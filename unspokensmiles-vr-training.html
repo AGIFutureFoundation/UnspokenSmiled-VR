@@ -225,7 +225,28 @@ footer b{color:#ffd9a8}
 .quiz-timer{font:600 1.05rem "IBM Plex Mono",monospace;color:var(--coral)}
 @media (max-width:900px){ .inst-cards{grid-template-columns:1fr 1fr} }
 @media (max-width:560px){ .tooth{font-size:.64rem;padding:5px 0 4px} .tooth small{display:none} .inst-cards{grid-template-columns:1fr} }
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .xpfill{transition:none} }
+/* practice / graded sequence runs */
+.pm-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:16px;align-items:start;margin-top:16px}
+@media (max-width:900px){.pm-grid{grid-template-columns:1fr}}
+.ctl-row{display:flex;flex-wrap:wrap;gap:18px 30px}
+.ctl-row .small{font-weight:700;margin:0}
+.case-kv{list-style:none;margin:.2rem 0;padding:0}
+.case-kv li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.case-kv li:last-child{border-bottom:none}
+.case-kv b{color:var(--teal)}
+.comfortbar{height:16px;background:var(--panel2);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.comfortfill{height:100%;width:90%;background:var(--good);transition:width .6s ease,background .6s ease}
+.theory{background:var(--gold-soft);border-radius:var(--r-md);padding:13px 15px;font-size:.95rem;margin:12px 0}
+.theory p{margin:.45rem 0 0}
+.promptbox{background:var(--coral-soft);border-radius:var(--r-md);padding:13px 15px;margin:12px 0}
+.promptbox .cue{font:700 1.08rem "Bricolage Grotesque",sans-serif;margin:.2rem 0}
+.prompt-timer{height:8px;background:var(--panel);border:1px solid var(--line);border-radius:99px;overflow:hidden;margin:9px 0}
+.prompt-timer div{height:100%;background:var(--coral);width:100%}
+.qstep.asbtn{width:100%;background:none;border:none;border-bottom:1px dashed var(--line);font:inherit;color:inherit;text-align:left;cursor:pointer}
+.qstep.asbtn:hover .qt{color:var(--teal)}
+.qstep.todo .qt{color:var(--ink2)}
+.pm-badge{background:var(--teal-soft);border-radius:var(--r-md);padding:12px 14px;font-size:.93rem;margin:12px 0}
+@media (prefers-reduced-motion: reduce){ .comfortfill{transition:none} html{scroll-behavior:auto} .xpfill{transition:none} }
 </style>
 </head>
 <body>
@@ -255,6 +276,7 @@ footer b{color:#ffd9a8}
         <a class="btn ghost" href="#teethlab">Teeth &amp; Calculus Lab</a>
         <a class="btn ghost" href="#stations">Explore the 6 stations</a>
         <a class="btn ghost" href="#sim">Run a simulation</a>
+        <a class="btn ghost" href="#spine">Practise, then run it graded</a>
         <a class="btn ghost" href="#tools">Compare the tools</a>
         <a class="btn ghost" href="#wiki">Read the wiki</a>
       </div>
@@ -293,6 +315,7 @@ footer b{color:#ffd9a8}
     </article>
   </div>
   <p class="small" style="margin-top:12px">Note: the TradePath <em>Dental Reception</em> zone is a separate front-desk session — it is not one of these three, and it isn't counted as one here either.</p>
+  <p class="small" style="margin-top:6px">Sessions 2 and 3 also run below in two modes — a no-stakes <a href="#spine">practice sandbox</a> and a <a href="#spine">graded run</a> where the step order itself is the score, with a live checklist, timed prompts and a patient-comfort meter.</p>
 </div></section>
 
 <section id="world"><div class="wrap">
@@ -674,6 +697,77 @@ footer b{color:#ffd9a8}
   </div>
 </div></section>
 
+<section id="spine"><div class="wrap">
+  <div class="sec-head">
+    <span class="tag coral">New · Practice → Graded</span>
+    <h2>Practice first — then graded, where the sequence is the score</h2>
+    <p>Two ways to run the Chairside Assisting and Sterilisation sessions. <strong>Practice Mode</strong> is a no-stakes sandbox: every step open, theory cards and hints on, nothing scored or kept — learn the tools and the order there first; it is labelled, and is, <strong>practice — not a credential</strong>. The <strong>graded run</strong> scores the sequence itself: a step taken out of order is a <em>sequence fault with a consequence</em>, not just lost points, and three faults end the run. Simulated patients are scripted, fictional teaching cases drawn at random — each card states its finding, and you work to it: learners never examine and never diagnose. <strong>Simulated procedure — not clinical training, not a licence. VR practice ≠ clinical hours.</strong></p>
+    <p class="small">The shape — sandbox before graded, timed clinician calls, a visible patient-comfort gauge — is common in dental sim games; here it is rebuilt as training. Prompts fade in calmly and are never a jump-scare. The comfort gauge moves quietly and the patient never screams, panics or becomes a joke — when it falls too low, Coach Mira pauses the run and the step is redone. There is no leaderboard. A badge earned in a graded run shows only on this page, for the learner and their coach — private, and never a completion record.</p>
+  </div>
+
+  <div class="card">
+    <div class="ctl-row">
+      <div>
+        <p class="small">MODE</p>
+        <div class="mode-tabs" id="pm-mode" role="tablist" aria-label="Run mode">
+          <button type="button" data-pm-mode="practice" class="on">Practice sandbox — not a credential</button>
+          <button type="button" data-pm-mode="graded">Graded run — scored</button>
+        </div>
+      </div>
+      <div>
+        <p class="small">SESSION</p>
+        <div class="mode-tabs" id="pm-sess" role="tablist" aria-label="Session">
+          <button type="button" data-pm-sess="chair" class="on">Chairside assisting · 9 steps</button>
+          <button type="button" data-pm-sess="sterile">Sterilisation · 8 steps</button>
+        </div>
+      </div>
+      <div>
+        <p class="small">PRESSURE — TIMED PROMPTS</p>
+        <div class="mode-tabs" id="pm-press" role="tablist" aria-label="Prompt pressure">
+          <button type="button" data-pm-press="low" class="on">Low · default</button>
+          <button type="button" data-pm-press="medium">Medium</button>
+          <button type="button" data-pm-press="high">High</button>
+        </div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:6px">The pressure dial sets how fast the clinician's calls — “Suction now”, “Check the gauge” — must be answered in a graded run. It defaults to low, where a missed call costs nothing. At every setting the call arrives as a calm banner: no sudden sounds, no flashes, no scares. In the sandbox there is no clock at all — the call simply waits for you.</p>
+  </div>
+
+  <div class="pm-grid">
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <h3 id="pm-case-title">Today's simulated patient</h3>
+          <button class="btn small ghost" id="pm-newcase" type="button">Draw a new case</button>
+        </div>
+        <div id="pm-case" aria-live="polite"></div>
+        <p class="small" style="margin-top:8px">A scripted teaching case: the finding is <b>given</b> on the card, with the tooth, the condition the clinician is working to, and the consent status. Cases rotate so no run can be memorised — and the consent and anaesthesia lines change what the right first moves are.</p>
+      </div>
+      <div class="card" id="pm-comfort-card" style="margin-bottom:16px">
+        <h3>Patient comfort — simulated</h3>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;font-weight:600;margin-top:6px"><span id="pm-comfort-state">Settled</span><span class="mono" id="pm-comfort-num">90 / 100</span></div>
+        <div class="comfortbar" style="margin-top:6px"><div class="comfortfill" id="pm-comfort-fill"></div></div>
+        <p class="small" style="margin-top:8px">Driven by <b>force, angle and anaesthesia state</b>: pressing too hard, dragging at the wrong angle, or starting before anaesthesia is confirmed all pull it down; careful work lets it settle back up. It only ever moves calmly, and the patient stays quiet — if it falls too low, Coach Mira pauses the run and the step is redone together. No screaming, no panic, no laughing at distress — ever.</p>
+      </div>
+      <div class="card">
+        <h3>Live checklist — the steps, always in view</h3>
+        <p class="small">In the headset this list floats in the room with the current step highlighted, so the sequence is never held in memory alone. <span id="pm-check-note">In the sandbox, tap any step to practise it in any order.</span></p>
+        <div id="pm-check" style="margin-top:6px"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+        <h3 id="pm-run-title">Chairside assisting — practice sandbox</h3>
+        <span class="mono small" id="pm-status">Sandbox · no score kept</span>
+      </div>
+      <div class="coach" style="margin-top:10px"><b>Coach Mira (demo guide):</b> <span id="pm-coach"></span></div>
+      <div id="pm-body" aria-live="polite"></div>
+      <div class="btnrow"><button class="btn small ghost" id="pm-restart" type="button">Restart this run</button></div>
+      <p class="small" style="margin-top:12px">Simulated procedure — not clinical training, not a licence. VR practice ≠ clinical hours. Scores and badges on this page are practice feedback for this visit only: private to the learner and their coach, never public, never a completion record.</p>
+    </div>
+  </div>
+</div></section>
+
 <section id="catalogue"><div class="wrap">
   <div class="sec-head">
     <h2>Catalogue — the full smiles world</h2>
@@ -755,7 +849,7 @@ footer b{color:#ffd9a8}
   <div class="sec-head">
     <span class="tag coral">Assessment mode · demo</span>
     <h2>Instructor review — your runs on this page</h2>
-    <p>The Assessment Centre pattern from the tools review, in demo form: attempts, scores and critical errors from the three scored pieces on this page — the clinic quest, the playable session and the Simulation Studio run. <b>Honest scope:</b> this shows only <em>your own</em> practice in this browser visit. There are no learner accounts, no saved records and no other learners — a real deployment would feed this view from the pseudonymised session log described in the wiki (MIN_CELL_N = 5).</p>
+    <p>The Assessment Centre pattern from the tools review, in demo form: attempts, scores and critical errors from the scored pieces on this page — the clinic quest, the playable session, the Simulation Studio run and the graded sequence runs. <b>Honest scope:</b> this shows only <em>your own</em> practice in this browser visit. There are no learner accounts, no saved records and no other learners — a real deployment would feed this view from the pseudonymised session log described in the wiki (MIN_CELL_N = 5).</p>
   </div>
   <div class="card">
     <div id="instructor-body" aria-live="polite"></div>
@@ -897,6 +991,23 @@ footer b{color:#ffd9a8}
         <li><b>Remote-control instrument interaction.</b> STAI rejected direct grab (the instrument clipped through teeth) and settled on a visual target the instrument follows with <b>lerp</b>, continuously rotating to face the selected tooth. The Clean stage here uses the same mechanism: target ring leads, instrument lerps behind it and rotates to face the tooth.</li>
         <li><b>Localisation pattern, re-pointed.</b> STAI localised Finnish + English (text and teacher audio) for its users; this app serves Costa Rica and the Americas, so the lab is localised <b>English + Spanish</b> (text; no audio is recorded for either language in this demo).</li>
         <li><b>Framing kept:</b> recognition practice on a model only — no diagnosis, no licensure or certification claim, and VR practice never counts as clinical hours, here or in STAI's framing as a student learning tool.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Session structure — practice / graded, comfort meter, timed prompts (added 2026-11-07)</summary>
+    <div class="body">
+      <p>The Practice / Graded section on this page borrows <b>session structure only</b> from patterns popularised by consumer dental simulator games. The immediate prompt for the review was a Facebook post (Mets Ta Quest, 2026-05-14) about <em>Dentist Simulator 2</em> by Code Lab (Meta Quest, v0.6.3, July 2025) — read via its caption and secondary summaries only: <b>the video itself could not be watched with the tools available</b>, and the post carried no audience signal (0 likes, 0 comments). <b>Nothing else is borrowed:</b> no branding, assets, models, characters or artwork; no horror or comedy treatment of patient distress; no public leaderboard; and the opposite of that genre's “real dentistry” framing — everything here is labelled a simulated procedure, not clinical training, not a licence, and VR practice never counts as clinical hours. This app is <b>not affiliated with or endorsed by</b> Code Lab or any game studio.</p>
+      <ul>
+        <li><b>Practice Mode sandbox vs graded run.</b> A no-stakes sandbox — all steps open, theory and hints on, nothing scored or kept — sits in front of the graded session, and is labelled “practice — not a credential” at the control itself, matching this app's standing line that simulation is practice, never a check.</li>
+        <li><b>The clinical sequence as the scored spine.</b> In the graded chairside and sterilisation runs, the step order itself is graded: an out-of-order action is a sequence fault with a stated consequence (in sterilisation, a contamination event that restarts the load), three faults end the run — order is never worth mere points.</li>
+        <li><b>Adjustable-difficulty timed prompts.</b> Clinician calls (“Suction now”, “Check the gauge”) arrive as calm banners against a pressure dial that defaults to low, where a missed call costs nothing. No sudden sounds, flashes or jump-scares at any setting — the pressure is a training dial, not entertainment.</li>
+        <li><b>Patient comfort meter.</b> The games' patient-distress mechanic, reframed as a calm, visible gauge driven by force, angle and anaesthesia state: too much force, a wrong angle, or starting before anaesthesia is confirmed lowers it; below the intervention line Coach Mira pauses the run and the step is redone. The simulated patient never screams, never panics, and distress is never played for laughs.</li>
+        <li><b>Randomised simulated patients.</b> Six clearly labelled fictional teaching cases — different teeth (FDI), different scripted findings, different consent and anaesthesia states — drawn at random per run, so the run cannot be memorised. Cases are presented with a <em>given</em> finding: learners work to the case card and never “examine and diagnose”. A case with no consent on file changes the correct first step to stopping.</li>
+        <li><b>Live in-world task checklist.</b> Every run keeps its step checklist visible with the current step highlighted — on this page beside the run; in the headset build it floats in view — so the sequence is never carried in memory alone.</li>
+        <li><b>Theory micro-lessons at the point of need.</b> Each step opens with one short theory card (why this instrument, why this order, why this check) linked to the CDC and DANB sources already cited in this wiki — the CDC dental infection-control summary and MMWR 2003;52(RR17), and DANB's CDA / GC / ICE topic pages at danb.org.</li>
+        <li><b>Badges stay local and private.</b> A graded run can end with a session badge rendered on this page only, visible to the learner and their coach. It is never published, never shared, and — consistent with the rest of this app — never a completion record.</li>
       </ul>
     </div>
   </details>
@@ -1608,7 +1719,9 @@ function renderInstructor(){
   rows+="<div style='padding:9px 0;border-bottom:1px dashed var(--line)'><b>Playable session — Prevention &amp; School Screening</b><br><span class='small'>Status: "+pstat+" · score "+pTotal()+" / 550 · wrong first attempts (retries): "+retries+". Criterion view: consent verified before screening (step 2), observe–record–flag, never diagnose (step 6), one-way sterilisation flow (step 9 quiz).</span></div>";
   var crit=slog.filter(function(l){return /\(0\/2\)$/.test(l)});
   var sstat=si===-1?"not started":(si>=5?"complete":"in progress — decision "+(si+1)+" of 5");
-  rows+="<div style='padding:9px 0'><b>Simulation Studio — School Screening Morning</b><br><span class='small'>Status: "+sstat+" · score "+sscore+" / 10 · <b>critical errors (0-point decisions): "+crit.length+"</b>"+(crit.length?": "+crit.map(function(l){return "“"+l.replace(/ \([0-9]\/2\)$/,"")+"”"}).join("; "):"")+".</span></div>";
+  rows+="<div style='padding:9px 0;border-bottom:1px dashed var(--line)'><b>Simulation Studio — School Screening Morning</b><br><span class='small'>Status: "+sstat+" · score "+sscore+" / 10 · <b>critical errors (0-point decisions): "+crit.length+"</b>"+(crit.length?": "+crit.map(function(l){return "“"+l.replace(/ \([0-9]\/2\)$/,"")+"”"}).join("; "):"")+".</span></div>";
+  var pmr=(window.__pmSummary)?window.__pmSummary():null;
+  rows+="<div style='padding:9px 0'><b>Graded sequence runs — chairside &amp; sterilisation (Practice / Graded section)</b><br><span class='small'>"+(pmr||"Not started in this visit. The practice sandbox keeps no score by design; graded runs record sequence faults, critical errors, timed-prompt misses and comfort interventions.")+"</span></div>";
   el.innerHTML=rows+"<p class='small' style='margin-top:10px'>Reviewer note: scores here are formative practice feedback for this visitor only — not a competency determination, not a grade, and not a credential. In the Dental VR Academy / Denti XR pattern, a teacher reviews exactly this shape of record — attempts, criterion scores, critical errors — for each learner.</p>";
 }
 var ib=$("btn-instructor");if(ib)ib.addEventListener("click",function(){renderInstructor();toast("Instructor review refreshed — this visit's runs only")});
@@ -1930,6 +2043,431 @@ Array.prototype.forEach.call($("tl-lang").children,function(b){b.addEventListene
 renderStudyCards();renderChart();
 $("tl-detail").innerHTML="<p class='small'>"+t("detailPick")+"</p>";
 mira(t("coachStudy"));
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+if(!$("pm-body"))return;
+function toast(m){var t=$("toast");if(t){t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2600)}}
+var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var CDC="https://www.cdc.gov/dental-infection-control/hcp/summary/sterilization-disinfection.html";
+var CDCT="CDC — Guidelines for Infection Control in Dental Health-Care Settings, summary";
+var DANB="https://www.danb.org/exams/exam/cda-exam";
+var DANBT="DANB — CDA exam & GC / ICE topic outlines (danb.org)";
+
+/* ============ RANDOMISED SIMULATED PATIENTS — fictional, scripted teaching cases ============ */
+var CASES=[
+ {code:"Case A",name:"“Mina” — fictional demo patient, age 12",tooth:"Tooth 46 · lower right first molar (permanent)",finding:"Given finding (scripted, from the clinician): visible calculus on the lingual surface. Plan: the assisted cleaning sequence, worked to this card.",consent:true,consentText:"Signed and on file",anaes:"planned",anaesText:"Planned — the clinician gives local anaesthesia before the procedure steps"},
+ {code:"Case B",name:"“Theo” — fictional demo patient, age 9",tooth:"Tooth 36 · lower left first molar (permanent)",finding:"Given finding (scripted): sealant present on the chart (S) — a check-and-prevention visit.",consent:true,consentText:"Signed and on file",anaes:"none",anaesText:"None planned — prevention and check visit only"},
+ {code:"Case C",name:"“Ada” — fictional demo patient, age 15",tooth:"Tooth 26 · upper left first molar (permanent)",finding:"Given finding (scripted): a dark area is noted on the chart, already flagged for the clinician's own review.",consent:false,consentText:"NOT on file — teaching demo only; no procedure steps may start",anaes:"none",anaesText:"Not applicable — with no consent there are no procedure steps"},
+ {code:"Case D",name:"“Luis” — fictional demo patient, age 11",tooth:"Tooth 16 · upper right first molar (permanent)",finding:"Given finding (scripted): partially erupted molar (PE on the chart); the clinician will demonstrate around it.",consent:true,consentText:"Signed and on file",anaes:"none",anaesText:"None planned — demonstration and prevention visit"},
+ {code:"Case E",name:"“Sana” — fictional demo patient, age 13",tooth:"Tooth 46 · lower right first molar (permanent)",finding:"Given finding (scripted): filled tooth (F on the chart); a routine assisted examination sequence.",consent:true,consentText:"Signed and on file",anaes:"planned",anaesText:"Planned — the clinician gives local anaesthesia before the procedure steps"},
+ {code:"Case F",name:"“Noah” — fictional demo patient, age 8",tooth:"Tooth 55 · upper right second primary molar",finding:"Given finding (scripted): a wobbly primary tooth, noted by the clinician. Plan: keep comfortable, observe only.",consent:true,consentText:"Signed and on file",anaes:"none",anaesText:"None planned — observation and prevention only"}
+];
+var LOADS=[
+ {code:"Load card 1",text:"Four exam sets and two hygiene sets — the routine morning load. Nothing unusual flagged."},
+ {code:"Load card 2",text:"End-of-day load: six sets, one handpiece in each. Handpieces are heat-sterilised between patients — never surface-disinfected only."},
+ {code:"Load card 3",text:"A fresh load of five sets. Note: one pouch from the previous load sits in quarantine with an unchanged indicator — it is not part of this load and must never reach the sterile store."}
+];
+
+/* ============ STEP DATA — theory card + scored options per step ============ */
+function chairSteps(c){
+ var steps=[
+  {t:"Check the case & consent",mira:"We start from the case card, always. Read it before we touch anything.",
+   theory:"Consent decides what may happen at all, and the finding on the card is the clinician's — given, scripted, and not yours to re-judge. Working to the card, in order, is the first habit this run teaches: verify before you act.",src:[DANBT,DANB],
+   q:"The case card is in front of you. What happens first?",
+   opts: c.consent?[
+     {t:"Confirm the signed consent matches this case, note the given finding, then set up.",ok:1,why:"Verified before anything else happens. The run now has a firm floor: this patient, this tooth, this given finding."},
+     {t:"Skip the paperwork and lay the tray — the case is probably fine.",kind:"order",why:"Sequence fault. The tray comes after consent is verified — work done before consent is work that may have to stop mid-procedure, with a patient already in the chair."},
+     {t:"Read the finding and decide for yourself whether it looks right.",kind:"unsafe",comfort:-8,why:"The finding is given and scripted. Re-judging it is examining and diagnosing — never the assistant's job, and never the learner's in this app."}
+   ]:[
+     {t:"Stop at the card: consent is not on file, so this case runs as a teaching demo only — flag it to the clinician and start no procedure steps.",ok:1,why:"Exactly right. No consent, no procedure — and the case still teaches: the remaining steps run as the demo version, hands off the patient."},
+     {t:"Proceed with setup — someone senior probably has the form somewhere.",kind:"crit",comfort:-10,why:"Critical error. “Probably on file” is not consent. Starting procedure steps without it is the precise failure this step exists to catch."},
+     {t:"Send the patient away and close the case.",kind:"unsafe",comfort:-8,why:"Too far the other way: the teaching demo is open to everyone. What stops without consent is the procedure — not the learning, and not the person."}
+   ]},
+  {t:"Hand hygiene & PPE",mira:"Hands first, gloves last. Every time, in that order.",
+   theory:"Hand hygiene comes before gloves and again after removing them — gloves are never a substitute for washing. PPE goes on clean-to-dirty: mask, protective eyewear, and gloves last of all, so the gloves stay clean for the field.",src:[CDCT,CDC],
+   q:"You are about to set up. The hygiene sequence is…",
+   opts:[
+     {t:"Wash / rub hands, then mask, protective eyewear, and gloves last.",ok:1,why:"Clean-to-dirty, gloves last. The field you are about to touch is only as clean as this step."},
+     {t:"Gloves on first — they cover the hands, so washing can wait until later.",kind:"unsafe",comfort:-8,why:"Gloves over unwashed hands carry whatever was on the hands straight to the field. CDC guidance is explicit: hand hygiene at every transition, and always after glove removal."},
+     {t:"Set the chair first, then do hygiene while the patient settles.",kind:"order",why:"Sequence fault. Hygiene sits at step 2 because everything after it touches the field — moving it later contaminates the setup you are about to build."}
+   ]},
+  {t:"Set the chair & settle the patient",mira:"Chair up, patient settled, and a word with them before a single instrument moves.",
+   theory:"The chair's 430–720 mm travel exists so the team can work in its zones — operator, assistant, transfer, static. Patient supine, head at the top of the headrest, and checked in with, before anything is picked up: a settled patient is a safety feature, not a courtesy extra.",src:[DANBT,DANB],
+   q:"The patient is here. You…",
+   opts:[
+     {t:"Raise the chair, settle the patient supine with the headrest set — and ask how they are doing before reaching for anything.",ok:1,why:"Positioned and settled, and the patient has been spoken to as a person first. Comfort holds."},
+     {t:"Move the chair into position with the loaded tray already over the patient — it saves a trip.",kind:"unsafe",comfort:-8,why:"Never move the chair with instruments over the patient. One jolt and the tray's contents are on the patient, not the field."},
+     {t:"Lay the tray first and bring the patient in once everything is ready.",kind:"order",why:"Sequence fault in this run's order: the checklist settles the patient before the tray is laid, so the tray is built around a positioned patient — not left waiting over an empty, moving chair."}
+   ]},
+  {t:"Lay the tray in working order",mira:"Mirror first. The tray is laid in the order the clinician works — no hunting, no reaching blind.",
+   theory:"A tray is laid in working order — mirror, explorer, probe, cotton pliers, suction, gauze — so the clinician can reach for the next instrument without looking. Layout is a safety feature, not tidiness: mid-procedure is the worst possible time to discover the order is wrong.",src:[DANBT,DANB],
+   q:"The tray layout for this case is…",
+   opts:[
+     {t:"Mirror → explorer → periodontal probe → cotton pliers → HVE tip → gauze, in working order.",ok:1,why:"Vision first, examination next, moisture control set before it is needed. The clinician will not have to look away from the field."},
+     {t:"Suction tip and gauze first — they get used the most.",kind:"unsafe",why:"Consumables and suction laid first bury the instruments the clinician reaches for blind. Frequency of use is not the ordering principle — the sequence of the examination is."},
+     {t:"Leave the tray until the procedure starts — it can be laid as you go.",kind:"order",why:"Sequence fault. Fetching and laying mid-procedure breaks the field, the rhythm and the patient's calm all at once."}
+   ]},
+  {t:"Barriers & the operating light",mira:"Handles get barriers every setup. The light moves by its handles — never by the head.",
+   theory:"Barrier the surfaces that will be touched — light handles first among them. The operating light (8,000–30,000 lux on the bench spec) is positioned by its barriered handles, centred on the oral cavity and angled so it never sits in the patient's eyes.",src:[CDCT,CDC],
+   q:"The light needs positioning. You…",
+   opts:[
+     {t:"Barrier the handles, position the light by them, centre it on the field, and check the patient's eyes are spared.",ok:1,why:"Barriered, centred, considerate. The clinician gets shadow-reduced light; the patient gets no glare."},
+     {t:"Push the light head itself into place — quicker than fiddling with handles.",kind:"unsafe",comfort:-8,why:"Gloved hands never grab the head: the handles — and their barriers — are the infection-control surface. Pushing the head undoes the barrier step."},
+     {t:"Position the light after suction starts — the lighting can catch up.",kind:"order",why:"Sequence fault. Light before work begins: nobody should be suctioning into a field they cannot fully see."}
+   ]}
+ ];
+ steps.push(
+  {t:"Confirm anaesthesia with the clinician",
+   mira: c.anaes==="planned"?"Anaesthesia is the clinician's act. Ours is to confirm it — out loud — before anything starts.":"No needle in this case. Confirming that, out loud, is still a step — not an assumption.",
+   theory: c.anaes==="planned"?"Anaesthesia is given by the clinician — never by the assistant, and never simulated as an injection in this app. The assistant's skill is the confirmation: given, and taken effect, before the procedure steps begin. Starting early is how a settled patient becomes a hurt one — the comfort meter will show you exactly that.":"This case has no anaesthesia planned — a prevention visit. Confirming the plan out loud still matters: an anaesthetic nobody planned would be a consent problem, and numbness assumed but never given is the mirror-image error.",
+   src:[DANBT,DANB],
+   q: c.anaes==="planned"?"Before the procedure steps begin, you…":"The plan says no anaesthesia for this visit. You…",
+   opts: c.anaes==="planned"?[
+     {t:"Ask the clinician, out loud: “Anaesthesia given and effective?” — and wait for the yes.",ok:1,why:"Confirmed and said out loud, so clinician, coach and chart all agree. Comfort holds — the run can start."},
+     {t:"Begin suction and passing — the clinician looks busy; it will be fine.",kind:"crit",comfort:-30,why:"Skipped anaesthesia. The patient feels the procedure steps before anyone has checked — comfort falls hard. This is the exact mistake the comfort meter exists to make visible."},
+     {t:"Give the anaesthetic yourself to keep the run moving.",kind:"crit",comfort:-30,why:"Far out of scope: injection is a licensed clinician's act, and it is never part of this training at any level. In a real room, the run stops here."}
+   ]:[
+     {t:"Confirm with the clinician: no anaesthesia planned for this visit — and note it on the case card.",ok:1,why:"Confirmed, not assumed. The whole team now shares the same plan."},
+     {t:"Assume anaesthesia was given earlier and work as if the tooth is numb.",kind:"crit",comfort:-20,why:"Assumed numbness that was never given is the skipped-anaesthesia error in mirror form — comfort falls, because the plan in your head was not the plan."},
+     {t:"Ask the patient whether they would like anaesthesia today.",kind:"unsafe",comfort:-8,why:"That is a clinical decision, made by the clinician with the patient's consent on file — not a question to hand a patient mid-setup."}
+   ]},
+  {t:"Suction & moisture control",prompt:{cue:"Suction — now.",btn:"HVE in place, bevel at the field"},
+   mira:"When the call comes, answer it calmly. Good suction is anticipation, not reaction.",
+   theory:"The HVE clears water, spray and debris at the working tooth (about 3.3 SCFM at −4 inHg on the bench spec): bevel near the field, non-dominant hand, following the handpiece. Force and angle are comfort — pressed hard or dragged across tissue, suction stops being help and becomes the thing the patient remembers.",src:[DANBT,DANB],
+   q:"The field is flooding. Your suction hold is…",
+   opts:[
+     {t:"Steady hold, bevel at the working tooth, light touch — suction follows the handpiece.",ok:1,why:"Moisture controlled without force. This is the hold the whole step is about — comfort holds."},
+     {t:"Press the HVE firmly into the cheek and floor of mouth to clear the field faster.",kind:"crit",comfort:-25,why:"Too much force. Suction evacuates; it does not retract. Pressure and tissue pull are felt immediately — comfort falls."},
+     {t:"Rest the tip flat across the tongue to keep it out of the way.",kind:"unsafe",comfort:-15,why:"Wrong angle. The tip drags on soft tissue and blocks the very field it was meant to clear — comfort dips and the clinician cannot see."}
+   ]},
+  {t:"Pass instruments in the transfer zone",prompt:{cue:"Mirror.",btn:"Pass the mirror, handle-first"},
+   mira:"Handle-first, in the transfer zone, one at a time — and say what you are passing.",
+   theory:"Instruments pass handle-first in the transfer zone over the patient's chest — never over the face — one at a time, announced. And if you do not recognise the instrument the clinician names, say so: asking costs three seconds; a guessed instrument can cost much more.",src:[DANBT,DANB],
+   q:"The clinician asks for the next instrument. You…",
+   opts:[
+     {t:"Pass it handle-first in the transfer zone, announced: “Mirror.”",ok:1,why:"Correct instrument, correct zone, announced. Four-handed work at its quietest."},
+     {t:"Pass it over the patient's face — it is the shortest path.",kind:"unsafe",comfort:-8,why:"Nothing passes over the face. A dropped instrument there lands on eyes — the transfer zone exists precisely to rule this out."},
+     {t:"Hand over the explorer as well, in case it is needed next.",kind:"unsafe",why:"One instrument at a time. Extras clutter the field and turn a clean pass into a juggling act over a patient."}
+   ]},
+  {t:"Turn over, hand off & log",mira:"The run ends the way sterilisation begins: one-way out, surfaces disinfected, and a log that tells the truth.",
+   theory:"Used instruments leave one-way, to receiving — they never return to a clean tray. Surfaces are disinfected, the next setup starts from sterile stock, and the log records what happened: observations, the given finding worked to, anything flagged. If it is not recorded, it did not happen.",src:[CDCT,CDC],
+   q:"The patient has left. The turnover is…",
+   opts:[
+     {t:"Instruments one-way to receiving, surfaces disinfected, case log completed with what was done and anything flagged.",ok:1,why:"Closed loop: the room, the instruments and the record all end in the right state. Run complete."},
+     {t:"Put the instruments back on the tray for the next patient — they look clean.",kind:"crit",why:"Critical error. “Looks clean” is how the one-way flow breaks at its most dangerous point — used instruments never return to a clean tray."},
+     {t:"Skip the log — the coach saw everything anyway.",kind:"order",why:"Sequence fault, and a record failure: the log is the last step of the sequence, not an optional extra. If it is not recorded, it did not happen."}
+   ]}
+ );
+ return steps;
+}
+function sterileSteps(){
+ return [
+  {t:"Receive & sort (dirty)",mira:"Dirty side first. Nothing in this room ever travels backwards.",
+   theory:"Receiving is where the one-way flow starts: contaminated sets land on the dirty bench, sharps go straight into the point-of-use container with a one-handed scoop, and nothing travels further dirty than it must. Get this step wrong and every later step inherits it.",src:[CDCT,CDC],
+   q:"A tray of used instruments arrives. First move?",
+   opts:[
+     {t:"Receive at the dirty bench — sharps into the point-of-use container, sets sorted for cleaning.",ok:1,why:"Contained, sorted, and on the dirty side of a one-way room. The chain has started correctly."},
+     {t:"Send the sets straight to the autoclave — heat fixes everything.",kind:"order",why:"Contamination logic: sterilising uncleaned instruments skips the stage that makes the cycle work — debris shields microbes from steam. Cleaning always comes before sterilisation."},
+     {t:"Carry the loose sharps across the room to the container by the sink.",kind:"crit",why:"Sharps travel at the point of use, by one-handed scoop — never carried loose across a room. A dropped sharp on a walkway is an exposure waiting for a foot."}
+   ]},
+  {t:"Ultrasonic clean",mira:"Cleaning before sterilisation. Always. The tank loosens what hands cannot.",
+   theory:"Cavitation at 35–48 kHz lifts debris from hinges and serrations that brushing misses. Sets go in fully submerged, lid on, timed at 5–10 minutes — and remember what the tank is: cleaning, never sterilisation.",src:[CDCT,CDC],
+   q:"The sorted sets are ready. You…",
+   opts:[
+     {t:"Submerge the sets fully, lid on, and run the timed ultrasonic cycle.",ok:1,why:"Fully submerged, lidded, timed — cavitation does the work your gloves should not."},
+     {t:"Give everything a quick rinse under the tap — the autoclave will handle the rest.",kind:"crit",why:"A rinse is not cleaning. Whatever the rinse leaves behind gets sealed in at the pouch and shielded from the steam — the cycle then certifies a dirty instrument."},
+     {t:"Pouch the sets now and clean them through the pouch later.",kind:"order",why:"Out of order: pouching seals the set for sterilisation. Cleaning after pouching means opening sterile packaging to do dirty work — the flow only runs one way."}
+   ]},
+  {t:"Rinse, dry & inspect",mira:"Under the magnifier, every instrument. Anything doubtful goes back — never forward.",
+   theory:"Rinsed, dried fully, and inspected under the magnifier lamp: any debris left means back to cleaning, no exceptions. Packaging never hides a dirty instrument — inspection is the gate between the dirty work and the clean work.",src:[CDCT,CDC],
+   q:"The tank cycle ends. You…",
+   opts:[
+     {t:"Rinse, dry fully, and inspect every instrument under the light — anything doubtful goes back to cleaning.",ok:1,why:"The gate is held. Only verified-clean instruments move toward packaging."},
+     {t:"Pouch the sets while they are still damp — the autoclave dries things anyway.",kind:"crit",why:"Wet packs wick contamination through the wrap after the cycle and compromise the barrier. Dry first — drying is part of this step, not the autoclave's job."},
+     {t:"Store the clean sets now and inspect them at the next session.",kind:"order",why:"Out of order, twice over: storage is eight steps away, and uninspected instruments have no business anywhere near it."}
+   ]},
+  {t:"Pouch & seal",mira:"Indicator visible in every pouch. If it cannot be seen, it cannot testify.",
+   theory:"Each set is pouched with its chemical indicator visible, sealed on the heat sealer and dated. The indicator is the load's witness at the other end of the cycle — pouch so it can be read without opening anything.",src:[CDCT,CDC],
+   q:"Clean, dry, inspected sets. You…",
+   opts:[
+     {t:"Pouch each set with its indicator visible, seal, and date every pouch.",ok:1,why:"Sealed, dated, readable. The pouches are ready to be loaded — loosely, so steam can reach every surface."},
+     {t:"Wrap the instruments loose in a drawer towel to save pouches.",kind:"crit",why:"No sealed barrier, no indicator, no date — nothing about that package can be verified later. Sterility you cannot check is sterility you cannot claim."},
+     {t:"Run the autoclave first and pouch the hot sets afterwards.",kind:"order",why:"Out of order: handling a hot, just-sterilised set into packaging ends its sterility on contact. Pouch before the cycle, always."}
+   ]},
+  {t:"Autoclave cycle",prompt:{cue:"Check the gauge.",btn:"Gauge checked — 133 °C, holding"},
+   mira:"The gauge and the timer are the contract. Check them — never assume them.",
+   theory:"The Class B cycle on the bench spec: 132–134 °C at about 27–30 psi, four minutes for a wrapped load, then 15–20 minutes of drying. A cycle is a set of numbers that must actually happen — which is why the mid-cycle call is always the same: check the gauge.",src:[CDCT,CDC],
+   q:"The pouches are loaded. You…",
+   opts:[
+     {t:"Run the wrapped cycle at 132–134 °C, watch the gauge, and let the load dry fully before opening.",ok:1,why:"Temperature, time and drying all honoured — and verified, not assumed."},
+     {t:"Open the door early — the sets look done and the next patient is waiting.",kind:"crit",why:"An interrupted cycle is an unverified load: wet, possibly unsterile, and now handled. Time pressure is exactly what the gauge-check habit exists to defeat."},
+     {t:"Use the fastest unwrapped cycle for everything, to save time.",kind:"crit",why:"Wrapped sets need the wrapped cycle and its drying phase. The fast cycle on the wrong load gives you hot pouches and no assurance."}
+   ]},
+  {t:"Cool & check indicators",mira:"Cool first. Then read every indicator like it matters — because it is the whole proof.",
+   theory:"Let the load cool before handling, then read each pouch's indicator. An unchanged indicator means unverified, full stop: that pouch is quarantined, logged and reprocessed — it is never argued with and never used.",src:[CDCT,CDC],
+   q:"The cycle is done and the load has cooled. You…",
+   opts:[
+     {t:"Check every pouch's indicator, and set aside any unchanged one for quarantine.",ok:1,why:"Every pouch accounted for. The load's proof is read, not presumed."},
+     {t:"Skip the indicators — the cycle ran, so the load is sterile.",kind:"crit",why:"The cycle running is a claim; the indicator is the evidence. Skipping the check turns the entire chain into theatre."},
+     {t:"Store the pouches now and check the indicators when there is a quiet moment.",kind:"order",why:"Out of order: storing before the check puts unverified instruments into circulation — where a quiet moment may find them already used."}
+   ]},
+  {t:"Log the load",mira:"Cycle, contents, indicators, operator. The log is what makes sterility a record instead of a memory.",
+   theory:"The log takes the cycle number, the date, the contents, the indicator results and who ran it — plus the weekly biological (spore) test in the same book. Months from now, the log is the only thing that can answer for this load.",src:[CDCT,CDC],
+   q:"Indicators checked. You…",
+   opts:[
+     {t:"Log the cycle: number, date, contents, indicator results, operator — and the spore-test schedule.",ok:1,why:"The load can now be answered for. One step left."},
+     {t:"Log the whole week on Friday, from memory.",kind:"order",why:"Out of order and out of memory: a log written later from recall is a story, not a record. The log belongs to this step, while the pouches are in front of you."},
+     {t:"Only log failures — routine loads do not need a record.",kind:"unsafe",why:"A log of failures only cannot prove the routine loads ever ran. The routine entries are the system; the failures are annotations on it."}
+   ]},
+  {t:"Sterile storage",mira:"Last step — because everything before it is what makes the word 'sterile' true.",
+   theory:"Dated pouches go into the closed, clean, dry sterile store, oldest at the front so stock rotates. Storage is the final step of the chain: it is the order — receiving to storage, one way — that makes the claim on the pouch honest.",src:[CDCT,CDC],
+   q:"Logged and verified. You…",
+   opts:[
+     {t:"Store the dated pouches in the closed sterile store, oldest at the front.",ok:1,why:"Chain complete: receive → clean → inspect → pouch → autoclave → verify → log → store. One way, every time."},
+     {t:"Leave the pouches on the receiving bench until the morning rush is over.",kind:"order",why:"Out of order and out of place: the receiving bench is the dirty zone. Sterile stock parked there breaks the one-way flow at its final step."},
+     {t:"Top up the store with the quarantined pouch too — its indicator was probably fine.",kind:"crit",why:"Quarantined means quarantined. An unverified pouch in the sterile store is the whole system failing quietly — the exact event this chain exists to prevent."}
+   ]}
+ ];
+}
+
+/* ============ ENGINE ============ */
+var pm={mode:"practice",sess:"chair",pressure:"low",caseIdx:0,loadIdx:0,idx:0,done:{},score:0,faults:0,crits:0,interv:0,contam:0,missed:0,answered:0,comfort:90,attempts:0,phase:"theory",promptNote:"",finished:false,failed:false,gradedRuns:0,lastGraded:null};
+var promptInt=null,promptLeft=0,promptStart=0;
+function curCase(){return CASES[pm.caseIdx]}
+function steps(){return pm.sess==="chair"?chairSteps(curCase()):sterileSteps()}
+function maxScore(){var st=steps(),m=st.length*20;st.forEach(function(s){if(s.prompt)m+=5});return m}
+function clearPrompt(){if(promptInt){clearInterval(promptInt);promptInt=null}}
+
+function renderControls(){
+ Array.prototype.forEach.call($("pm-mode").children,function(b){b.classList.toggle("on",b.getAttribute("data-pm-mode")===pm.mode)});
+ Array.prototype.forEach.call($("pm-sess").children,function(b){b.classList.toggle("on",b.getAttribute("data-pm-sess")===pm.sess)});
+ Array.prototype.forEach.call($("pm-press").children,function(b){b.classList.toggle("on",b.getAttribute("data-pm-press")===pm.pressure)});
+}
+function renderCase(){
+ var title=$("pm-case-title"),body=$("pm-case");
+ if(pm.sess==="chair"){var c=curCase();title.textContent="Today's simulated patient — "+c.code;
+  body.innerHTML="<ul class='case-kv'><li><b>Patient:</b> "+c.name+"</li><li><b>Tooth:</b> "+c.tooth+"</li><li><b>Finding:</b> "+c.finding+"</li><li><b>Consent:</b> "+c.consentText+"</li><li><b>Anaesthesia:</b> "+c.anaesText+"</li></ul>";
+  $("pm-newcase").textContent="Draw a new case";
+ }else{var l=LOADS[pm.loadIdx];title.textContent="Today's load — "+l.code;
+  body.innerHTML="<p style='font-size:.95rem'>"+l.text+"</p>";
+  $("pm-newcase").textContent="Draw a new load card";}
+}
+function comfortState(){
+ if(pm.comfort>=85)return "Settled";
+ if(pm.comfort>=65)return "Mostly settled";
+ if(pm.comfort>=50)return "Uneasy — slow down, check in";
+ return "Too low — Mira is pausing the run";
+}
+function renderComfort(){
+ var card=$("pm-comfort-card");
+ if(pm.sess!=="chair"){card.style.display="none";return}
+ card.style.display="";
+ $("pm-comfort-fill").style.width=pm.comfort+"%";
+ $("pm-comfort-fill").style.background=pm.comfort>=65?"var(--good)":pm.comfort>=50?"var(--gold)":"var(--coral)";
+ $("pm-comfort-num").textContent=pm.comfort+" / 100";
+ $("pm-comfort-state").textContent=comfortState();
+}
+function renderTitle(){
+ $("pm-run-title").textContent=(pm.sess==="chair"?"Chairside assisting":"Sterilisation — the one-way chain")+(pm.mode==="practice"?" · practice sandbox":" · graded run");
+}
+function renderStatus(){
+ var el=$("pm-status"),st=steps(),doneN=Object.keys(pm.done).length;
+ if(pm.mode==="practice"){el.textContent="Sandbox · no score kept · steps practised "+doneN+" / "+st.length+(pm.interv?" · Mira stepped in "+pm.interv+"×":"")}
+ else if(pm.sess==="chair"){el.textContent="Score "+pm.score+" / "+maxScore()+" · Faults "+pm.faults+" / 3 · Interventions "+pm.interv}
+ else{el.textContent="Score "+pm.score+" / "+maxScore()+" · Faults "+pm.faults+" / 3 · Contamination events "+pm.contam}
+}
+function renderChecklist(){
+ var st=steps(),box=$("pm-check");
+ $("pm-check-note").textContent=pm.mode==="practice"?"In the sandbox, tap any step to practise it in any order.":"In the graded run the steps unlock in order — the highlighted step is the one in front of you.";
+ box.innerHTML=st.map(function(s,i){
+   var cls=pm.done[i]?"done":(i===pm.idx&&!pm.finished&&!pm.failed)?"active":"todo";
+   var inner="<span class='dot'>"+(pm.done[i]?"✓":(i+1))+"</span><span class='qt'>"+s.t+"</span>";
+   if(pm.mode==="practice"&&!pm.finished&&!pm.failed)return "<button type='button' class='qstep asbtn "+cls+"' data-pm-step='"+i+"'>"+inner+"</button>";
+   return "<div class='qstep "+cls+"'>"+inner+"</div>";
+ }).join("");
+ if(pm.mode==="practice"){Array.prototype.forEach.call(box.querySelectorAll("[data-pm-step]"),function(b){b.addEventListener("click",function(){clearPrompt();pm.idx=+b.getAttribute("data-pm-step");pm.attempts=0;pm.phase="theory";pm.promptNote="";renderAll()})})}
+}
+function coachSay(t){$("pm-coach").innerHTML=t}
+function renderAll(){renderControls();renderCase();renderComfort();renderTitle();renderStatus();renderChecklist();renderStep()}
+function resetRun(){
+ clearPrompt();pm.idx=0;pm.done={};pm.score=0;pm.faults=0;pm.crits=0;pm.interv=0;pm.contam=0;pm.missed=0;pm.answered=0;pm.comfort=90;pm.attempts=0;pm.phase="theory";pm.promptNote="";pm.finished=false;pm.failed=false;renderAll();
+}
+function theoryHTML(s){
+ return "<div class='theory'><span class='tag gold'>Theory · at the point of need</span><p>"+s.theory+"</p><p class='src'>Source: <a href='"+s.src[1]+"' target='_blank' rel='noopener'>"+s.src[0]+"</a> — full citations in the wiki below.</p></div>";
+}
+function renderStep(){
+ var body=$("pm-body"),st=steps();
+ if(pm.failed){renderFail();return}
+ if(pm.finished){renderFinish();return}
+ var s=st[pm.idx];
+ coachSay(s.mira);
+ if(pm.phase==="theory"){
+   body.innerHTML="<p style='font-weight:700;font-size:1.02rem;margin:.35rem 0 0'>Step "+(pm.idx+1)+" of "+st.length+" — "+s.t+"</p>"+theoryHTML(s)+"<button class='btn coral' id='pm-begin' type='button'>"+(pm.mode==="practice"?"Practise this step":"Begin step "+(pm.idx+1))+"</button>"+(pm.mode==="practice"?"<p class='small' style='margin-top:8px'>Sandbox: hints are on — a wrong pick explains itself and costs nothing.</p>":"");
+   $("pm-begin").addEventListener("click",function(){pm.attempts=0;if(s.prompt){startPrompt(s)}else{pm.phase="opts";renderStep()}});
+   return;
+ }
+ if(pm.phase==="opts"){renderOpts();return}
+}
+function startPrompt(s){
+ pm.phase="prompt";
+ var body=$("pm-body");
+ var secs=pm.pressure==="low"?20:pm.pressure==="medium"?12:7;
+ body.innerHTML="<div class='promptbox'><p class='small' style='font-weight:700;margin:0'>TIMED PROMPT · THE CLINICIAN CALLS</p><p class='cue'>“"+s.prompt.cue+"”</p>"+(pm.mode==="graded"?"<div class='prompt-timer'><div id='pm-ptbar'></div></div><p class='small' id='pm-pttext' style='margin:0'></p>":"<p class='small' style='margin:0'>Sandbox: no clock — the call waits for you, as long as you need.</p>")+"<div class='btnrow'><button class='btn coral' id='pm-pbtn' type='button'>"+s.prompt.btn+"</button></div></div>";
+ $("pm-pbtn").addEventListener("click",function(){
+   clearPrompt();
+   if(pm.mode==="graded"){var took=((Date.now()-promptStart)/1000).toFixed(1);pm.score+=5;pm.answered++;pm.promptNote="<div class='conseq'><b>Prompt answered in "+took+"s (+5).</b> Calm, on time, no scramble — that is the standard the dial is training.</div>"}
+   else{pm.promptNote="<div class='conseq'><b>Call answered.</b> In the graded run this call is timed by the pressure dial.</div>"}
+   pm.phase="opts";renderStatus();renderStep();
+ });
+ if(pm.mode==="graded"){
+   promptStart=Date.now();promptLeft=secs*10;
+   var bar=$("pm-ptbar"),txt=$("pm-pttext");
+   function draw(){var left=Math.max(0,promptLeft/10);if(txt)txt.textContent="Answer within "+left.toFixed(1)+"s · pressure: "+pm.pressure+(pm.pressure==="low"?" — a miss here costs nothing":"");if(bar&&!reduced)bar.style.width=(promptLeft/(secs*10)*100)+"%"}
+   draw();
+   promptInt=setInterval(function(){promptLeft--;draw();
+     if(promptLeft<=0){clearPrompt();promptTimeout(s)}
+   },100);
+ }
+}
+function promptTimeout(s){
+ var note;
+ if(pm.pressure==="low"){note="<div class='conseq'><b>The call waited, then lapsed — and at low pressure that costs nothing.</b> That is what the low setting is for. Raise the dial when answering feels easy.</div>"}
+ else if(pm.pressure==="medium"){pm.missed++;if(pm.sess==="chair")pm.comfort=Math.max(0,pm.comfort-5);note="<div class='conseq'><b>Missed call.</b> The moment passed and the field waited — comfort dips a little and the run notes it. No alarm, no drama: answer the next one.</div>"}
+ else{pm.missed++;pm.faults++;if(pm.sess==="chair")pm.comfort=Math.max(0,pm.comfort-10);note="<div class='conseq'><b>Missed call — sequence fault "+pm.faults+" of 3.</b> At high pressure a missed call is a step taken out of time: the sequence broke, and the fault is recorded.</div>"}
+ pm.promptNote=note;renderComfort();renderStatus();
+ if(pm.faults>=3){pm.lastWhy="Three faults — the last was a missed call at high pressure.";failRun("Three sequence faults. The run's order — including its timing — broke down, and a graded run does not continue on a broken sequence.");return}
+ if(pm.sess==="chair"&&pm.comfort<50){intervene("The missed call left the patient waiting in a flooding field, and the comfort meter fell through the intervention line.");return}
+ pm.phase="opts";renderStep();
+}
+function renderOpts(){
+ var body=$("pm-body"),st=steps(),s=st[pm.idx];
+ var ord=s.opts.map(function(_,i){return i});
+ for(var k=ord.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var tmp=ord[k];ord[k]=ord[j];ord[j]=tmp}
+ body.innerHTML="<p style='font-weight:700;font-size:1.02rem;margin:.35rem 0 0'>Step "+(pm.idx+1)+" of "+st.length+" — "+s.t+"</p>"+(pm.promptNote||"")+"<p style='font-weight:700;margin-top:10px'>"+s.q+"</p><div id='pm-opts'>"+ord.map(function(i){return "<button class='sim-opt' data-pm-opt='"+i+"' type='button'>"+s.opts[i].t+"</button>"}).join("")+"</div><div id='pm-fb'></div>";
+ Array.prototype.forEach.call(body.querySelectorAll("[data-pm-opt]"),function(b){b.addEventListener("click",function(){pickOpt(+b.getAttribute("data-pm-opt"),b)})});
+}
+function pickOpt(i,btn){
+ var st=steps(),s=st[pm.idx],o=s.opts[i];
+ pm.attempts++;
+ if(o.ok){
+   var pts=0;
+   if(pm.mode==="graded"){pts=pm.attempts===1?20:pm.attempts===2?10:5;pm.score+=pts}
+   if(pm.sess==="chair")pm.comfort=Math.min(100,pm.comfort+4);
+   pm.done[pm.idx]=1;pm.promptNote="";
+   renderComfort();renderStatus();renderChecklist();
+   var allDone=Object.keys(pm.done).length>=st.length;
+   var fb="<div class='conseq'><b>"+(pm.mode==="graded"?("Correct · +"+pts+" pts."):"Correct.")+"</b> "+o.why+"</div>";
+   if(pm.mode==="graded"){
+     if(pm.idx>=st.length-1){$("pm-opts").innerHTML="";$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Finish the run</button>";$("pm-next").addEventListener("click",function(){pm.finished=true;finishGraded();renderAll()})}
+     else{$("pm-opts").innerHTML="";$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Next step →</button>";$("pm-next").addEventListener("click",function(){pm.idx++;pm.attempts=0;pm.phase="theory";renderAll()})}
+   }else{
+     $("pm-opts").innerHTML="";
+     if(allDone){$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Finish the sandbox</button>";$("pm-next").addEventListener("click",function(){pm.finished=true;renderAll()})}
+     else{$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Next unpractised step →</button>";$("pm-next").addEventListener("click",function(){for(var k=0;k<st.length;k++){if(!pm.done[k]){pm.idx=k;break}}pm.attempts=0;pm.phase="theory";renderAll()})}
+   }
+   return;
+ }
+ /* wrong pick */
+ btn.classList.add("picked-bad");btn.disabled=true;
+ var kind=o.kind||"unsafe";
+ var fbHTML="";
+ if(pm.sess==="chair"&&o.comfort)pm.comfort=Math.max(0,pm.comfort+o.comfort);
+ else if(pm.sess==="chair"&&kind==="unsafe")pm.comfort=Math.max(0,pm.comfort-8);
+ else if(pm.sess==="chair"&&kind==="order")pm.comfort=Math.max(0,pm.comfort-5);
+ if(pm.mode==="practice"){
+   renderComfort();
+   if(pm.sess==="chair"&&pm.comfort<50){intervene(o.why);return}
+   $("pm-fb").innerHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>Not that one — and in the sandbox, that's free.</b> "+o.why+"</div><p class='small'><b>Hint:</b> the checklist is the answer key — the right move is the one that belongs to <em>this</em> step, in this order. Try again.</p>";
+   coachSay("Good place to get that wrong — here, where it costs nothing. Read the consequence, then pick the move that belongs to this step.");
+   return;
+ }
+ /* graded consequences */
+ var fault=false,contam=false;
+ if(kind==="order"||kind==="crit"){fault=true;pm.faults++;if(kind==="crit")pm.crits++;if(pm.sess==="sterile")contam=true}
+ if(contam)pm.contam++;
+ renderComfort();renderStatus();renderChecklist();
+ pm.lastWhy=o.why;
+ if(contam&&pm.contam>=2){failRun("Second contamination event. A load can be restarted once; a room that contaminates twice in one run stops, reprocesses everything, and reviews the flow before it runs again.");return}
+ if(pm.faults>=3){failRun("Three sequence faults. The order is the score in a graded run — once it has broken three times, the run ends and the debrief begins.");return}
+ if(pm.sess==="chair"&&pm.comfort<50){intervene(o.why);return}
+ if(contam){
+   $("pm-opts").innerHTML="";
+   $("pm-fb").innerHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>Contamination event "+pm.contam+" — the load is compromised.</b> "+o.why+"</div><p style='font-size:.95rem'>In this room there is no carrying on from a broken flow: the load restarts from receiving, and the run restarts with it. Faults stay on the record.</p><button class='btn coral' id='pm-loadrestart' type='button'>Restart the load from receiving</button>";
+   $("pm-loadrestart").addEventListener("click",function(){pm.idx=0;pm.done={};pm.score=0;pm.attempts=0;pm.phase="theory";pm.promptNote="";renderAll();toast("Load restarted — faults and the contamination event stay recorded")});
+   coachSay("Stop the line. The flow broke, so the load goes back to receiving — that is not a punishment, it is the system working.");
+   return;
+ }
+ fbHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>"+(fault?("Sequence fault "+pm.faults+" of 3. "):"Not that one. ")+"</b>"+o.why+"</div><p class='small'>Pick again — a correct answer now earns "+(pm.attempts===1?"10":"5")+" of this step's 20 points.</p>";
+ $("pm-fb").innerHTML=fbHTML;
+ coachSay(kind==="order"?"Order matters here — that action belongs to a different step. Find the one that belongs to <em>this</em> step.":"Not that one. Read the consequence, breathe, and pick again — the step is still in front of you.");
+}
+function intervene(why){
+ pm.interv++;renderStatus();
+ if(pm.mode==="graded"&&pm.interv>=2){failRun("Coach Mira stops the run after the second comfort intervention. The patient needs a break, not a third attempt — and in this training, the patient's state outranks the schedule every time.");return}
+ var body=$("pm-body"),st=steps();
+ body.innerHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>Coach Mira steps in.</b> "+why+"</div><p style='font-size:.97rem'>“Pause. Our patient has gone quiet and tense — that's the signal, and we act on it. We stop, we check in, and we redo this step together, slowly.”</p><p class='small'>Nobody in this simulation is hurt, and nobody is upset with you. Noticing the signal and redoing the step <em>is</em> the skill being trained — the meter only ever moves calmly, and so do we.</p><button class='btn coral' id='pm-redo' type='button'>Redo step "+(pm.idx+1)+" together</button>";
+ coachSay("We redo it together. The step is the same — only the hands change.");
+ $("pm-redo").addEventListener("click",function(){pm.comfort=65;pm.attempts=0;pm.phase="theory";pm.promptNote="";renderComfort();renderStep();renderChecklist()});
+ renderComfort();renderChecklist();
+}
+function finishGraded(){
+ pm.gradedRuns++;
+ pm.lastGraded={sess:pm.sess,score:pm.score,max:maxScore(),faults:pm.faults,crits:pm.crits,interv:pm.interv,contam:pm.contam,missed:pm.missed,result:"complete"};
+}
+function failRun(reason){
+ pm.failed=true;pm.gradedRuns++;
+ pm.lastGraded={sess:pm.sess,score:pm.score,max:maxScore(),faults:pm.faults,crits:pm.crits,interv:pm.interv,contam:pm.contam,missed:pm.missed,result:"failed"};
+ renderAll();
+}
+function renderFail(){
+ var body=$("pm-body");
+ coachSay("The run ends here — and the debrief is where it pays off. Nothing about this follows you anywhere.");
+ body.innerHTML="<p style='font-weight:700;font-size:1.05rem;margin:.35rem 0 0'>Run failed — the sequence broke</p>"+(pm.lastWhy?"<div class='conseq' style='border-left-color:var(--coral)'><b>Last consequence:</b> "+pm.lastWhy+"</div>":"")+"<p style='font-size:.95rem'>"+(pm.failReason||"")+"</p><p class='small'>Score at the stop: <b>"+pm.score+" / "+maxScore()+"</b> · faults "+pm.faults+" · critical errors "+pm.crits+(pm.sess==="chair"?" · comfort interventions "+pm.interv:" · contamination events "+pm.contam)+". This is the training working: consent, order and the patient's comfort <em>are</em> the run. Walk the same steps in the sandbox — hints on, nothing counted — then come back.</p><div class='btnrow'><button class='btn coral' id='pm-tosandbox' type='button'>Practise in the sandbox</button><button class='btn ghost' id='pm-retry' type='button'>Retry the graded run</button></div>";
+ $("pm-tosandbox").addEventListener("click",function(){pm.mode="practice";resetRun();toast("Sandbox — same steps, no stakes")});
+ $("pm-retry").addEventListener("click",function(){resetRun();toast("Graded run reset — new attempt")});
+}
+/* failRun wrapper to carry the reason */
+var _failRun=failRun;
+failRun=function(reason){pm.failReason=reason;_failRun(reason)};
+function renderFinish(){
+ var body=$("pm-body"),st=steps();
+ if(pm.mode==="practice"){
+   coachSay("Every step practised. When the order feels easy here, the graded run is the same steps with the training wheels off.");
+   body.innerHTML="<p style='font-weight:700;font-size:1.05rem;margin:.35rem 0 0'>Sandbox complete — all "+st.length+" steps practised</p><p style='font-size:.95rem'>You walked the whole "+(pm.sess==="chair"?"chairside":"sterilisation")+" sequence in your own order, with the theory cards, at no cost for any mistake. Nothing was scored, recorded or kept — that is what the sandbox is for.</p><p class='small'>Ready when you are: the graded run is the same steps, in order, with faults counted, timed prompts on the dial, and "+(pm.sess==="chair"?"the comfort meter live":"contamination restarting the load")+".</p><div class='btnrow'><button class='btn coral' id='pm-tograded' type='button'>Start the graded run</button><button class='btn ghost' id='pm-again' type='button'>Practise again — new case</button></div>";
+   $("pm-tograded").addEventListener("click",function(){pm.mode="graded";resetRun();toast("Graded run — the sequence is the score")});
+   $("pm-again").addEventListener("click",function(){drawNewCase();resetRun()});
+   return;
+ }
+ coachSay("Run complete. Debrief honestly: two things done well, two to change — that is where the learning consolidates.");
+ var clean=pm.faults===0&&pm.interv===0&&pm.contam===0;
+ body.innerHTML="<p style='font-weight:700;font-size:1.05rem;margin:.35rem 0 0'>"+(pm.sess==="chair"?"Chairside assisting":"Sterilisation")+" — graded run complete</p><p style='font-size:.97rem'>Final score <b>"+pm.score+" / "+maxScore()+"</b> · sequence faults "+pm.faults+" · critical errors "+pm.crits+(pm.sess==="chair"?" · comfort interventions "+pm.interv+" · final comfort "+pm.comfort+" / 100":" · contamination events "+pm.contam)+" · timed prompts answered "+pm.answered+", missed "+pm.missed+".</p><div class='pm-badge'><b>Session badge — "+(clean?"Sequence Keeper (clean run)":"Sequence Completed")+".</b> Earned on this page, for this run. It is shown only here, for you and your coach: private, never published, and <b>never a completion record</b>.</div><p class='small'><b>Debrief:</b> two things done well, two to change. "+(pm.faults?"Your faults are listed in the run above — name the step each one belongs to before you rerun.":"A clean sequence — now raise the pressure dial a notch and hold the same standard.")+" A graded score in this demo is practice feedback only — not a credential, and VR practice ≠ clinical hours.</p><div class='btnrow'><button class='btn coral' id='pm-again2' type='button'>Run again — new case</button><button class='btn ghost' id='pm-tosandbox2' type='button'>Back to the sandbox</button></div>";
+ $("pm-again2").addEventListener("click",function(){drawNewCase();resetRun()});
+ $("pm-tosandbox2").addEventListener("click",function(){pm.mode="practice";resetRun()});
+}
+function drawNewCase(){
+ if(pm.sess==="chair"){var n;do{n=Math.floor(Math.random()*CASES.length)}while(n===pm.caseIdx&&CASES.length>1);pm.caseIdx=n}
+ else{var m;do{m=Math.floor(Math.random()*LOADS.length)}while(m===pm.loadIdx&&LOADS.length>1);pm.loadIdx=m}
+}
+/* instructor-review hook */
+window.__pmSummary=function(){
+ if(!pm.lastGraded&&pm.mode==="practice")return null;
+ var g=pm.lastGraded;
+ if(!g)return "Graded run in progress this visit ("+(pm.sess==="chair"?"chairside":"sterilisation")+"). Practice sandbox runs are unscored by design.";
+ var nm=g.sess==="chair"?"Chairside assisting":"Sterilisation";
+ return "Graded runs this visit: "+pm.gradedRuns+" · Latest: "+nm+" — "+g.result+", score "+g.score+" / "+g.max+" · sequence faults "+g.faults+" · critical errors "+g.crits+(g.sess==="chair"?" · comfort interventions "+g.interv:" · contamination events "+g.contam)+" · timed prompts missed "+g.missed+". Simulated patients are fictional scripted cases; findings are given, never diagnosed. Scores are formative practice feedback — not a competency determination, not a credential.";
+};
+/* controls */
+Array.prototype.forEach.call($("pm-mode").children,function(b){b.addEventListener("click",function(){if(pm.mode!==b.getAttribute("data-pm-mode")){pm.mode=b.getAttribute("data-pm-mode");resetRun();toast(pm.mode==="practice"?"Practice sandbox — no stakes, not a credential":"Graded run — order enforced, faults counted")}})});
+Array.prototype.forEach.call($("pm-sess").children,function(b){b.addEventListener("click",function(){if(pm.sess!==b.getAttribute("data-pm-sess")){pm.sess=b.getAttribute("data-pm-sess");drawNewCase();resetRun()}})});
+Array.prototype.forEach.call($("pm-press").children,function(b){b.addEventListener("click",function(){pm.pressure=b.getAttribute("data-pm-press");renderControls();toast("Pressure: "+pm.pressure+(pm.pressure==="low"?" — a missed call costs nothing":""))})});
+$("pm-newcase").addEventListener("click",function(){drawNewCase();resetRun();toast(pm.sess==="chair"?"New simulated patient drawn — read the case card first":"New load card drawn")});
+$("pm-restart").addEventListener("click",function(){resetRun();toast("Run restarted — same case")});
+pm.caseIdx=Math.floor(Math.random()*CASES.length);pm.loadIdx=Math.floor(Math.random()*LOADS.length);
+resetRun();
 })();
 </script>
 </body>
