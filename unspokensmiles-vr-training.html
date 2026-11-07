@@ -247,6 +247,36 @@ footer b{color:#ffd9a8}
 .qstep.todo .qt{color:var(--ink2)}
 .pm-badge{background:var(--teal-soft);border-radius:var(--r-md);padding:12px 14px;font-size:.93rem;margin:12px 0}
 @media (prefers-reduced-motion: reduce){ .comfortfill{transition:none} html{scroll-behavior:auto} .xpfill{transition:none} }
+/* learning library / fellows' resource hub */
+.enc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+@media (max-width:900px){.enc-grid{grid-template-columns:1fr}}
+.enc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:16px}
+.enc-card h3{margin:6px 0 4px}
+.enc-card dl{margin:6px 0 0}
+.enc-card dt{font:700 .74rem "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-top:9px}
+.enc-card dd{margin:2px 0 0;font-size:.92rem}
+.enc-card dd.spec{font-family:"IBM Plex Mono",monospace;font-size:.84rem;color:var(--ink)}
+.clock-wrap{display:grid;grid-template-columns:250px 1fr;gap:18px;align-items:center}
+@media (max-width:700px){.clock-wrap{grid-template-columns:1fr}}
+.zone-legend{list-style:none;margin:0;padding:0}
+.zone-legend li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.zone-legend li:last-child{border-bottom:none}
+.zone-legend .sw{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:8px;vertical-align:-2px}
+.path-mod{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.94rem}
+.path-mod:last-child{border-bottom:none}
+.path-mod .pm-txt{flex:1}
+.path-mod .pm-txt b{display:block}
+.markbtn{flex:0 0 auto;background:var(--panel2);border:1.5px solid var(--line);border-radius:999px;padding:5px 11px;font:600 .8rem "Public Sans",sans-serif;color:var(--ink);cursor:pointer}
+.markbtn.on{background:var(--good);border-color:var(--good);color:#fff}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px}
+@media (max-width:700px){.gloss{grid-template-columns:1fr}}
+.gloss div{padding:8px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.gloss b{color:var(--teal)}
+.res-link{display:block;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;text-decoration:none;color:var(--ink)}
+.res-link:hover{border-color:var(--teal)}
+.res-link b{color:var(--teal);display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.02rem}
+.res-link span{font-size:.88rem;color:var(--ink2);font-weight:400}
+@media print{ .demo-strip,.hero,#world,#stations,#lab,#teethlab,#packs,#sim,#play,#spine,#catalogue,#evidence,#tools,#instructor,#standards,#guide,#wiki,#roadmap,#offer,#hackathon,footer,.toast{display:none!important} }
 </style>
 </head>
 <body>
@@ -274,6 +304,7 @@ footer b{color:#ffd9a8}
         <a class="btn coral" href="#world">Enter the clinic world</a>
         <a class="btn ghost" href="#lab">Open the Equipment Lab</a>
         <a class="btn ghost" href="#teethlab">Teeth &amp; Calculus Lab</a>
+        <a class="btn ghost" href="#library">Learning Library — Fellows' Hub</a>
         <a class="btn ghost" href="#stations">Explore the 6 stations</a>
         <a class="btn ghost" href="#sim">Run a simulation</a>
         <a class="btn ghost" href="#spine">Practise, then run it graded</a>
@@ -582,6 +613,223 @@ footer b{color:#ffd9a8}
     </div>
   </div>
   <p class="small" style="margin-top:12px" data-i18n="foot">Numbering shown in FDI (the two-digit system used across Latin America and Europe) with the US Universal number alongside. Surface and instrument-area guidance in this lab is a simplified teaching map for recognition practice — a supervising clinician's judgment always governs real care.</p>
+</div></section>
+
+<section id="library"><div class="wrap">
+  <div class="sec-head">
+    <span class="tag coral">New · Learning Library</span>
+    <h2>Fellows' Resource Hub — tools, methods, pathways</h2>
+    <p>The study companion for Unspoken Smiles teams (Fellows): a tools encyclopedia, the core chairside methods — with four-handed dentistry as a playable drill — role-based learning paths mapped to the real credential frameworks, and a resource shelf of official links, a glossary and printable checklists. Everything here is <b>study and rehearsal material</b>: it teaches what the tools and methods <em>are</em> so supervised training makes sense faster. It diagnoses nothing, certifies no one, and <b>VR practice ≠ clinical hours</b> — every hour that counts toward a credential happens in an approved programme, under licensed supervision.</p>
+    <p class="small">Specs are quoted only where the wiki spec bible verified them; anything unverified is marked <b>TBD</b>, never filled in. Four-handed dentistry content is grounded in dentalcare.com CE course <b>CE643, “The Concepts of Four-handed Dentistry”</b> (linked in the wiki Sources) and the HDAS four-handed guide.</p>
+  </div>
+
+  <h3 style="margin:8px 0 4px">1 · Tools encyclopedia — know every instrument on the tray</h3>
+  <p class="small" style="max-width:760px">Fourteen entries: what it is, what it is for, how it is held and transferred, how it is cared for and sterilised, and its spec range where verified. Filter by family, or read straight through — this is the bench knowledge behind the Equipment Lab hotspots above.</p>
+  <div class="mode-tabs" id="enc-filters" role="tablist" aria-label="Filter tools by family">
+    <button type="button" data-enc="all" class="on">All 14</button>
+    <button type="button" data-enc="hand">Hand instruments</button>
+    <button type="button" data-enc="powered">Powered &amp; rotary</button>
+    <button type="button" data-enc="air">Suction &amp; air–water</button>
+    <button type="button" data-enc="ster">Imaging &amp; sterilisation</button>
+  </div>
+  <div class="enc-grid" id="enc-grid" aria-live="polite"></div>
+
+  <h3 style="margin:30px 0 4px">2 · Methods — four-handed dentistry, as a drill</h3>
+  <p class="small" style="max-width:760px">Four-handed dentistry is the operator (dentist) and the chairside assistant working one patient with four hands in a planned, coordinated way: the assistant passes instruments, controls moisture and keeps the field clear, so the operator's hands and eyes rarely leave the mouth. It runs on three ideas — <b>zones</b>, <b>the single-handed transfer</b>, and <b>motion economy</b> — and all three are drilled below. <span class="src">Grounding: <a href="https://www.dentalcare.com/en-us/ce-courses/ce643/instrument-transfer" target="_blank" rel="noopener">dentalcare.com CE643 — instrument transfer</a> · <a href="https://www.hdas.biz/four-handed-dentistry/" target="_blank" rel="noopener">HDAS — four-handed dentistry guide</a>.</span></p>
+
+  <div class="grid2" style="align-items:start">
+    <div class="card">
+      <span class="tag">The clock-face zones</span>
+      <h3 style="margin-top:8px">Where everyone works — right-handed operator</h3>
+      <div class="clock-wrap">
+        <svg viewBox="0 0 220 220" role="img" aria-label="Clock-face diagram of the four working zones around a dental patient" style="width:100%;max-width:250px;height:auto">
+          <circle cx="110" cy="110" r="96" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+          <path d="M70 179.3 A80 80 0 0 1 110 30" fill="none" stroke="#0e5a50" stroke-width="15"/>
+          <path d="M179.3 150 A80 80 0 0 1 70 179.3" fill="none" stroke="#e85d3d" stroke-width="15"/>
+          <path d="M179.3 70 A80 80 0 0 1 179.3 150" fill="none" stroke="#d99a1f" stroke-width="15"/>
+          <path d="M110 30 A80 80 0 0 1 179.3 70" fill="none" stroke="#47635c" stroke-width="15"/>
+          <circle cx="110" cy="110" r="27" fill="var(--panel2)" stroke="var(--line)"/>
+          <text x="110" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">PATIENT</text>
+          <text x="110" y="120" text-anchor="middle" font-size="9" fill="var(--ink2)">chin ↓ 6 o'clock</text>
+          <text x="110" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">12</text>
+          <text x="196" y="114" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">3</text>
+          <text x="110" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">6</text>
+          <text x="24" y="114" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">9</text>
+        </svg>
+        <ul class="zone-legend">
+          <li><span class="sw" style="background:#0e5a50"></span><b>Operator zone · 7–12</b> — the dentist works here; eyes stay on the illuminated field.</li>
+          <li><span class="sw" style="background:#e85d3d"></span><b>Transfer zone · 4–7</b> — below the patient's chin, out of their line of sight. <b>Every</b> exchange happens here — instruments <b>never pass over the patient's face</b>.</li>
+          <li><span class="sw" style="background:#d99a1f"></span><b>Assistant zone · 2–4</b> — the assistant works here, mobile cart and suction close at hand.</li>
+          <li><span class="sw" style="background:#47635c"></span><b>Static zone · 12–2</b> — equipment that stays put during the procedure.</li>
+        </ul>
+      </div>
+      <p class="small">For a left-handed operator the clock mirrors — learn the right-handed layout first, then flip it.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag coral">Interactive drill</span>
+      <h3 style="margin-top:8px">The single-handed transfer — call and response</h3>
+      <p class="small">One hand passes and receives while the other stays free for suction or the air–water syringe. For a <b>right-handed dentist, the assistant transfers with the LEFT hand</b>: pick up the next instrument early, hold it near the end opposite the working end (thumb + first finger), wait in the transfer zone about 10–12 inches from the dentist's hand, read the signal (the dentist lifts their hand), <b>receive the used instrument with the little finger</b>, and place the new one in position of use — the operator must not need to reposition it. Release only once the operator has firmly grasped it. Working end points <b>UP for maxillary</b> (upper) and <b>DOWN for mandibular</b> (lower). The four stages: <b>working → signal → pretransfer → midtransfer</b>. At the start, mirror + explorer are passed together, one in each hand.</p>
+      <div class="progress-dots" id="fh-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div id="fh-body" aria-live="polite"></div>
+      <div class="btnrow"><button class="btn small ghost" id="fh-restart" type="button">Restart the drill</button></div>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:16px">
+    <article class="card"><span class="tag">Grasp 1</span><h3 style="margin-top:8px">Pen grasp</h3><p class="small">Held like a pen — thumb, index and middle finger on the handle, the side of the middle finger supporting it. The precision grasp for mirrors, explorers, probes and most hand instruments: fine control, low force.</p></article>
+    <article class="card"><span class="tag">Grasp 2</span><h3 style="margin-top:8px">Palm grasp</h3><p class="small">The handle lies across the palm, gripped by all four fingers with the thumb free or bracing. A power grasp for instruments that need a firm hold — and how double-handed instruments (scissors, forceps) are <em>received</em>: grasp the working end, handle into the operator's palm.</p></article>
+    <article class="card"><span class="tag">Grasp 3</span><h3 style="margin-top:8px">Palm-thumb grasp</h3><p class="small">The handle rests in the palm while the thumb guides and steadies the working end — the grasp for tools like the HVE tip, where the thumb steers placement against the tooth.</p></article>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Motion economy — why the transfer looks like choreography</h3>
+    <p class="small">The point of the system, from CE643: <b>conserve motion</b> (the smallest movement that does the job — fingers and wrist before forearm, forearm before the whole arm), <b>increase smooth flow</b> (instruments pre-positioned in working order, the next one picked up early), and <b>reduce eyestrain</b> (the operator never looks away from the illuminated field to hunt for an instrument — the assistant's anticipation is what makes that possible). Every unnecessary motion is time the patient spends open-mouthed and the operator spends looking away. CODA-accredited assisting programmes teach efficient instrument transfer for exactly this reason.</p>
+  </div>
+
+  <h3 style="margin:30px 0 10px">Methods library — the rest of the chairside canon</h3>
+  <div class="grid2" style="align-items:start">
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">The infection-control chain</h3><p class="small">One direction, no shortcuts: hand hygiene at every transition (gloves are never a substitute — wash or rub after removing them) → PPE → barriers on touch surfaces → instruments flow dirty → ultrasonic clean → inspect → pouch with indicator → Class B autoclave → dated sterile store. Handpieces are heat-sterilised between <em>every</em> patient; sharps go in the point-of-use container with the one-handed scoop. A breach anywhere breaks the chain — the load restarts, never carries on. Practise it in the <a href="#lab">One-Way Chain challenge</a>. <span class="src">Standard: CDC Guidelines for Infection Control in Dental Health-Care Settings — 2003, <i>MMWR</i> 2003;52(RR17) — nine recommendation areas, walked in order in the Sterilization session.</span></p></article>
+    <article class="card"><span class="tag coral">Method · simulated only</span><h3 style="margin-top:8px">Radiography technique — positioning, never exposure</h3><p class="small">In this app the X-ray unit is <b>simulated only — nothing emits radiation</b> (60–70&nbsp;kV class unit as modelled). What is practised is everything around the exposure: <b>ALARA</b> — as low as reasonably achievable: confirm the image is justified, position the sensor with a holder, place the <b>lead apron + thyroid collar</b>, set the position-indicating device, step out, and only a licensed operator in a real clinic ever exposes. Retakes are dose — good positioning the first time is the safety skill. Mapped to DANB <b>RHS</b> topics for familiarisation only.</p></article>
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">Sealant application — the order that makes it stick</h3><p class="small">On a model, in training: <b>1</b> clean the tooth surface · <b>2</b> isolate and keep it dry (cotton rolls / suction — saliva contamination is the classic failure) · <b>3</b> etch, rinse, dry to a frosty surface · <b>4</b> apply sealant into the pits and fissures · <b>5</b> cure per the material's instructions · <b>6</b> check coverage and bite, and chart it (S = sealant present, in the screening charting codes). Never seal a cavitated lesion — that is a referral, not a sealant case. Placement on patients is a licensed clinician's task; Fellows rehearse the sequence and the failure modes.</p></article>
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">Fluoride varnish — the school-programme workhorse</h3><p class="small">The CPSTF-recommended school fluoride varnish model needs no specialised equipment: <b>1</b> consent checked · <b>2</b> teeth dried with gauze · <b>3</b> a thin varnish film painted on all tooth surfaces with the applicator brush · <b>4</b> aftercare explained (soft foods, no brushing until the time the programme specifies) · <b>5</b> logged on the chart. Who may apply it in the field depends on the jurisdiction's regulation — dental, trained non-dental, or trained lay workers where the rules allow; in this app it is a supervised teaching workflow, never a field authorisation.</p></article>
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">Charting with FDI — record what is given, never diagnose</h3><p class="small">FDI two-digit notation: quadrant (1–4 permanent, 5–8 primary) + tooth (1–8 from the midline). The <a href="#teethlab">Teeth &amp; Calculus Lab</a> drills the numbers against US Universal. In screening charting the worked codes are <b>D</b> decay suspected · <b>F</b> filled · <b>M</b> missing · <b>S</b> sealant present · <b>PS</b> prescribe sealant · <b>PE</b> partially erupted · <b>N/I</b> not indicated — a record of what was <em>seen</em> for the reviewing clinician, with a gentle blunt-explorer touch. Fellows chart and refer; diagnosis belongs to the dentist.</p></article>
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">School screening — the Zero Cavity workflow</h3><p class="small"><b>Screen → educate → refer.</b> Consent list checked first — a child without consent is not screened, full stop · privacy screen up · visual screening example with mirror and light · findings charted with the codes above · brushing teach-back on the big tooth model · referral note written for anything seen · everything logged for the reviewing clinician. <b>No treatment in the field</b> — no instruments beyond the screening kit, no improvisation, and the stop-and-refer case is a pass, not a failure.</p></article>
+    <article class="card"><span class="tag">Method</span><h3 style="margin-top:8px">Patient communication &amp; comfort</h3><p class="small">Introduce yourself and your role honestly (“I'm a Fellow in training, working with the clinical team”) · explain before you touch, in the patient's language where you can · agree a stop signal before anything starts · watch the patient, not just the field — going quiet and tense <em>is</em> a signal: pause, check in, redo slowly (the comfort meter in the <a href="#spine">graded runs</a> trains exactly this) · for children, tell-show-do and a caregiver in sight · never promise an outcome, never discuss another patient's case. Comfort is a clinical input, not a courtesy extra.</p></article>
+    <article class="card"><span class="tag gold">Method · field kit</span><h3 style="margin-top:8px">Ergonomics &amp; stress — the fourth hand is posture</h3><p class="small">CE643 pairs instrument transfer with exercises for stress reduction for a reason: four-handed work fails when bodies fail. Stools adjusted so feet are flat and thighs level · patient positioned so the field is at elbow height, not reached for · neutral wrists in every grasp · micro-breaks and hand/forearm stretches between patients · look up and far away regularly to rest the eyes the system works so hard to keep on the field. In the sim, a run that ignores setup is scored as a setup fault — ergonomics is part of the sequence, not an afterthought.</p></article>
+  </div>
+
+  <h3 style="margin:30px 0 4px">3 · Learning paths for Fellows — two tracks, one rule</h3>
+  <p class="small" style="max-width:780px">Pick the track that matches your team role. Each module names the part of this app that rehearses it and the real framework it prepares you <em>for</em> — DANB CDA domains for the assistant track, the hygiene process of care for the hygiene track. Mark modules as practised to watch your own progress on this page. <b>The rule:</b> progress here is practice-only, held in this page visit and never saved, shared or certified — <b>it is never a credential, and VR practice ≠ clinical hours</b>. The hours and exams in the mapping tables below belong to accredited programmes and examining bodies, not to this app.</p>
+
+  <div class="grid2" style="align-items:start">
+    <div class="card">
+      <span class="tag">Track A</span>
+      <h3 style="margin-top:8px">Assistant track — chairside · sterilisation · radiography</h3>
+      <div id="path-a"></div>
+      <div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:600;margin-top:12px"><span>Practised on this page</span><span class="mono" id="path-a-count">0 / 6</span></div>
+      <div class="xpbar" style="margin-top:5px"><div class="xpfill" id="path-a-fill" style="width:0%"></div></div>
+      <p class="small" style="margin-top:10px">Framework: <b>DANB CDA</b> — GC (General Chairside) · ICE (Infection Control) · RHS (Radiation Health &amp; Safety), and the California RDA programme buckets below.</p>
+    </div>
+    <div class="card">
+      <span class="tag coral">Track B</span>
+      <h3 style="margin-top:8px">Hygiene track — prevention · periodontics · radiography</h3>
+      <div id="path-b"></div>
+      <div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:600;margin-top:12px"><span>Practised on this page</span><span class="mono" id="path-b-count">0 / 6</span></div>
+      <div class="xpbar" style="margin-top:5px"><div class="xpfill" id="path-b-fill" style="width:0%"></div></div>
+      <p class="small" style="margin-top:10px">Framework: the ADEA process of care — Assessment → Dental Hygiene Diagnosis → Planning → Implementation → Evaluation &amp; Documentation — inside a CODA-accredited hygiene programme. Hygienist licensure additionally requires the NBDHE and a clinical board exam (see the wiki licensure entry); nothing here substitutes for any of it.</p>
+    </div>
+  </div>
+
+  <div class="grid2" style="align-items:start;margin-top:16px">
+    <div class="card">
+      <h3>The real exam this prepares you to study for — DANB CDA</h3>
+      <table class="spec-table">
+        <tr><td>Domains</td><td>RHS + ICE + GC, taken together</td></tr>
+        <tr><td>Questions</td><td>245</td></tr>
+        <tr><td>Time</td><td>195 minutes · 60-day test window</td></tr>
+        <tr><td>Fee</td><td>$450, as shown on the DANB CDA page</td></tr>
+        <tr><td>Pathways</td><td>I — CODA-accredited DA/DH programme graduate · II — high school + 3,500 hours approved work experience · III — former CDA / dental degree routes (all + current hands-on CPR/BLS/ACLS from a DANB-accepted provider)</td></tr>
+      </table>
+      <p class="src" style="margin-top:8px">Primary source: <a href="https://www.danb.org/exams/exam/cda-exam" target="_blank" rel="noopener">danb.org — CDA exam</a>. This app maps topics for familiarisation only; it cannot confer eligibility or certification.</p>
+    </div>
+    <div class="card">
+      <h3>The real programme hours — California RDA</h3>
+      <table class="spec-table">
+        <tr><td>Total</td><td>800 hours, board-approved programme</td></tr>
+        <tr><td>Didactic</td><td>275 hours — the modules here rehearse the <em>concepts</em> behind this bucket</td></tr>
+        <tr><td>Lab / preclinical</td><td>260 hours — the drills and labs on this page are rehearsal for this kind of practice, and count for none of it</td></tr>
+        <tr><td>Extramural clinical</td><td>265 hours — real patients, real clinics, licensed supervision; a headset is never in this bucket</td></tr>
+        <tr><td>Inside the 800</td><td>Radiation Safety 32h · Coronal Polishing 12h · Pit &amp; Fissure Sealants 16h · Infection Control 8h · CA Dental Practice Act 2h</td></tr>
+        <tr><td>Also</td><td>RDAEF programme ≥410h · no reciprocity in California</td></tr>
+      </table>
+      <p class="src" style="margin-top:8px">Primary source: <a href="https://dbc.ca.gov/formspubs/app_rda_provider_rda.pdf" target="_blank" rel="noopener">Dental Board of California — RDA program application (Rev. 4/2026)</a>.</p>
+    </div>
+  </div>
+  <div class="openq" style="margin-top:16px"><b>Costa Rica note — stated plainly:</b> no verified primary source has been found for a standalone Costa Rican assistant/hygienist licence, so this hub does <b>not</b> present one. What is verified (from Unspoken Smiles' own public material): Fellows train under <b>ULACIT faculty supervision</b> at the San José clinic and earn academic credit, and ULACIT runs a <b>Técnico en Asistencia Dental</b> (dental assisting technician) programme — linked on the resource shelf below. Dentists in Costa Rica are regulated by the CCDCR; check CCDCR and ULACIT directly for current requirements.</div>
+
+  <h3 style="margin:30px 0 4px">4 · Resource shelf — official links, glossary, checklists</h3>
+  <p class="small" style="max-width:760px">Links only — this hub copies no content from these bodies; their pages are the authority, and this app is <b>not endorsed by any of them</b>.</p>
+  <div class="grid3">
+    <a class="res-link" href="https://www.danb.org/exams/exam/cda-exam" target="_blank" rel="noopener"><b>DANB — CDA exam</b><span>Dental Assisting National Board: RHS / ICE / GC domains, pathways, the $450 fee as shown, and the official exam outlines.</span></a>
+    <a class="res-link" href="https://coda.ada.org/-/media/project/ada-organization/ada/coda/files/dental_hygiene_standards.pdf?rev=d03fdeaf50c24f608ead6ca293a0a240" target="_blank" rel="noopener"><b>CODA — accreditation standards</b><span>Commission on Dental Accreditation (ADA): the Dental Hygiene Standards PDF — the Dental Assisting Standards are linked in the Standards section of this page.</span></a>
+    <a class="res-link" href="https://www.cdc.gov/dental-infection-control/hcp/summary/sterilization-disinfection.html" target="_blank" rel="noopener"><b>CDC — dental infection control</b><span>Sterilization &amp; disinfection summary, with the 2003 Guidelines (<i>MMWR</i> 2003;52(RR17)) behind this hub's infection-control chain.</span></a>
+    <a class="res-link" href="https://www.ada.org/resources/students" target="_blank" rel="noopener"><b>ADA — students</b><span>American Dental Association student resources: pathways into dental careers and student membership via ASDA.</span></a>
+    <a class="res-link" href="https://dbc.ca.gov/formspubs/app_rda_provider_rda.pdf" target="_blank" rel="noopener"><b>Dental Board of California — RDA</b><span>The RDA Educational Program Application (Rev. 4/2026): the 800-hour breakdown, course hours and programme rules.</span></a>
+    <a class="res-link" href="http://www.colegiodentistas.org/contactenos/" target="_blank" rel="noopener"><b>CCDCR — Costa Rica</b><span>Colegio de Cirujanos Dentistas de Costa Rica: the professional college for dentists in Costa Rica (Spanish).</span></a>
+    <a class="res-link" href="https://ulacit.ac.cr/carreras/tecnico-en-asistencia-dental/" target="_blank" rel="noopener"><b>ULACIT — Técnico en Asistencia Dental</b><span>ULACIT's dental assisting technician programme page (Spanish) — the academic partner model behind Fellowship training in San José.</span></a>
+    <a class="res-link" href="https://ulacit.ac.cr/carreras/licenciatura-en-odontologia/" target="_blank" rel="noopener"><b>ULACIT — Licenciatura en Odontología</b><span>ULACIT's dentistry degree page (Spanish), SINAES-accredited per ULACIT.</span></a>
+    <a class="res-link" href="https://www.dentalcare.com/en-us/ce-courses/ce643/instrument-transfer" target="_blank" rel="noopener"><b>CE643 — Four-handed Dentistry</b><span>The dentalcare.com continuing-education course this hub's transfer drill is grounded in: zones, grasps, transfers, motion economy.</span></a>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Glossary — the words on this page, in plain language</h3>
+    <div class="gloss">
+      <div><b>ALARA</b> — “As low as reasonably achievable”: use the least radiation that gets the needed image; in this app, positioning practice only, never exposure.</div>
+      <div><b>Biological indicator (spore test)</b> — a vial of hardy spores run through the autoclave and incubated; growth = the cycle failed. At least weekly, and with every implantable load.</div>
+      <div><b>Calculus</b> — hardened plaque (tartar) on teeth; removed by licensed clinicians — here, recognised and cleaned on models only.</div>
+      <div><b>Chairside assisting</b> — the assistant's work at the chair: transfers, suction, materials, field control, patient comfort.</div>
+      <div><b>Chemical indicator</b> — ink on or within a pouch that changes colour when sterilising conditions were reached; checked on every pack, every load.</div>
+      <div><b>Class B autoclave</b> — a pre-vacuum steam steriliser (EN 13060) that pulls air out before the cycle, so wrapped and hollow instruments sterilise through.</div>
+      <div><b>Didactic</b> — classroom/theory teaching; 275 of the California RDA programme's 800 hours.</div>
+      <div><b>Extramural clinical</b> — supervised practice on real patients in real clinics outside the school; 265 of the RDA 800 hours. VR is never this.</div>
+      <div><b>FDI notation</b> — the two-digit tooth code: quadrant + tooth from the midline (e.g. 11 = upper right central incisor).</div>
+      <div><b>Four-handed dentistry</b> — operator + assistant working one patient as a coordinated four-hand team, built on zones, transfers and motion economy.</div>
+      <div><b>Fulcrum</b> — a finger rest that steadies a hand instrument; taught in supervised clinical training, named here so the word is familiar.</div>
+      <div><b>HVE</b> — high-volume evacuator: the wide suction tip that clears water and debris at the working site (≈3.3 SCFM class).</div>
+      <div><b>Motion economy</b> — using the smallest, smoothest movements that do the job, so flow is kept and the operator's eyes stay on the field.</div>
+      <div><b>Preclinical / lab</b> — practice on models and simulators inside a programme (260 of the RDA 800 hours) — competence here is shown <em>before</em> the same skill on a patient.</div>
+      <div><b>Screening</b> — a visual look-and-record that flags what a clinician must see. Screening is <b>not</b> diagnosis, and Fellows never diagnose.</div>
+      <div><b>Sealant</b> — a protective resin flowed into pits and fissures to block decay; needs a dry field, and is never placed over a cavitated lesion.</div>
+      <div><b>Transfer zone</b> — the 4–7 o'clock area below the patient's chin where every instrument exchange happens — never over the face.</div>
+      <div><b>Working end</b> — the business end of an instrument; pointed up for maxillary work, down for mandibular, at the moment of transfer.</div>
+    </div>
+  </div>
+
+  <h3 style="margin:26px 0 10px">Printable checklists — copy them, print them, pin them by the bench</h3>
+  <div class="grid3" style="align-items:start">
+    <div class="card">
+      <span class="tag">Checklist 1</span>
+      <h3 style="margin-top:8px">Chairside setup &amp; transfer</h3>
+      <ul class="check" id="chk-chair">
+        <li><span class="box"></span><span>Hand hygiene done; PPE on; barriers placed</span></li>
+        <li><span class="box"></span><span>Tray laid out in working order, left to right</span></li>
+        <li><span class="box"></span><span>Mirror + explorer ready to pass together at the start</span></li>
+        <li><span class="box"></span><span>Suction (HVE + saliva ejector) tested and in the assistant zone</span></li>
+        <li><span class="box"></span><span>Stop signal agreed with the patient before starting</span></li>
+        <li><span class="box"></span><span>Every exchange in the transfer zone, below the chin — never over the face</span></li>
+        <li><span class="box"></span><span>Used instrument received with the little finger; new one placed in position of use</span></li>
+      </ul>
+      <div class="btnrow"><button class="btn small ghost" type="button" data-copycheck="chk-chair" data-checkname="Chairside setup &amp; transfer">Copy checklist</button></div>
+    </div>
+    <div class="card">
+      <span class="tag">Checklist 2</span>
+      <h3 style="margin-top:8px">Sterilisation — one-way chain</h3>
+      <ul class="check" id="chk-ster">
+        <li><span class="box"></span><span>Receive dirty instruments in the dirty zone only</span></li>
+        <li><span class="box"></span><span>Ultrasonic clean (35–48 kHz) — cleaning, not sterilising</span></li>
+        <li><span class="box"></span><span>Rinse, dry, inspect under the magnifier — anything doubtful goes back</span></li>
+        <li><span class="box"></span><span>Pouch with chemical indicator; seal checked</span></li>
+        <li><span class="box"></span><span>Class B autoclave 132–134 °C; mechanical + chemical indicators read on the load</span></li>
+        <li><span class="box"></span><span>Spore test logged — at least weekly, and with every implantable load</span></li>
+        <li><span class="box"></span><span>Cool, dry, date, store in the clean zone — the flow never reverses</span></li>
+      </ul>
+      <div class="btnrow"><button class="btn small ghost" type="button" data-copycheck="chk-ster" data-checkname="Sterilisation — one-way chain">Copy checklist</button></div>
+    </div>
+    <div class="card">
+      <span class="tag">Checklist 3</span>
+      <h3 style="margin-top:8px">School screening morning — Zero Cavity</h3>
+      <ul class="check" id="chk-school">
+        <li><span class="box"></span><span>Consent list checked — no consent, no screening</span></li>
+        <li><span class="box"></span><span>Privacy screen up; kit case laid out (mirror, explorer, gauze, gloves, torch)</span></li>
+        <li><span class="box"></span><span>Screen visually; chart with D / F / M / S / PS / PE / N-I codes</span></li>
+        <li><span class="box"></span><span>Educate: brushing teach-back on the big tooth model</span></li>
+        <li><span class="box"></span><span>Refer: a note for everything seen — no treatment in the field</span></li>
+        <li><span class="box"></span><span>Log the morning for the reviewing clinician</span></li>
+      </ul>
+      <div class="btnrow"><button class="btn small ghost" type="button" data-copycheck="chk-school" data-checkname="School screening morning — Zero Cavity">Copy checklist</button></div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:10px">Copy a checklist and paste it into any document to print — or print this page from your browser: the print stylesheet trims it to the library. Checklists are study aids for supervised training, not clinical protocols.</p>
 </div></section>
 
 <section id="packs"><div class="wrap">
@@ -1013,6 +1261,19 @@ footer b{color:#ffd9a8}
   </details>
 
   <details>
+    <summary>Learning Library — Fellows' Resource Hub (added 2026-11-07)</summary>
+    <div class="body">
+      <p>The <a href="#library">Learning Library</a> on this page is the study companion for Unspoken Smiles teams (Fellows): a 14-entry tools encyclopedia (what it is / what it is for / how to hold and transfer it / care and sterilisation / spec range where verified), a methods library, two role-based learning paths, and a resource shelf with a glossary and printable checklists. Standing rules are unchanged and stated inside the hub itself: demo-only, not official, not endorsed; <b>VR practice ≠ clinical hours</b>; progress is practice-only and never a credential; no diagnosis; no licensure claims; specs only where the spec bible verified them (chair 430–720&nbsp;mm · autoclave 132–134&nbsp;°C · ultrasonic cleaner 35–48&nbsp;kHz · scaler 28&nbsp;kHz · X-ray 60–70&nbsp;kV simulated only) and <b>lab bench specs remain TBD — not invented</b>.</p>
+      <ul>
+        <li><b>Four-handed dentistry</b> is grounded in dentalcare.com CE course <b>CE643, “The Concepts of Four-handed Dentistry Including Ergonomic Instrument Transfer and Exercises for Stress Reduction”</b> — clock-face zones (operator 7–12 · transfer 4–7 below the chin · assistant 2–4 · static 12–2), the single-handed transfer (left hand for a right-handed dentist; working end up for maxillary, down for mandibular; used instrument received with the little finger; never pass over the patient's face; stages working → signal → pretransfer → midtransfer), the pen / palm / palm-thumb grasps, and the principles of motion economy — reinforced by the HDAS four-handed dentistry guide. The hub drills it as an 8-question interactive exercise; the underlying CE content itself is <b>not copied</b> — the course is linked, and Fellows who want the credit-bearing version take it at dentalcare.com.</li>
+        <li><b>Learning paths</b> map app modules to frameworks without conferring anything: assistant track → DANB CDA domains (RHS / ICE / GC — $450, 195 minutes, 245 questions, per danb.org) and California RDA programme buckets (800 hours = 275 didactic + 260 lab/preclinical + 265 extramural clinical, per the Dental Board of California, Rev. 4/2026); hygiene track → the ADEA process of care inside a CODA-accredited programme. Path progress is marked by the learner on the page, held in the visit only, never saved — consistent with the session-log contract below, which remains the only progress record this design recognises.</li>
+        <li><b>Costa Rica honesty:</b> no verified primary source exists for a standalone Costa Rican assistant/hygienist licence, so the hub presents none; it links the CCDCR (Colegio de Cirujanos Dentistas de Costa Rica, colegiodentistas.org) and ULACIT's Técnico en Asistencia Dental and Licenciatura en Odontología programme pages, found via search on 2026-11-07 and linked verbatim, as the places to check requirements directly.</li>
+        <li><b>Resource shelf rule:</b> external links only, no copied content — DANB, CODA, CDC, ADA, Dental Board of California, CCDCR, ULACIT and CE643. None of these bodies endorses this demo.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
     <summary>The dental skill registry (new, SmartCiti.X shape)</summary>
     <div class="body">
       <p>A small <b>new</b> dental registry in the SmartCiti.X shape — 11 strands × 3 tiers (fundamentals / practitioner / lead), sequenced by the same engine pattern: <span class="mono">control/graph.mjs · sequencer.mjs · dial.mjs · gates.mjs · hints.mjs</span>.</p>
@@ -1163,6 +1424,8 @@ footer b{color:#ffd9a8}
         <li>TradePath — <span class="mono">tradepath-training-centre.json</span> (the 3 sessions, zones, XP).</li>
         <li>WorldForge / worlds-3d and Cognition.X (Flow Zone, Simulation Studio, CXXR) — pattern sources, reviewed 2026-11-07.</li>
         <li><a href="https://helsinkixrcenter.com/news/hxrc-team-gamifying-dental-calculus-cleaning/" target="_blank" rel="noopener">Helsinki XR Center — “Gamifying Dental Calculus Cleaning” (STAI Health)</a>, Jun 10, 2025 (updated 2025-06-16) — design inspiration for the Teeth &amp; Calculus Lab: Study / Quiz / Clean modes, primary + permanent models, the four calculus instruments and tip-recognition aim, the teacher character, the quiet room + passthrough option, remote-control lerp instrument interaction, and the two-language localisation pattern. Ideas only — no assets, models or branding copied; not affiliated or endorsed.</li>
+        <li><a href="https://www.dentalcare.com/en-us/ce-courses/ce643/instrument-transfer" target="_blank" rel="noopener">dentalcare.com — CE643 “The Concepts of Four-handed Dentistry” (instrument transfer)</a> + <a href="https://www.hdas.biz/four-handed-dentistry/" target="_blank" rel="noopener">HDAS — four-handed dentistry guide</a> — grounding for the Learning Library's four-handed dentistry drill: clock-face zones, single-handed transfer, grasps and motion economy (verified 2026-11-07; linked, not copied — the CE course itself is taken at dentalcare.com).</li>
+        <li><a href="http://www.colegiodentistas.org/contactenos/" target="_blank" rel="noopener">CCDCR — Colegio de Cirujanos Dentistas de Costa Rica</a> · <a href="https://ulacit.ac.cr/carreras/tecnico-en-asistencia-dental/" target="_blank" rel="noopener">ULACIT — Técnico en Asistencia Dental</a> · <a href="https://ulacit.ac.cr/carreras/licenciatura-en-odontologia/" target="_blank" rel="noopener">ULACIT — Licenciatura en Odontología</a> · <a href="https://www.ada.org/resources/students" target="_blank" rel="noopener">ADA — students</a> — Learning Library resource shelf (found via search 2026-11-07, linked verbatim; links only, no content copied, no endorsement implied).</li>
         <li><b>Wiki fact route (Firecrawl, run 2026-11-07):</b> public facts in the wiki's licensure bridge and Unspoken Smiles entry were scraped with Firecrawl from the primary pages listed above (DANB, CDC MMWR, Dental Board of California, unspokensmiles.org) and are cited per fact, with conflicts kept flagged and never merged. Demo-only throughout: not official, not endorsed, not affiliated.</li>
       </ul>
     </div>
@@ -2468,6 +2731,113 @@ $("pm-newcase").addEventListener("click",function(){drawNewCase();resetRun();toa
 $("pm-restart").addEventListener("click",function(){resetRun();toast("Run restarted — same case")});
 pm.caseIdx=Math.floor(Math.random()*CASES.length);pm.loadIdx=Math.floor(Math.random()*LOADS.length);
 resetRun();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+function toast(m){var t=$("toast");if(t){t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2600)}}
+function copyText(txt,msg){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast(msg)},function(){toast("Copy failed — select and copy manually")})}else{toast("Clipboard unavailable in this view")}}
+
+/* ============ TOOLS ENCYCLOPEDIA ============ */
+var ENC=[
+ {n:"Mouth mirror",c:"hand",t:"Hand instrument",w:"A small angled mirror on a slim handle — the team's second pair of eyes.",u:"Indirect vision of surfaces the eye cannot reach (behind and inside teeth), reflecting light into dark corners, and gentle retraction of cheek and tongue.",h:"Pen grasp. Passed and received like any hand instrument — in the transfer zone, working end oriented for the arch being treated.",k:"Heat-sterilised between patients. A scratched or fogged mirror head is replaced — an unclear image hides the very thing it exists to show.",s:"No spec-bible figure — mirror size varies by manufacturer (TBD)"},
+ {n:"Explorer",c:"hand",t:"Hand instrument",w:"A fine, sharply pointed tip on a handle, in several angles.",u:"Tactile detection: the tip reads surface texture — roughness, catches, margins — that the eye alone misses. On models and in screening examples only in this app.",h:"Pen grasp, light touch. In school screening the touch is gentle and a blunt pattern is used — the worked example in the CPSTF card. Handle as a sharp at all times.",k:"Heat-sterilised between patients. The point is a sharp: one-handed scoop into the sharps container at end of life, never re-capped by hand.",s:"No spec-bible figure — tip patterns are manufacturer designs (TBD)"},
+ {n:"Periodontal probe",c:"hand",t:"Hand instrument",w:"A thin, blunt, graduated probe.",u:"In supervised clinical training, measuring the depth of the space between tooth and gum and recording it on the periodontal chart. In this app: recognition and charting practice on models only — Fellows never probe patients.",h:"Pen grasp, walked gently around the tooth by the clinician. The assistant's job is charting what is called out, accurately and in FDI.",k:"Heat-sterilised between patients. Kept with the exam set so readings stay comparable.",s:"No spec-bible figure — graduation patterns vary (TBD)"},
+ {n:"Scalers & curettes",c:"hand",t:"Hand instruments · tip recognition",w:"Hand scaling instruments in two families: sickles (triangular cross-section, pointed tip) and curettes (spoon-shaped blade, rounded toe — universal, or area-specific patterns like the mesial, distal and buccal-lingual curettes in the Teeth & Calculus Lab).",u:"Removing calculus deposits — above the gumline for sickles, below it for curettes. On patients this is licensed clinicians' work; Fellows learn to recognise the tip and match it to tooth and surface.",h:"Pen grasp for the clinician; stroke and finger-rest technique are taught in supervised clinical training and deliberately not taught here. Passed by handle in the transfer zone like any hand instrument.",k:"Heat-sterilised between patients. Edges must stay sharp — a dull scaler burnishes calculus instead of removing it; sharpening is a supervised lab skill.",s:"No spec-bible figure — patterns are manufacturer designs (TBD) · tips drilled in the Teeth & Calculus Lab"},
+ {n:"High-speed handpiece",c:"powered",t:"Rotary · operator's tool",w:"An air-turbine rotary handpiece on the delivery unit, spinning a bur at very high speed with water coolant.",u:"The operator's cutting instrument for cavity preparation and crown work. The assistant's jobs: anticipate it, keep its field clear with the HVE, and manage burs and coolant.",h:"Operator's pen-style grip — assistants never operate it. Passed handle-first in the transfer zone, bur guarded; received the same way, never by the bur end.",k:"Heat-sterilised between every patient (CDC). Never exceed 135 °C for handpieces; clean and lubricate per the manufacturer's instructions before sterilising.",s:"Delivery air 0.5–0.8 MPa · water 0.2–0.3 MPa (spec bible)"},
+ {n:"Slow-speed handpiece & contra-angle",c:"powered",t:"Rotary · operator's tool",w:"A lower-speed rotary handpiece with interchangeable heads — straight, contra-angle, and disposable prophy angles.",u:"Polishing, finishing, and slower cutting tasks where high speed would be wrong. Coronal polishing is a named course inside the California RDA programme (12h).",h:"Operator-held; the assistant prepares the correct head and paste in working order on the tray and passes handle-first.",k:"Heat-sterilised between every patient (CDC), same handpiece rule as high-speed; single-use prophy angles are discarded, never reprocessed.",s:"Delivery air 0.5–0.8 MPa · water 0.2–0.3 MPa (spec bible)"},
+ {n:"Ultrasonic scaler",c:"powered",t:"Powered · hygiene",w:"A powered scaler whose tip vibrates at ultrasonic frequency with a water coolant spray.",u:"Disrupting and flushing calculus deposits, primarily in hygiene care — on patients, a licensed clinician's instrument. Fellows learn its setup, its sound, and tip recognition against the hand instruments.",h:"Clinician-held with a light pen grasp; the assistant manages water, suction and field visibility so the tip can keep moving.",k:"Tips are inspected and replaced when worn; the handpiece is heat-sterilised per the manufacturer; unit surfaces disinfected between patients.",s:"28 kHz ±3 · 3–20 W · tip excursion ≤100–200 µm · water coolant (spec bible)"},
+ {n:"Ultrasonic cleaner",c:"ster",t:"Sterilisation · cleaning stage",w:"A lidded tank of cleaning solution vibrated at ultrasonic frequency.",u:"Loosening debris from instruments before packaging. It CLEANS — it does not sterilise, and treating it as sterilisation is a chain-breaking error.",h:"Gloved handling in the dirty zone; instruments fully submerged, lid on while it runs (the solution aerosolises).",k:"Solution changed per its instructions and when visibly soiled; tank cleaned and disinfected on schedule; test strips verify the unit is cavitating.",s:"35–48 kHz · 2–6 L · 5–10 min cycles · solution 40–55 °C (spec bible)"},
+ {n:"HVE — high-volume evacuator",c:"air",t:"Suction · assistant's tool",w:"The wide-bore suction tip on the assistant's side of the delivery unit.",u:"Clearing water, spray and debris at the working site so the field — and the patient's airway — stay clear. The assistant's primary instrument during four-handed work.",h:"Palm-thumb or pen grasp, bevel alongside the tooth being worked, placed before the handpiece starts and kept moving with it. Positioned from the assistant zone (2–4 o'clock).",k:"Disposable tips are single-patient. Tubing flushed and disinfected per the daily protocol; traps cleaned on schedule.",s:"≈3.3 SCFM @ −4 inHg (spec bible)"},
+ {n:"Saliva ejector",c:"air",t:"Suction · low volume",w:"The narrow, bendable low-volume suction tube.",u:"Pooling saliva removal between active work — comfort suction, not field control.",h:"Shaped to sit in the floor of the mouth, tip under the tongue side; the patient is asked not to close their lips tightly around it (backflow risk).",k:"Single-patient use — always discarded, never reprocessed.",s:"≈1.3 SCFM (spec bible)"},
+ {n:"3-way syringe (air–water)",c:"air",t:"Air · water · mist",w:"A handled syringe delivering air, water, or a combined mist at the press of its buttons.",u:"Rinsing the field clean and drying it for inspection — the rhythm of assist work: rinse, dry, look.",h:"Held by assistant or operator as the procedure needs; kept off the transfer path — it lives at the delivery unit, not passed hand to hand mid-procedure.",k:"Detachable tips are heat-sterilised between patients or single-use; lines maintained under the waterline protocol (CDC: dental unit waterlines ≤500 CFU/mL).",s:"Runs on the delivery ranges — air 0.5–0.8 MPa · water 0.2–0.3 MPa (spec bible)"},
+ {n:"Intraoral X-ray unit — SIMULATED ONLY",c:"ster",t:"Imaging · simulated",w:"A wall- or chair-mounted intraoral X-ray head on a counterbalanced arm. In this app it is a model: NOTHING EMITS RADIATION, here or anywhere in this training.",u:"In a real clinic, producing intraoral images under a licensed operator. Here: positioning practice only — sensor holder, apron and thyroid collar, alignment, step out.",h:"Never 'held' during an exposure anywhere — the head is positioned, then everyone steps clear. ALARA governs every real image: justify, position once, avoid retakes.",k:"Apron and thyroid collar stored hanging, never folded (cracks in the shielding); unit inspected on its regulatory schedule in a real clinic.",s:"60–70 kV · 2–8 mA · 0.05–0.5 s · focal spot 0.4 mm · ALARA — modelled range, simulated only (spec bible)"},
+ {n:"Class B autoclave",c:"ster",t:"Sterilisation · the pass point",w:"A pre-vacuum steam steriliser (EN 13060 Class B): it pulls air out of the chamber before the steam cycle, so wrapped packs and hollow handpieces sterilise through.",u:"The step that turns cleaned, pouched instruments into sterile ones. Its cycle is the pass/fail heart of the sterilisation chain.",h:"Loaded, never packed tight — steam must reach every surface. Pouches placed paper-to-plastic, not stacked flat. The operator reads the mechanical printout/display on every load.",k:"Mechanical + chemical indicator checked on EVERY load; biological spore test at least weekly and with every implantable load; chamber and gasket cleaned on schedule; a failed test recalls the load — it is never used.",s:"132–134 °C · ~27–30 psi · wrapped 4 min · drying 15–20 min (spec bible)"},
+ {n:"Packaging & spore-test kit",c:"ster",t:"Sterilisation · proof",w:"Pouches and wrap with chemical indicators, a heat sealer, indicator tape — and the biological indicator (spore test) vials and incubator that prove the autoclave actually sterilised.",u:"Packaging keeps instruments sterile from autoclave to chairside; the spore test is the chain's evidence — the one check that demonstrates killing power, not just heat.",h:"Pouch instruments dry and inspected, working ends protected; seal across the full width; label with date and load. Spore vials are run with a normal load and incubated per the kit's instructions.",k:"Pouches stored dry in the clean zone, used oldest-first, and reprocessed if torn, wet or expired. Spore results are logged — an unlogged test is an undone test.",s:"Bench and sealer dimensions: lab bench specs TBD — not invented (spec bible)"}
+];
+var encFilter="all";
+function renderEnc(){
+ var g=$("enc-grid");if(!g)return;
+ g.innerHTML=ENC.filter(function(e){return encFilter==="all"||e.c===encFilter}).map(function(e){
+  return "<article class='enc-card'><span class='tag'>"+e.t+"</span><h3>"+e.n+"</h3><dl>"+
+  "<dt>What it is</dt><dd>"+e.w+"</dd>"+
+  "<dt>What it is for</dt><dd>"+e.u+"</dd>"+
+  "<dt>Hold &amp; transfer</dt><dd>"+e.h+"</dd>"+
+  "<dt>Care &amp; sterilisation</dt><dd>"+e.k+"</dd>"+
+  "<dt>Spec range</dt><dd class='spec'>"+e.s+"</dd></dl></article>"}).join("");
+}
+Array.prototype.forEach.call($("enc-filters").children,function(b){b.addEventListener("click",function(){encFilter=b.getAttribute("data-enc");Array.prototype.forEach.call($("enc-filters").children,function(x){x.classList.toggle("on",x===b)});renderEnc()})});
+renderEnc();
+
+/* ============ FOUR-HANDED TRANSFER DRILL ============ */
+var FH=[
+ {q:"On the clock face (right-handed operator), where does every instrument exchange happen?",o:["The operator zone, 7–12","The transfer zone, 4–7 — below the patient's chin","The assistant zone, 2–4","Over the patient's face, where both can see it"],a:1,w:"Every exchange happens in the transfer zone, below the chin and out of the patient's line of sight. Over the face is never a route — a dropped instrument falls on the patient."},
+ {q:"Your operator is right-handed. Which of your hands passes the next instrument?",o:["Right hand","Left hand","Both hands together"],a:1,w:"Left hand for a right-handed dentist — that is what makes it single-handed: the other hand stays free for suction or the air–water syringe."},
+ {q:"At the very start of the procedure, mirror and explorer are passed…",o:["One at a time, explorer first","Together — one in each hand","Only when the operator asks for each"],a:1,w:"Together, one in each hand, at the start — the operator begins with the examination pair already in hand."},
+ {q:"The operator lifts their hand from the mouth. That is…",o:["A rest break","The signal — move the new instrument into the transfer zone","Time to ask the patient a question"],a:1,w:"The signal. You picked the instrument up early and waited in the transfer zone, about 10–12 inches from the operator's hand — now the exchange happens."},
+ {q:"The operator hands back the used instrument. You receive it with…",o:["Thumb and first finger","Your little finger","An open palm"],a:1,w:"The little finger hooks the used instrument while thumb and first finger deliver the new one — one hand, both directions, no pause."},
+ {q:"The next instrument is for an UPPER (maxillary) tooth. At the moment of transfer its working end points…",o:["Up","Down","Toward you"],a:0,w:"Working end UP for maxillary, DOWN for mandibular — oriented the way the operator will use it, so it lands in position of use with no repositioning."},
+ {q:"And for a LOWER (mandibular) tooth, the working end points…",o:["Up","Down","Toward the patient"],a:1,w:"Down for mandibular. Same rule, flipped arch — the instrument arrives ready, every time."},
+ {q:"Scissors are a double-handed instrument. You pass them by…",o:["Holding the handle, offering the blades","Grasping the working end and placing the handle into the operator's palm","Laying them on the tray for the operator to pick up"],a:1,w:"Grasp the working end, handle into the operator's palm — and receive the same way. Laying instruments down for pickup breaks the whole system: the operator's eyes would leave the field."}
+];
+var fh={i:0,score:0,done:false};
+function fhDots(){$("fh-dots").innerHTML=FH.map(function(_,k){return "<span class='"+(k<fh.i||fh.done?"done":k===fh.i?"now":"")+"'></span>"}).join("")}
+function renderFH(){
+ var b=$("fh-body");if(!b)return;fhDots();
+ if(fh.done){b.innerHTML="<div class='conseq'><b>Drill complete — "+fh.score+" / "+FH.length+".</b> "+(fh.score===FH.length?"A clean transfer run: zones, hands, directions and stages all in order. Now do it at chair speed in the graded runs.":"Good reps — re-read the why on anything you missed and run it again; the transfer has to be boring before it is fast.")+"</div><button class='btn coral small' id='fh-again' type='button'>Run the drill again</button>";
+  $("fh-again").addEventListener("click",function(){fh={i:0,score:0,done:false};renderFH()});return}
+ var q=FH[fh.i];
+ b.innerHTML="<p class='mono small' style='color:var(--coral)'>QUESTION "+(fh.i+1)+" OF "+FH.length+" · SCORE "+fh.score+"</p><p style='font-weight:700;font-size:1.0rem'>"+q.q+"</p><div id='fh-opts'>"+q.o.map(function(o,k){return "<button class='sim-opt' data-fh='"+k+"' type='button'>"+o+"</button>"}).join("")+"</div><div id='fh-fb'></div>";
+ Array.prototype.forEach.call(b.querySelectorAll("[data-fh]"),function(btn){btn.addEventListener("click",function(){
+  var k=+btn.getAttribute("data-fh");var good=k===q.a;if(good)fh.score++;
+  Array.prototype.forEach.call(b.querySelectorAll("[data-fh]"),function(x){x.disabled=true;var j=+x.getAttribute("data-fh");if(j===q.a)x.classList.add("picked-good");else if(j===k)x.classList.add("picked-bad")});
+  $("fh-fb").innerHTML="<div class='conseq'><b>"+(good?"Correct.":"Not quite — the safe answer is the one outlined.")+"</b> "+q.w+"</div><button class='btn coral small' id='fh-next' type='button'>"+(fh.i===FH.length-1?"Finish the drill":"Next question →")+"</button>";
+  $("fh-next").addEventListener("click",function(){fh.i++;if(fh.i>=FH.length)fh.done=true;renderFH()});
+ })});
+}
+$("fh-restart").addEventListener("click",function(){fh={i:0,score:0,done:false};renderFH();toast("Transfer drill restarted")});
+renderFH();
+
+/* ============ LEARNING PATHS (in-visit practice marks only) ============ */
+var PATHS={
+ a:[["Chairside assisting — the graded sequence","Practise in the Practice / Graded runs (#spine), chairside session","DANB GC · CA RDA lab/preclinical concepts"],
+    ["Four-handed transfer & zones","The transfer drill and clock diagram above","DANB GC"],
+    ["Sterilisation & the one-way chain","Equipment Lab chain challenge + graded sterilisation run","DANB ICE · CA RDA Infection Control 8h course"],
+    ["Radiography — positioning & ALARA (simulated)","Radiography method card + imaging nook hotspot in the 3D clinic","DANB RHS · CA RDA Radiation Safety 32h course"],
+    ["Instruments & the exam tray","Tools encyclopedia + Tray in Working Order challenge","DANB GC"],
+    ["Patient communication & comfort","Comfort-meter graded runs + communication method card","DANB GC"]],
+ b:[["Teeth, surfaces & FDI charting","Teeth & Calculus Lab — Study mode, both dentitions","Hygiene assessment · process of care: Assessment"],
+    ["Calculus instruments — tip recognition","Teeth & Calculus Lab — Clean mode, four instruments","Preclinical hygiene"],
+    ["Periodontal charting — record what is called","Charting method card + probe encyclopedia entry","Process of care: Assessment"],
+    ["Sealants & fluoride — prevention sequences","Sealant and fluoride method cards","CA RDA Pit & Fissure Sealants 16h course (assistant route) · school prevention programmes"],
+    ["Radiography — positioning & ALARA (simulated)","Radiography method card + imaging nook hotspot","Hygiene radiography coursework"],
+    ["Screening, education & referral","School-screening session + Zero Cavity workflow card","Process of care: Planning → Implementation → Evaluation"]]
+};
+var pathDone={a:{},b:{}};
+function renderPath(key){
+ var box=$("path-"+key);if(!box)return;
+ box.innerHTML=PATHS[key].map(function(m,i){
+  var on=!!pathDone[key][i];
+  return "<div class='path-mod'><div class='pm-txt'><b>"+m[0]+"</b><span class='small'>"+m[1]+"</span><br><span class='mono small' style='color:var(--teal)'>"+m[2]+"</span></div><button class='markbtn"+(on?" on":"")+"' data-path='"+key+"' data-mod='"+i+"' type='button' aria-pressed='"+on+"'>"+(on?"Practised ✓":"Mark practised")+"</button></div>"}).join("");
+ var n=Object.keys(pathDone[key]).length;
+ $("path-"+key+"-count").textContent=n+" / "+PATHS[key].length;
+ $("path-"+key+"-fill").style.width=Math.round(n/PATHS[key].length*100)+"%";
+ Array.prototype.forEach.call(box.querySelectorAll("[data-path]"),function(btn){btn.addEventListener("click",function(){
+  var k=btn.getAttribute("data-path"),i=btn.getAttribute("data-mod");
+  if(pathDone[k][i])delete pathDone[k][i];else pathDone[k][i]=1;
+  renderPath(k);
+ })});
+}
+renderPath("a");renderPath("b");
+
+/* ============ CHECKLIST COPY ============ */
+Array.prototype.forEach.call(document.querySelectorAll("[data-copycheck]"),function(btn){btn.addEventListener("click",function(){
+ var ul=$(btn.getAttribute("data-copycheck"));if(!ul)return;
+ var lines=Array.prototype.map.call(ul.querySelectorAll("li"),function(li,i){return (i+1)+". "+li.textContent.trim()});
+ copyText("CHECKLIST — "+btn.getAttribute("data-checkname")+"\nUnspokenSmiles VR Training (demo) — study aid for supervised training, not a clinical protocol.\n\n"+lines.join("\n"),"Checklist copied — paste it anywhere to print");
+})});
 })();
 </script>
 </body>
