@@ -277,6 +277,26 @@ footer b{color:#ffd9a8}
 .res-link b{color:var(--teal);display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.02rem}
 .res-link span{font-size:.88rem;color:var(--ink2);font-weight:400}
 @media print{ .demo-strip,.hero,#world,#stations,#lab,#teethlab,#packs,#sim,#play,#spine,#catalogue,#evidence,#tools,#instructor,#standards,#guide,#wiki,#roadmap,#offer,#hackathon,footer,.toast{display:none!important} }
+/* flow state layer */
+.flowmeter{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow)}
+.flowmeter .fm-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.flow-track{position:relative;height:30px;border-radius:99px;overflow:visible;margin:14px 0 6px;background:linear-gradient(90deg,var(--gold-soft) 0 33%,var(--teal-soft) 33% 67%,var(--coral-soft) 67% 100%);border:1px solid var(--line)}
+.flow-track .fm-zone{position:absolute;top:0;bottom:0;display:grid;place-items:center;font:600 .68rem "IBM Plex Mono",monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+.flow-marker{position:absolute;top:-7px;width:4px;height:42px;background:var(--ink);border-radius:2px;transform:translateX(-50%);transition:left .6s ease}
+.flow-marker::after{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink)}
+.flow-narrate{background:var(--teal-soft);border-radius:var(--r-md);padding:10px 12px;font-size:.92rem;margin-top:10px}
+.flow-narrate b{color:var(--teal)}
+.fm-stats{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--ink2);margin-top:8px}
+.fm-stats b{color:var(--ink)}
+.blockgoal{background:var(--gold-soft);border-radius:var(--r-md);padding:9px 12px;font-size:.9rem;margin:8px 0}
+.blockgoal b{color:var(--gold)}
+.blockitem{padding:8px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.blockitem:last-child{border-bottom:none}
+.blockitem .bt{display:block;font-size:.8rem;color:var(--ink2);margin-top:2px}
+.blockitem .bt b{color:var(--teal)}
+.milestone{margin-top:12px;background:var(--teal-soft);border-radius:var(--r-md);padding:10px 12px;font-size:.9rem}
+.milestone b{color:var(--teal)}
+@media (prefers-reduced-motion: reduce){ .flow-marker{transition:none} }
 </style>
 </head>
 <body>
@@ -299,6 +319,7 @@ footer b{color:#ffd9a8}
         <span class="chip"><b>4</b> Flow Zone packs</span>
         <span class="chip"><b>4</b> clinic districts</span>
         <span class="chip"><b>6</b> research-mapped stations A–F</span>
+        <span class="chip"><b>Flow</b> State training layer</span>
       </div>
       <div class="btnrow">
         <a class="btn coral" href="#world">Enter the clinic world</a>
@@ -308,6 +329,7 @@ footer b{color:#ffd9a8}
         <a class="btn ghost" href="#stations">Explore the 6 stations</a>
         <a class="btn ghost" href="#sim">Run a simulation</a>
         <a class="btn ghost" href="#spine">Practise, then run it graded</a>
+        <a class="btn ghost" href="#flowstate">Flow State — how training adapts</a>
         <a class="btn ghost" href="#tools">Compare the tools</a>
         <a class="btn ghost" href="#wiki">Read the wiki</a>
       </div>
@@ -330,19 +352,22 @@ footer b{color:#ffd9a8}
       <span class="tag">Outreach Hub world</span>
       <h3 style="margin-top:8px">1 · Prevention &amp; School Screening</h3>
       <p class="small">Zero Cavity-style prevention teaching: welcome a class, check the consent list, demonstrate brushing on the big tooth model, run a visual screening example, and log what a clinician needs to see. Screening examples only — learners never diagnose.</p>
-      <p class="mono small">9 steps · max 180 XP · District: School-Screening Hall</p>
+      <p class="small"><b>Goal, up front:</b> run a school screening morning end to end — consent first, teach, look-and-record, refer — without ever diagnosing.</p>
+      <p class="mono small">9 blocks · one skill + one transfer check each · max 180 XP · District: School-Screening Hall</p>
     </article>
     <article class="card">
       <span class="tag">Dental Operatory world</span>
       <h3 style="margin-top:8px">2 · Chairside Assisting Basics</h3>
       <p class="small">Set the chair, lay out instruments in order, practise passing and suction positioning on a training setup, keep the field organised, and turn the room over. Skills: dental terminology, infection control basics, patient communication basics.</p>
-      <p class="mono small">9 steps · max 180 XP · District: Operatory</p>
+      <p class="small"><b>Goal, up front:</b> set up, assist four-handed and turn the room over, in order, with the patient settled throughout.</p>
+      <p class="mono small">9 blocks · one skill + one transfer check each · max 180 XP · District: Operatory</p>
     </article>
     <article class="card">
       <span class="tag">Sterilization world</span>
       <h3 style="margin-top:8px">3 · Sterilization &amp; Operatory Setup</h3>
       <p class="small">The one-way flow: receive, clean, pouch, autoclave, store. The order is the safety — every step happens in sequence, indicators get checked, and anything doubtful gets reprocessed, never used. Skills: instrument processing, operatory turnover, instrument tracking.</p>
-      <p class="mono small">9 steps · max 180 XP · District: Sterilization</p>
+      <p class="small"><b>Goal, up front:</b> move one load through the one-way chain — receive to sterile store — with every indicator read and logged.</p>
+      <p class="mono small">8–9 blocks · one skill + one transfer check each · max 180 XP · District: Sterilization</p>
     </article>
   </div>
   <p class="small" style="margin-top:12px">Note: the TradePath <em>Dental Reception</em> zone is a separate front-desk session — it is not one of these three, and it isn't counted as one here either.</p>
@@ -708,6 +733,7 @@ footer b{color:#ffd9a8}
       <div id="path-a"></div>
       <div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:600;margin-top:12px"><span>Practised on this page</span><span class="mono" id="path-a-count">0 / 6</span></div>
       <div class="xpbar" style="margin-top:5px"><div class="xpfill" id="path-a-fill" style="width:0%"></div></div>
+      <p class="small" style="margin-top:10px"><b>Track milestone (practice only, never a credential):</b> all six modules marked practised in one visit, then the same skills shown live on the training kit with a coach — the live showing is the transfer check, and it happens off this page.</p>
       <p class="small" style="margin-top:10px">Framework: <b>DANB CDA</b> — GC (General Chairside) · ICE (Infection Control) · RHS (Radiation Health &amp; Safety), and the California RDA programme buckets below.</p>
     </div>
     <div class="card">
@@ -716,6 +742,7 @@ footer b{color:#ffd9a8}
       <div id="path-b"></div>
       <div style="display:flex;justify-content:space-between;font-size:.85rem;font-weight:600;margin-top:12px"><span>Practised on this page</span><span class="mono" id="path-b-count">0 / 6</span></div>
       <div class="xpbar" style="margin-top:5px"><div class="xpfill" id="path-b-fill" style="width:0%"></div></div>
+      <p class="small" style="margin-top:10px"><b>Track milestone (practice only, never a credential):</b> all six modules marked practised in one visit, then the prevention sequence — screen, educate, refer — run live for volunteers with a coach observing.</p>
       <p class="small" style="margin-top:10px">Framework: the ADEA process of care — Assessment → Dental Hygiene Diagnosis → Planning → Implementation → Evaluation &amp; Documentation — inside a CODA-accredited hygiene programme. Hygienist licensure additionally requires the NBDHE and a clinical board exam (see the wiki licensure entry); nothing here substitutes for any of it.</p>
     </div>
   </div>
@@ -830,57 +857,78 @@ footer b{color:#ffd9a8}
     </div>
   </div>
   <p class="small" style="margin-top:10px">Copy a checklist and paste it into any document to print — or print this page from your browser: the print stylesheet trims it to the library. Checklists are study aids for supervised training, not clinical protocols.</p>
+
+  <div id="flowstate">
+  <h3 style="margin:34px 0 4px">5 · Flow State — training at the edge of what you can almost do</h3>
+  <p class="small" style="max-width:780px">This app's training layer is built on <b>flow</b>: the state of full, focused absorption a person enters when a task is matched to their skill — described and named by psychologist <b>Mihaly Csikszentmihalyi</b>, whose work this section follows and credits. In plain language, flow needs three things at once, and this app is organised to supply all three:</p>
+  <div class="grid3" style="align-items:start">
+    <article class="card"><span class="tag">Condition 1</span><h3 style="margin-top:8px">A clear goal, known before you start</h3><p class="small">You cannot aim at a target nobody showed you. So every block states its <b>goal up front</b> — on the track cards, on the session cards, and on the theory card before each graded step — and every block is <b>one doable skill + one transfer check</b>, small enough to finish and concrete enough to know when you have.</p></article>
+    <article class="card"><span class="tag coral">Condition 2</span><h3 style="margin-top:8px">Feedback at once, never only at the end</h3><p class="small">Every action answers immediately: a choice returns <b>correct / not that one + why</b>, a graded step taken out of order returns its <b>sequence-fault consequence</b> on the spot, suction with too much force moves the <b>comfort meter</b> in the same moment, and a broken sterilisation flow restarts the load there and then. The end-of-run score is a summary — the teaching already happened, action by action.</p></article>
+    <article class="card"><span class="tag gold">Condition 3</span><h3 style="margin-top:8px">Challenge matched to demonstrated skill</h3><p class="small">Too easy breeds boredom; too hard breeds anxiety; between them is the <b>flow band</b>. Cognition.X scenarios carry a target band of <b>9–10</b>, and its difficulty model is the rule this app borrows: <b>85% or better and the next run moves up, under 50% and it moves down, otherwise stay</b> — advice, never a gate. The <b>Flow Meter</b> in the sessions shows where you sit, driven by your recent accuracy and pace.</p></article>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>How each feature of this app maps to the model</h3>
+    <table class="spec-table">
+      <tr><td>Blocks &amp; tracks</td><td><b>Clear goals.</b> Each Flow Zone track is a sequence of blocks — one doable skill + one transfer check, goal stated up front — leading to a practice milestone. A milestone is <b>never a credential</b>, and every block's transfer check is done live, on real material: <span class="mono">transfer.done_here</span> is always <span class="mono">false</span> on this page.</td></tr>
+      <tr><td>Flow Meter</td><td><b>Balance, made visible.</b> In the Practice / Graded runs, the playable session and the Simulation Studio, the meter plots challenge against your recent accuracy and speed, and Coach Mira narrates what it means — in the band, drifting easy, or tipping into overwhelm — while you work, not after.</td></tr>
+      <tr><td>Pressure dial + Practice Mode</td><td><b>The challenge dials the learner controls.</b> Practice Mode drops challenge to the floor (no clock, hints on, nothing scored) so a new skill can be learned; the pressure dial then raises it in graded runs — faster timed calls at medium and high. Both feed the adaptation the meter reads.</td></tr>
+      <tr><td>Complications (+1 / +2)</td><td><b>When it gets easy, the work grows.</b> Succeeding easily is a signal, not a finish line: the Simulation Studio seeds +1 complication at difficulty 2 and +2 at Full drill (the Cognition.X rule — complications land mid-run, never first or last), and in graded sequence runs a first-try streak tightens the next timed prompt one notch.</td></tr>
+      <tr><td>Hints &amp; dropping back</td><td><b>When it gets hard, the work shrinks — kindly.</b> Struggling is also a signal: the coach offers a hint drawn from the step's theory card, a comfort intervention redoes the step together at a calmer level, and the sandbox is always one tap away. Dropping back to a simpler block is the model working, not a failure.</td></tr>
+      <tr><td>Comfort meter &amp; consequences</td><td><b>Immediate feedback, in the body of the work.</b> Force, angle and anaesthesia state move the simulated patient's comfort the instant they happen; sequence faults state their consequence the instant they occur. Nothing waits for a report card.</td></tr>
+      <tr><td>Debrief + flow readout</td><td><b>Reflection closes the loop.</b> Every run ends in the two-well / two-to-change debrief, and every Simulation Studio run adds a flow readout — in the band, too easy, or too hard, with the next difficulty recommended by the 85% / 50% rule and a named thing to practise next.</td></tr>
+    </table>
+    <p class="src" style="margin-top:10px">Source &amp; credit: the block, transfer-check, Simulation Studio and difficulty rules above follow the <a href="https://raw.githubusercontent.com/AGIFutureFoundation/Cognition.X/main/docs/SIMULATION.md" target="_blank" rel="noopener">Cognition.X Simulation Studio documentation</a> (with its <a href="https://raw.githubusercontent.com/AGIFutureFoundation/Cognition.X/main/docs/XR_REVIEW.md" target="_blank" rel="noopener">XR review</a>), credited here as <b>inspiration and pattern source only — no affiliation is claimed</b>, and the flow model itself is Csikszentmihalyi's, attributed as such. Cognition.X's own stance is carried verbatim wherever its pattern is used: <b>Simulation ≠ certification</b>. This hub remains demo-only study material: not official, not endorsed, no diagnosis, no licensure claims, and <b>VR practice ≠ clinical hours</b>.</p>
+  </div>
+  </div>
 </div></section>
 
 <section id="packs"><div class="wrap">
   <div class="sec-head">
     <h2>Curriculum — Flow Zone packs</h2>
-    <p>Built on the Cognition.X blocks model: <strong>one block = one doable skill</strong>, and every block ends with a <strong>transfer check</strong> — the learner performs the skill on real (training) material, not just in the scene. Small blocks, in order, at the edge of what the learner can almost do: that's the Flow Zone.</p>
+    <p>Built on the Cognition.X blocks model: <strong>one block = one doable skill + one transfer check</strong>, with the <strong>goal stated up front</strong> before the block starts — the learner performs the skill on real (training) material, not just in the scene, to pass the check. A <strong>track</strong> is a sequence of blocks in order, and it leads to a <strong>practice milestone — never a credential</strong>: in Cognition.X the transfer check is done live, on real material, with an assessor, and no run on this page credits it — here <span class="mono">transfer.done_here</span> is always <span class="mono">false</span>. Small blocks, in order, at the edge of what the learner can almost do: that's the Flow Zone.</p>
+    <p class="small">How the blocks below are read: <b>Goal</b> = what this track is for, stated before block 1 · each numbered item is one <b>block</b> (one doable skill) with its <b>transfer check</b> underneath · the teal strip is the track's practice milestone. Difficulty adapts between blocks — see the <a href="#flowstate">Flow State section</a> in the Learning Library.</p>
   </div>
   <div class="grid4">
     <article class="card pack">
-      <span class="tag">Pack 1</span>
+      <span class="tag">Track 1 · 4 blocks</span>
       <h3 style="margin-top:8px">Prevention</h3>
-      <ul>
-        <li>Explain fluoride in one friendly sentence</li>
-        <li>Demonstrate brushing on the big tooth model</li>
-        <li>Teach the two-minute rule with a timer song</li>
-        <li>Sort snacks into “everyday” and “sometimes”</li>
-      </ul>
-      <div class="transfer"><b>Transfer check:</b> teach the brushing demo to a real classmate, start to finish, without the script.</div>
+      <div class="blockgoal"><b>Goal, up front:</b> teach prevention to children in plain, true sentences — and prove each line on the big tooth model, not just say it.</div>
+      <div class="blockitem"><b>B1 ·</b> Explain fluoride in one friendly sentence<span class="bt"><b>Transfer check:</b> say it to a classmate who then repeats the meaning back correctly.</span></div>
+      <div class="blockitem"><b>B2 ·</b> Demonstrate brushing on the big tooth model<span class="bt"><b>Transfer check:</b> teach the brushing demo to a real classmate, start to finish, without the script.</span></div>
+      <div class="blockitem"><b>B3 ·</b> Teach the two-minute rule with a timer song<span class="bt"><b>Transfer check:</b> run a full two-minute demo while a partner times it and checks all four quadrants were covered.</span></div>
+      <div class="blockitem"><b>B4 ·</b> Sort snacks into “everyday” and “sometimes”<span class="bt"><b>Transfer check:</b> lead the sorting game for a small group and answer the juice question by asking, not telling.</span></div>
+      <div class="milestone"><b>Practice milestone (never a credential):</b> a full prevention mini-lesson taught live to peers, observed by a coach — practice only, <span class="mono">transfer.done_here: false</span>.</div>
     </article>
     <article class="card pack">
-      <span class="tag">Pack 2</span>
+      <span class="tag">Track 2 · 4 blocks</span>
       <h3 style="margin-top:8px">Chairside Assisting</h3>
-      <ul>
-        <li>Name the core instruments on a laid-out tray</li>
-        <li>Pass an instrument safely, handle-first</li>
-        <li>Hold suction position on the training setup</li>
-        <li>Seat and settle a nervous training patient</li>
-      </ul>
-      <div class="transfer"><b>Transfer check:</b> run a full tray setup and three clean passes on the physical training kit.</div>
+      <div class="blockgoal"><b>Goal, up front:</b> be the second pair of hands at the chair — tray in working order, clean passes in the transfer zone, a settled patient.</div>
+      <div class="blockitem"><b>B1 ·</b> Name the core instruments on a laid-out tray<span class="bt"><b>Transfer check:</b> name every instrument on a shuffled physical tray, in working order, without notes.</span></div>
+      <div class="blockitem"><b>B2 ·</b> Pass an instrument safely, handle-first<span class="bt"><b>Transfer check:</b> three clean single-handed passes on the physical training kit — left hand, little-finger receive, working end up for maxillary / down for mandibular.</span></div>
+      <div class="blockitem"><b>B3 ·</b> Hold suction position on the training setup<span class="bt"><b>Transfer check:</b> hold HVE position through a partner's full simulated procedure without resting on soft tissue.</span></div>
+      <div class="blockitem"><b>B4 ·</b> Seat and settle a nervous training patient<span class="bt"><b>Transfer check:</b> settle a role-playing partner — introduction, explanation, agreed stop signal — before any instrument moves.</span></div>
+      <div class="milestone"><b>Practice milestone (never a credential):</b> a full tray setup and three clean passes on the physical training kit, observed live — practice only, <span class="mono">transfer.done_here: false</span>.</div>
     </article>
     <article class="card pack">
-      <span class="tag">Pack 3</span>
+      <span class="tag">Track 3 · 4 blocks</span>
       <h3 style="margin-top:8px">Sterilization</h3>
-      <ul>
-        <li>Walk the one-way flow without backtracking</li>
-        <li>Pouch and seal a training instrument set</li>
-        <li>Read a pouch indicator and say what it means</li>
-        <li>Quarantine and log a pouch that failed</li>
-      </ul>
-      <div class="transfer"><b>Transfer check:</b> process a full training load in order and catch the planted failed pouch.</div>
+      <div class="blockgoal"><b>Goal, up front:</b> run the one-way chain without ever travelling backwards — and treat every indicator as the load's witness.</div>
+      <div class="blockitem"><b>B1 ·</b> Walk the one-way flow without backtracking<span class="bt"><b>Transfer check:</b> walk a training load receive → store in a real sterilisation room layout, naming each zone as you enter it.</span></div>
+      <div class="blockitem"><b>B2 ·</b> Pouch and seal a training instrument set<span class="bt"><b>Transfer check:</b> pouch, seal and date a training set with the indicator visible, checked by a partner.</span></div>
+      <div class="blockitem"><b>B3 ·</b> Read a pouch indicator and say what it means<span class="bt"><b>Transfer check:</b> read three pouches — changed, unchanged, doubtful — and state the action for each, out loud.</span></div>
+      <div class="blockitem"><b>B4 ·</b> Quarantine and log a pouch that failed<span class="bt"><b>Transfer check:</b> process a full training load in order and catch the planted failed pouch — quarantine, log, reprocess.</span></div>
+      <div class="milestone"><b>Practice milestone (never a credential):</b> one complete training load processed in order with a correct log, observed live — practice only, <span class="mono">transfer.done_here: false</span>.</div>
     </article>
     <article class="card pack">
-      <span class="tag">Pack 4</span>
+      <span class="tag">Track 4 · 4 blocks</span>
       <h3 style="margin-top:8px">School Screening</h3>
-      <ul>
-        <li>Check the consent list before anyone is seen</li>
-        <li>Set up the screening corner in ten minutes</li>
-        <li>Record a visual screening example on the chart</li>
-        <li>Flag — never diagnose — and refer to a clinician</li>
-      </ul>
-      <div class="transfer"><b>Transfer check:</b> run a mock screening morning for four volunteers and hand over a clean chart.</div>
+      <div class="blockgoal"><b>Goal, up front:</b> run a screening morning the Zero Cavity way — screen, educate, refer — with consent as the gate and the chart as the record.</div>
+      <div class="blockitem"><b>B1 ·</b> Check the consent list before anyone is seen<span class="bt"><b>Transfer check:</b> reconcile a class list against a consent list with one name missing, and state exactly what that child does and does not join.</span></div>
+      <div class="blockitem"><b>B2 ·</b> Set up the screening corner in ten minutes<span class="bt"><b>Transfer check:</b> set up a real corner — privacy screen, kit case, consent folder, referral pad — against the clock.</span></div>
+      <div class="blockitem"><b>B3 ·</b> Record a visual screening example on the chart<span class="bt"><b>Transfer check:</b> chart a worked example in FDI with the D / F / M / S / PS / PE / N-I codes, observations only.</span></div>
+      <div class="blockitem"><b>B4 ·</b> Flag — never diagnose — and refer to a clinician<span class="bt"><b>Transfer check:</b> run a mock screening morning for four volunteers and hand over a clean chart with every flag referred.</span></div>
+      <div class="milestone"><b>Practice milestone (never a credential):</b> a mock screening morning handed over clean, observed live — practice only, <span class="mono">transfer.done_here: false</span>.</div>
     </article>
   </div>
 </div></section>
@@ -888,7 +936,7 @@ footer b{color:#ffd9a8}
 <section id="sim"><div class="wrap">
   <div class="sec-head">
     <h2>Simulation Studio — decision runs</h2>
-    <p>The Cognition.X Simulation Studio pattern: a short brief, <strong>5 decision points</strong>, 3 options each scored 2 / 1 / 0, the consequence shown after every choice, and a debrief with 3 questions. Its stance, carried verbatim: <strong>simulation is practice, never a check, never a credential.</strong> A portable run record is generated at the end — it's yours to keep or share.</p>
+    <p>The Cognition.X Simulation Studio pattern: a short brief, <strong>5 decision points</strong>, 3 options each scored 2 / 1 / 0, the consequence shown after every choice, and a debrief with 3 questions. Its stance, carried verbatim: <strong>simulation is practice, never a check, never a credential — Simulation ≠ certification.</strong> Every run record states <span class="mono">transfer.done_here: false</span> — the transfer check for the block this rehearses is done live, on real material, with an assessor; it never happens here. A portable run record is generated at the end — it's yours to keep or share — and a <strong>flow readout</strong> follows it: whether your decisions sat in the flow band, ran too easy, or ran too hard, and what to practise next.</p>
   </div>
   <div class="grid2" style="align-items:start">
     <div class="card">
@@ -907,6 +955,21 @@ footer b{color:#ffd9a8}
           <li><b>Say it out loud</b> — narrate checks so the coach and the chart agree.</li>
           <li><b>Log what happened</b> — if it isn't recorded, it didn't happen.</li>
         </ul>
+      </div>
+      <div class="flowmeter" id="flow-sim" style="margin-bottom:16px">
+        <div class="fm-head"><h3 style="margin:0">Flow Meter</h3><span class="mono small" data-fm-label>Not started yet</span></div>
+        <div class="flow-track" aria-hidden="true"><span class="fm-zone" style="left:0;width:33%">Too easy</span><span class="fm-zone" style="left:33%;width:34%">Flow band</span><span class="fm-zone" style="right:0;width:33%">Too hard</span><span class="flow-marker" data-fm-marker style="left:50%"></span></div>
+        <div class="fm-stats"><span>Recent accuracy <b data-fm-acc>—</b></span><span>Challenge now <b data-fm-chal>—</b></span><span>Actions <b data-fm-n>0</b></span></div>
+        <div class="flow-narrate"><b>Coach Mira:</b> <span data-fm-say>Pick a difficulty and begin. After the run I will read the meter back to you: in the band, too easy, or too hard — and what to practise next.</span></div>
+      </div>
+      <div class="card">
+        <h3>Difficulty — the Cognition.X three</h3>
+        <div class="mode-tabs" id="sim-diff" role="tablist" aria-label="Simulation difficulty" style="margin:6px 0">
+          <button type="button" data-sim-diff="1" class="on">1 · Rehearsal — 5 decisions</button>
+          <button type="button" data-sim-diff="2">2 · Complications — +1</button>
+          <button type="button" data-sim-diff="3">3 · Full drill — +2</button>
+        </div>
+        <p class="small">The Simulation Studio's own rule: the five decisions are the run; at higher difficulty the engine seeds <b>+1 or +2 complications</b> into the middle of it — never first, never last. After a run it recommends the next difficulty — <b>85% or better moves up, under 50% moves down, otherwise stay</b> — as advice to learner and teacher, never a gate.</p>
       </div>
       <div class="card">
         <h3>How scoring works</h3>
@@ -936,6 +999,12 @@ footer b{color:#ffd9a8}
         <h3>Roster — session progress</h3>
         <div id="roster"></div>
         <p class="small" style="margin-top:10px">Progress lives on this page only, for this visit. There is no learner account and no saved record — see the session-log contract in the wiki for how a validated log would work.</p>
+      </div>
+      <div class="flowmeter" id="flow-play" style="margin-bottom:16px">
+        <div class="fm-head"><h3 style="margin:0">Flow Meter</h3><span class="mono small" data-fm-label>Not started yet</span></div>
+        <div class="flow-track" aria-hidden="true"><span class="fm-zone" style="left:0;width:33%">Too easy</span><span class="fm-zone" style="left:33%;width:34%">Flow band</span><span class="fm-zone" style="right:0;width:33%">Too hard</span><span class="flow-marker" data-fm-marker style="left:50%"></span></div>
+        <div class="fm-stats"><span>Recent accuracy <b data-fm-acc>—</b></span><span>Challenge now <b data-fm-chal>—</b></span><span>Actions <b data-fm-n>0</b></span></div>
+        <div class="flow-narrate"><b>Coach Mira:</b> <span data-fm-say>Every answer moves this meter at once — correct or not, you see the consequence and the balance immediately, never only a score at the end.</span></div>
       </div>
       <div class="card">
         <h3>Ratings</h3>
@@ -990,6 +1059,12 @@ footer b{color:#ffd9a8}
         </div>
         <div id="pm-case" aria-live="polite"></div>
         <p class="small" style="margin-top:8px">A scripted teaching case: the finding is <b>given</b> on the card, with the tooth, the condition the clinician is working to, and the consent status. Cases rotate so no run can be memorised — and the consent and anaesthesia lines change what the right first moves are.</p>
+      </div>
+      <div class="flowmeter" id="flow-spine" style="margin-bottom:16px">
+        <div class="fm-head"><h3 style="margin:0">Flow Meter — challenge vs. skill</h3><span class="mono small" data-fm-label>Not started yet</span></div>
+        <div class="flow-track" aria-hidden="true"><span class="fm-zone" style="left:0;width:33%">Too easy</span><span class="fm-zone" style="left:33%;width:34%">Flow band</span><span class="fm-zone" style="right:0;width:33%">Too hard</span><span class="flow-marker" data-fm-marker style="left:50%"></span></div>
+        <div class="fm-stats"><span>Recent accuracy <b data-fm-acc>—</b></span><span>Recent pace <b data-fm-speed>—</b></span><span>Challenge now <b data-fm-chal>—</b></span><span>Actions counted <b data-fm-n>0</b></span></div>
+        <div class="flow-narrate"><b>Coach Mira:</b> <span data-fm-say>Start any run and I will read this meter with you. It is driven by your recent accuracy and how fast you answer — when the marker sits in the middle band, the work is matched to you: neither boring nor overwhelming.</span></div>
       </div>
       <div class="card" id="pm-comfort-card" style="margin-bottom:16px">
         <h3>Patient comfort — simulated</h3>
@@ -1895,7 +1970,7 @@ var P=[
  {t:"Chart & log the morning",lesson:"The demo ends; the record begins. Charts for 23 screened examples, one consent note, one referral flag.",check:["23 screening examples charted","Sam's consent note attached","Referral flag on the dark-spot chart"],q:"What belongs in the log?",opts:["Observations, the consent note, and the referral — facts only","Your opinion on which children brush well","A diagnosis summary for parents"],a:0,why:"Log what happened: observations and referrals. Opinions and diagnoses don't belong in a guide's log — log what happened, nothing more."},
  {t:"Visual quiz & debrief",lesson:"Last step — the visual quiz. Look at Guide image 2 in the Guide media section (the sterilization room): benches, washer, glowing autoclave, sterile cabinet, and arrows on the floor.",check:["Looked at Guide image 2 (Guide media section)","Arrows point one way — receiving to storage","Quiz answer decides your All-Star shot"],q:"Quiz: what is the floor-arrow flow in that room?",opts:["Storage → autoclave → washer → receiving","Receiving → washer → autoclave → sterile storage","Any order, as long as it's fast"],a:1,why:"The order is the safety: receiving → clean → pouch → autoclave → storage, one way, never back. Session complete."}
 ];
-var pi=0,pscore=[],pattempts=[],pquizFirst=false,pdone=false;
+var pi=0,pscore=[],pattempts=[],pquizFirst=false,pdone=false,pStepT=Date.now();
 var pdots=$("play-dots");for(var d=0;d<9;d++){var sp=document.createElement("span");pdots.appendChild(sp)}
 function pTotal(){return pscore.reduce(function(a,b){return a+(b||0)},0)}
 function renderRoster(){
@@ -1909,19 +1984,19 @@ function renderPlay(){
   var body=$("play-body");
   if(pdone){
     var pct=tot/550*100;var rating=pct>=95&&pquizFirst?"All-Star":pct>=80?"Gold":pct>=60?"Silver":"Bronze";
-    body.innerHTML="<p><b>Prevention & School Screening — complete.</b></p><p class='small'>Final score <b>"+tot+" / 550</b> · XP <b>"+Math.round(tot/550*180)+" / 180</b> · Rating: <b>"+rating+"</b></p><p class='small'>Debrief: What did the consent check change? Where did you nearly improvise instead of escalating? What will you log differently next run? Ratings are play feedback — never a completion record, never money, never a credential.</p><button class='btn coral' id='play-again' type='button'>Play again</button>";
+    body.innerHTML="<p><b>Prevention & School Screening — complete.</b></p><p class='small'>Final score <b>"+tot+" / 550</b> · XP <b>"+Math.round(tot/550*180)+" / 180</b> · Rating: <b>"+rating+"</b></p>"+(window.FlowLog?FlowLog.readoutHTML(tot/550,"this session"):"")+"<p class='small'>Debrief: What did the consent check change? Where did you nearly improvise instead of escalating? What will you log differently next run? Ratings are play feedback — never a completion record, never money, never a credential.</p><button class='btn coral' id='play-again' type='button'>Play again</button>";
     $("play-again").addEventListener("click",function(){pi=0;pscore=[];pattempts=[];pquizFirst=false;pdone=false;renderPlay();toast("Session reset — run it again")});
     return;
   }
-  var s=P[pi];var max=pi===8?100:50;
+  var s=P[pi];var max=pi===8?100:50;pStepT=Date.now();if(window.FlowLog)FlowLog.setChallenge(25+pi*7,"Playable session · step "+(pi+1)+" of 9");
   body.innerHTML="<p style='font-size:.97rem'>"+s.lesson+"</p><p class='small' style='font-weight:700;margin-top:10px'>CHECKLIST</p><ul style='margin:.2rem 0 .6rem;padding-left:0;list-style:none'>"+s.check.map(function(c){return "<li style='display:flex;gap:9px;font-size:.93rem;padding:3px 0'><span style='flex:0 0 18px;width:18px;height:18px;border:2px solid var(--teal);border-radius:5px;margin-top:2px'></span>"+c+"</li>"}).join("")+"</ul><p style='font-weight:700;margin-top:10px'>"+s.q+"</p><div id='play-opts'>"+s.opts.map(function(o,i){return "<button class='sim-opt' data-pi='"+i+"' type='button'>"+o+"</button>"}).join("")+"</div><div id='play-fb'></div>";
   Array.prototype.forEach.call(body.querySelectorAll("[data-pi]"),function(b){b.addEventListener("click",function(){
     var pick=+b.getAttribute("data-pi");pattempts[pi]=(pattempts[pi]||0)+1;
-    if(pick===s.a){var pts=pattempts[pi]===1?max:Math.round(max/2);pscore[pi]=pts;if(pi===8&&pattempts[pi]===1)pquizFirst=true;
+    if(pick===s.a){var pts=pattempts[pi]===1?max:Math.round(max/2);pscore[pi]=pts;if(pi===8&&pattempts[pi]===1)pquizFirst=true;if(window.FlowLog)FlowLog.record("play",pattempts[pi]===1?1:0.5,Date.now()-pStepT,null);
       b.classList.add("picked-good");Array.prototype.forEach.call(body.querySelectorAll("[data-pi]"),function(x){x.disabled=true});
       $("play-fb").innerHTML="<div class='conseq'><b>+"+pts+" pts.</b> "+s.why+"</div><button class='btn coral' id='play-next' type='button'>"+(pi===8?"Finish session":"Next step →")+"</button>";
       $("play-next").addEventListener("click",function(){if(pi===8){pdone=true}else{pi++}renderPlay()});renderRoster();$("play-score").textContent="Score "+pTotal()+" · XP "+Math.round(pTotal()/550*180)+" / 180";}
-    else{b.classList.add("picked-bad");b.disabled=true;$("play-fb").innerHTML="<div class='conseq'>Not that one — think about the disciplines: verify before you act, the order is the safety, escalate don't improvise. Try again (a correct answer now earns half points).</div>"}
+    else{b.classList.add("picked-bad");b.disabled=true;if(window.FlowLog)FlowLog.record("play",0,Date.now()-pStepT,null);$("play-fb").innerHTML="<div class='conseq'><b>Not that one — feedback at once:</b> think about the disciplines: verify before you act, the order is the safety, escalate don't improvise. <b>Coach's hint:</b> the checklist above is the answer key for this step. Try again (a correct answer now earns half points).</div>"}
   })});
 }
 renderPlay();
@@ -1949,26 +2024,44 @@ var SIM=[
    {t:"Quarantine the pouch, log it, reprocess a fresh set, and tell the coach the session starts with a substitute exercise.",s:2,c:"Right. Quarantine, log, reprocess, communicate. The order is the safety — and the log is what makes it real."},
    {t:"Set it aside quietly and borrow instruments from the next tray.",s:1,c:"You avoided using it — good — but without the log and quarantine, the pouch can drift back into circulation. Finish the job."}]}
 ];
-var si=-1,sscore=0,slog=[];
-function simDots(){var dots=$("sim-dots").children;for(var i=0;i<5;i++){dots[i].className=i<si?"done":i===si?"now":""}}
+var COMP=[
+ {t:"Complication — The missing referral pad",p:"Mid-morning, a decision is flagged for referral — and the referral pad is empty. The printer is down the corridor; the line is waiting; the teacher is watching.",opts:[
+   {t:"Send the child back to class and refer from memory later.",s:0,c:"A referral from memory is a referral that may never exist. The flag is the intervention — it has to be written, now, on something."},
+   {t:"Write the referral on a plain sheet — child, tooth, what was seen, your name — and log that the pad ran out.",s:2,c:"Right. The form is a tool, not the act: the record is complete, dated and attributable, and the missing pad is itself logged so it is restocked."},
+   {t:"Hold the whole line while someone fetches a new pad.",s:1,c:"Safe, but the room stalls for a stationery problem. Record it properly on what you have; escalate the restock, don't queue behind it."}]},
+ {t:"Complication — The anxious child",p:"Fourth child in, a seven-year-old goes quiet, grips the chair arms and will not open her mouth. Her friend whispers: “She's scared of dentists.” The queue behind her is growing.",opts:[
+   {t:"Proceed quickly — the faster it is over, the better for her.",s:0,c:"Speed is not kindness here. A frightened child screened by force teaches every watching child the same lesson — and a tense, moving child cannot be screened safely at all."},
+   {t:"Pause the line, drop to her level, explain on the big tooth first, agree a stop signal — and if she still says no, she joins the demo unscreened and it is noted, kindly.",s:2,c:"Right. Consent is not only paperwork: her no is data. She keeps the teaching, loses nothing, and the note protects her and you. The person in front of you is a control, not a courtesy."},
+   {t:"Ask the teacher to hold her still for ten seconds.",s:1,c:"Never. Restraint is not a screening technique — and asking a teacher to do it outsources a line you must not cross yourself."}]}
+];
+var simDiff=1,si=-1,sscore=0,slog=[],simT0=0;
+function simSeq(){var s=SIM.slice();if(simDiff>=2)s.splice(2,0,COMP[0]);if(simDiff>=3)s.splice(4,0,COMP[1]);return s}
+function simDots(){var seq=simSeq(),dots=$("sim-dots");dots.innerHTML=seq.map(function(){return "<span></span>"}).join("");var ch=dots.children;for(var i=0;i<seq.length;i++){ch[i].className=i<si?"done":i===si?"now":""}}
+function flowSay(txt){if(window.FlowLog)FlowLog.setChallenge(simDiff===1?35:simDiff===2?60:85,"Simulation difficulty "+simDiff+(simDiff>1?" · +"+(simDiff-1)+" complication"+(simDiff===3?"s":""):" · rehearsal"))}
 function renderSim(){
-  simDots();var body=$("sim-body");
-  if(si===-1){body.innerHTML="<p><b>Brief.</b> You are the assistant-guide on a school screening morning: 24 children, one teacher, a demo to teach, a chart to keep, and a clinician who reviews everything afterwards. Five decisions. Each scores 2 / 1 / 0, with the consequence shown. Simulation is practice, never a check, never a credential.</p><button class='btn coral' id='sim-begin' type='button'>Begin the run</button>";
-    $("sim-begin").addEventListener("click",function(){si=0;renderSim()});return}
-  if(si>=5){var rec="RUN RECORD — UnspokenSmiles VR Training (Simulation Studio)\nRun: School Screening Morning · Score: "+sscore+" / 10\nStance: simulation is practice, never a check, never a credential.\n" + slog.map(function(l,i){return "D"+(i+1)+": "+l}).join("\n");
-    body.innerHTML="<p><b>Run complete — "+sscore+" / 10.</b></p><p style='font-weight:700'>Debrief — three questions</p><ol style='font-size:.95rem;padding-left:1.2rem'><li>Which decision cost you points, and which discipline was it testing?</li><li>Where were you tempted to improvise instead of escalating?</li><li>What goes in the log from this morning — and what must never go in it?</li></ol><p class='small'>Your portable run record:</p><p class='mono' style='font-size:.8rem;background:var(--panel2);border-radius:8px;padding:12px;white-space:pre-wrap'>"+rec+"</p><div class='btnrow'><button class='btn small' id='sim-copy' type='button'>Copy run record</button><button class='btn small ghost' id='sim-again' type='button'>Run it again</button></div>";
+  simDots();flowSay();var body=$("sim-body"),seq=simSeq(),max=seq.length*2;
+  if(si===-1){body.innerHTML="<p><b>Brief.</b> You are the assistant-guide on a school screening morning: 24 children, one teacher, a demo to teach, a chart to keep, and a clinician who reviews everything afterwards. <b>Goal, up front:</b> finish the morning with consent verified before anyone is seen, nothing diagnosed, every flag referred and everything logged. "+seq.length+" decisions at difficulty "+simDiff+(simDiff>1?" — the five, plus "+(simDiff-1)+" seeded complication"+(simDiff===3?"s":"")+" mid-run":"")+". Each scores 2 / 1 / 0, with the consequence shown at once. Simulation is practice, never a check, never a credential — Simulation ≠ certification.</p><button class='btn coral' id='sim-begin' type='button'>Begin the run</button>";
+    $("sim-begin").addEventListener("click",function(){si=0;simT0=Date.now();renderSim()});return}
+  if(si>=seq.length){var pct=sscore/max;var rec="RUN RECORD — UnspokenSmiles VR Training (Simulation Studio)\nRun: School Screening Morning · Difficulty: "+simDiff+" ("+seq.length+" decisions"+(simDiff>1?", incl. "+(simDiff-1)+" complication"+(simDiff===3?"s":""):"")+") · Score: "+sscore+" / "+max+"\nStance: simulation is practice, never a check, never a credential. Simulation ≠ certification.\ntransfer.done_here: false — the transfer check for this block is done live, on real material, with an assessor; it never happens in a run.\n" + slog.map(function(l,i){return "D"+(i+1)+": "+l}).join("\n") + "\nFlow readout: "+(window.FlowLog?FlowLog.readoutText(pct):(pct>=0.85?"Running easy — move up a difficulty next run.":pct<0.5?"Running hard — drop back a difficulty and practise the basics.":"In the flow band — same difficulty, new run."));
+    var nxt=pct>=0.85?Math.min(3,simDiff+1):pct<0.5?Math.max(1,simDiff-1):simDiff;
+    body.innerHTML="<p><b>Run complete — "+sscore+" / "+max+".</b></p><p style='font-weight:700'>Debrief — three questions</p><ol style='font-size:.95rem;padding-left:1.2rem'><li>Which decision cost you points, and which discipline was it testing?</li><li>Where were you tempted to improvise instead of escalating?</li><li>What goes in the log from this morning — and what must never go in it?</li></ol>"+(window.FlowLog?FlowLog.readoutHTML(pct,"this run"):"")+"<p class='small'><b>Next difficulty — advice, never a gate:</b> "+(nxt===simDiff?"stay at difficulty "+simDiff+" — the band rule (85% up · under 50% down · otherwise stay) says this level is still teaching you.":"the band rule (85% up · under 50% down · otherwise stay) recommends difficulty "+nxt+".")+"</p>"+(nxt!==simDiff?"<div class='btnrow'><button class='btn small' id='sim-applydiff' type='button'>Set difficulty "+nxt+" for the next run</button></div>":"")+"<p class='small' style='margin-top:10px'><b>Simulation ≠ certification.</b> <span class='mono'>transfer.done_here: false</span> — this run rehearses a block whose transfer check is done live, on real material, with an assessor.</p><p class='small'>Your portable run record:</p><p class='mono' style='font-size:.8rem;background:var(--panel2);border-radius:8px;padding:12px;white-space:pre-wrap'>"+rec+"</p><div class='btnrow'><button class='btn small' id='sim-copy' type='button'>Copy run record</button><button class='btn small ghost' id='sim-again' type='button'>Run it again</button></div>";
     $("sim-copy").addEventListener("click",function(){if(navigator.clipboard)navigator.clipboard.writeText(rec).then(function(){toast("Run record copied — it's yours to keep or share")})});
-    $("sim-again").addEventListener("click",function(){si=-1;sscore=0;slog=[];renderSim()});return}
-  var d=SIM[si];
-  body.innerHTML="<p class='mono small' style='color:var(--coral)'>"+d.t.toUpperCase()+" · SCORE SO FAR "+sscore+"</p><p style='font-size:.98rem'>"+d.p+"</p><div id='sim-opts'>"+d.opts.map(function(o,i){return "<button class='sim-opt' data-si='"+i+"' type='button'>"+o.t+"</button>"}).join("")+"</div><div id='sim-fb'></div>";
+    $("sim-again").addEventListener("click",function(){si=-1;sscore=0;slog=[];renderSim()});
+    var ab=$("sim-applydiff");if(ab)ab.addEventListener("click",function(){simDiff=nxt;si=-1;sscore=0;slog=[];syncSimDiff();renderSim();toast("Difficulty "+nxt+" set — advice taken, never a gate")});
+    return}
+  var d=seq[si];
+  body.innerHTML="<p class='mono small' style='color:var(--coral)'>"+d.t.toUpperCase()+" · SCORE SO FAR "+sscore+" / "+max+"</p><p style='font-size:.98rem'>"+d.p+"</p><div id='sim-opts'>"+d.opts.map(function(o,i){return "<button class='sim-opt' data-si='"+i+"' type='button'>"+o.t+"</button>"}).join("")+"</div><div id='sim-fb'></div>";
   Array.prototype.forEach.call(body.querySelectorAll("[data-si]"),function(b){b.addEventListener("click",function(){
-    var pick=+b.getAttribute("data-si");var o=d.opts[pick];sscore+=o.s;slog.push(o.t+" ("+o.s+"/2)");
+    var pick=+b.getAttribute("data-si");var o=d.opts[pick];var ms=Date.now()-simT0;sscore+=o.s;slog.push(d.t.replace(/^Decision [0-9]+ — /,"").replace(/^Complication — /,"Complication: ")+": "+o.t+" ("+o.s+"/2)");
+    if(window.FlowLog)FlowLog.record("sim",o.s/2,ms,null);
     b.classList.add(o.s===2?"picked-good":o.s===1?"picked-mid":"picked-bad");
     Array.prototype.forEach.call(body.querySelectorAll("[data-si]"),function(x){x.disabled=true});
-    $("sim-fb").innerHTML="<div class='conseq'><b>Consequence — "+o.s+" / 2.</b> "+o.c+"</div><button class='btn coral' id='sim-next' type='button'>"+(si===4?"Finish & debrief":"Next decision →")+"</button>";
-    $("sim-next").addEventListener("click",function(){si++;renderSim()});
+    $("sim-fb").innerHTML="<div class='conseq'><b>"+(o.s===2?"Correct":o.s===1?"Partly right":"Not that one")+" — consequence, at once ("+o.s+" / 2).</b> "+o.c+"</div><button class='btn coral' id='sim-next' type='button'>"+(si===seq.length-1?"Finish & debrief":"Next decision →")+"</button>";
+    $("sim-next").addEventListener("click",function(){si++;simT0=Date.now();renderSim()});
   })});
 }
+function syncSimDiff(){Array.prototype.forEach.call($("sim-diff").children,function(b){b.classList.toggle("on",+b.getAttribute("data-sim-diff")===simDiff)})}
+Array.prototype.forEach.call($("sim-diff").children,function(b){b.addEventListener("click",function(){simDiff=+b.getAttribute("data-sim-diff");si=-1;sscore=0;slog=[];syncSimDiff();renderSim();toast("Simulation difficulty "+simDiff+(simDiff>1?" — complications seeded mid-run":" — the five decisions, plain"))})});
 renderSim();
 
 /* ================= INSTRUCTOR REVIEW (demo) ================= */
@@ -1981,8 +2074,8 @@ function renderInstructor(){
   var retries=pattempts.reduce(function(a,b){return a+Math.max(0,(b||1)-1)},0);
   rows+="<div style='padding:9px 0;border-bottom:1px dashed var(--line)'><b>Playable session — Prevention &amp; School Screening</b><br><span class='small'>Status: "+pstat+" · score "+pTotal()+" / 550 · wrong first attempts (retries): "+retries+". Criterion view: consent verified before screening (step 2), observe–record–flag, never diagnose (step 6), one-way sterilisation flow (step 9 quiz).</span></div>";
   var crit=slog.filter(function(l){return /\(0\/2\)$/.test(l)});
-  var sstat=si===-1?"not started":(si>=5?"complete":"in progress — decision "+(si+1)+" of 5");
-  rows+="<div style='padding:9px 0;border-bottom:1px dashed var(--line)'><b>Simulation Studio — School Screening Morning</b><br><span class='small'>Status: "+sstat+" · score "+sscore+" / 10 · <b>critical errors (0-point decisions): "+crit.length+"</b>"+(crit.length?": "+crit.map(function(l){return "“"+l.replace(/ \([0-9]\/2\)$/,"")+"”"}).join("; "):"")+".</span></div>";
+  var sstat=si===-1?"not started":(si>=simSeq().length?"complete":"in progress — decision "+(si+1)+" of "+simSeq().length);
+  rows+="<div style='padding:9px 0;border-bottom:1px dashed var(--line)'><b>Simulation Studio — School Screening Morning</b><br><span class='small'>Status: "+sstat+" · difficulty "+simDiff+" · score "+sscore+" / "+(simSeq().length*2)+" · transfer.done_here: false · Simulation ≠ certification · <b>critical errors (0-point decisions): "+crit.length+"</b>"+(crit.length?": "+crit.map(function(l){return "“"+l.replace(/ \([0-9]\/2\)$/,"")+"”"}).join("; "):"")+".</span></div>";
   var pmr=(window.__pmSummary)?window.__pmSummary():null;
   rows+="<div style='padding:9px 0'><b>Graded sequence runs — chairside &amp; sterilisation (Practice / Graded section)</b><br><span class='small'>"+(pmr||"Not started in this visit. The practice sandbox keeps no score by design; graded runs record sequence faults, critical errors, timed-prompt misses and comfort interventions.")+"</span></div>";
   el.innerHTML=rows+"<p class='small' style='margin-top:10px'>Reviewer note: scores here are formative practice feedback for this visitor only — not a competency determination, not a grade, and not a credential. In the Dental VR Academy / Denti XR pattern, a teacher reviews exactly this shape of record — attempts, criterion scores, critical errors — for each learner.</p>";
@@ -2052,6 +2145,7 @@ function makeChain(cfg){
     renderSlots();fb.innerHTML="<p class='small'>Step "+(next+1)+" of "+order.length+" — tap the next stage.</p>";
   }
   function pick(name,btn){
+    if(window.FlowLog){FlowLog.setChallenge(50,"Sequence challenge · step "+(next+1)+" of "+order.length);FlowLog.record("chain",name===order[next]?1:0,null,null)}
     if(name===order[next]){next++;btn.classList.add("used");
       if(next>=order.length){renderSlots();fb.innerHTML="<div class='conseq'><b>Chain complete — clean run"+(errors?" with "+errors+" error"+(errors>1?"s":""):" , zero errors")+".</b> "+cfg.done+"</div>";toast(cfg.toast)}
       else{renderSlots();fb.innerHTML="<p class='small'><b>Correct.</b> "+cfg.why[name]+"</p>"}
@@ -2557,7 +2651,7 @@ function renderChecklist(){
 function coachSay(t){$("pm-coach").innerHTML=t}
 function renderAll(){renderControls();renderCase();renderComfort();renderTitle();renderStatus();renderChecklist();renderStep()}
 function resetRun(){
- clearPrompt();pm.idx=0;pm.done={};pm.score=0;pm.faults=0;pm.crits=0;pm.interv=0;pm.contam=0;pm.missed=0;pm.answered=0;pm.comfort=90;pm.attempts=0;pm.phase="theory";pm.promptNote="";pm.finished=false;pm.failed=false;renderAll();
+ clearPrompt();pm.streak=0;pm.slump=0;pm.flowBoost=false;if(window.FlowLog)FlowLog.setChallenge(pm.mode==="practice"?15:(pm.pressure==="low"?40:pm.pressure==="medium"?60:85),(pm.mode==="practice"?"Practice sandbox":"Graded run")+" · pressure "+pm.pressure);pm.idx=0;pm.done={};pm.score=0;pm.faults=0;pm.crits=0;pm.interv=0;pm.contam=0;pm.missed=0;pm.answered=0;pm.comfort=90;pm.attempts=0;pm.phase="theory";pm.promptNote="";pm.finished=false;pm.failed=false;renderAll();
 }
 function theoryHTML(s){
  return "<div class='theory'><span class='tag gold'>Theory · at the point of need</span><p>"+s.theory+"</p><p class='src'>Source: <a href='"+s.src[1]+"' target='_blank' rel='noopener'>"+s.src[0]+"</a> — full citations in the wiki below.</p></div>";
@@ -2575,14 +2669,15 @@ function renderStep(){
  }
  if(pm.phase==="opts"){renderOpts();return}
 }
+function secs0(){return pm.pressure==="low"?20000:pm.pressure==="medium"?12000:7000}
 function startPrompt(s){
  pm.phase="prompt";
  var body=$("pm-body");
- var secs=pm.pressure==="low"?20:pm.pressure==="medium"?12:7;
- body.innerHTML="<div class='promptbox'><p class='small' style='font-weight:700;margin:0'>TIMED PROMPT · THE CLINICIAN CALLS</p><p class='cue'>“"+s.prompt.cue+"”</p>"+(pm.mode==="graded"?"<div class='prompt-timer'><div id='pm-ptbar'></div></div><p class='small' id='pm-pttext' style='margin:0'></p>":"<p class='small' style='margin:0'>Sandbox: no clock — the call waits for you, as long as you need.</p>")+"<div class='btnrow'><button class='btn coral' id='pm-pbtn' type='button'>"+s.prompt.btn+"</button></div></div>";
+ var secs=pm.pressure==="low"?20:pm.pressure==="medium"?12:7;if(pm.flowBoost)secs=pm.pressure==="low"?12:pm.pressure==="medium"?7:5;
+ body.innerHTML="<div class='promptbox'><p class='small' style='font-weight:700;margin:0'>TIMED PROMPT · THE CLINICIAN CALLS</p><p class='cue'>“"+s.prompt.cue+"”</p>"+(pm.flowBoost?"<p class='small' style='margin:0 0 6px'><b>Flow adaptation — complication added:</b> you have been answering first-time and fast, so this call runs one pressure notch tighter. Same skill, more challenge — that is the band being kept.</p>":"")+(pm.mode==="graded"?"<div class='prompt-timer'><div id='pm-ptbar'></div></div><p class='small' id='pm-pttext' style='margin:0'></p>":"<p class='small' style='margin:0'>Sandbox: no clock — the call waits for you, as long as you need.</p>")+"<div class='btnrow'><button class='btn coral' id='pm-pbtn' type='button'>"+s.prompt.btn+"</button></div></div>";
  $("pm-pbtn").addEventListener("click",function(){
    clearPrompt();
-   if(pm.mode==="graded"){var took=((Date.now()-promptStart)/1000).toFixed(1);pm.score+=5;pm.answered++;pm.promptNote="<div class='conseq'><b>Prompt answered in "+took+"s (+5).</b> Calm, on time, no scramble — that is the standard the dial is training.</div>"}
+   if(pm.mode==="graded"){var took=((Date.now()-promptStart)/1000).toFixed(1);pm.score+=5;pm.answered++;if(window.FlowLog)FlowLog.record("pm",1,took*1000,secs*1000);pm.flowBoost=false;pm.promptNote="<div class='conseq'><b>Prompt answered in "+took+"s (+5).</b> Calm, on time, no scramble — that is the standard the dial is training.</div>"}
    else{pm.promptNote="<div class='conseq'><b>Call answered.</b> In the graded run this call is timed by the pressure dial.</div>"}
    pm.phase="opts";renderStatus();renderStep();
  });
@@ -2597,6 +2692,7 @@ function startPrompt(s){
  }
 }
 function promptTimeout(s){
+ if(window.FlowLog)FlowLog.record("pm",0,secs0(),null);pm.flowBoost=false;
  var note;
  if(pm.pressure==="low"){note="<div class='conseq'><b>The call waited, then lapsed — and at low pressure that costs nothing.</b> That is what the low setting is for. Raise the dial when answering feels easy.</div>"}
  else if(pm.pressure==="medium"){pm.missed++;if(pm.sess==="chair")pm.comfort=Math.max(0,pm.comfort-5);note="<div class='conseq'><b>Missed call.</b> The moment passed and the field waited — comfort dips a little and the run notes it. No alarm, no drama: answer the next one.</div>"}
@@ -2619,11 +2715,14 @@ function pickOpt(i,btn){
  if(o.ok){
    var pts=0;
    if(pm.mode==="graded"){pts=pm.attempts===1?20:pm.attempts===2?10:5;pm.score+=pts}
+   if(window.FlowLog)FlowLog.record("pm",pm.mode==="graded"?pts/20:1,null,null);
+   var boostNote="";
+   if(pm.attempts===1){pm.streak++;pm.slump=0;if(pm.mode==="graded"&&pm.streak>=2&&!pm.flowBoost){pm.flowBoost=true;boostNote="<p class='small'><b>Flow adaptation:</b> two first-try answers in a row — you are running easy. The next timed call in this run carries a complication: it runs one pressure notch tighter.</p>"}}else{pm.streak=0}
    if(pm.sess==="chair")pm.comfort=Math.min(100,pm.comfort+4);
    pm.done[pm.idx]=1;pm.promptNote="";
    renderComfort();renderStatus();renderChecklist();
    var allDone=Object.keys(pm.done).length>=st.length;
-   var fb="<div class='conseq'><b>"+(pm.mode==="graded"?("Correct · +"+pts+" pts."):"Correct.")+"</b> "+o.why+"</div>";
+   var fb="<div class='conseq'><b>"+(pm.mode==="graded"?("Correct · +"+pts+" pts."):"Correct.")+"</b> "+o.why+"</div>"+boostNote;
    if(pm.mode==="graded"){
      if(pm.idx>=st.length-1){$("pm-opts").innerHTML="";$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Finish the run</button>";$("pm-next").addEventListener("click",function(){pm.finished=true;finishGraded();renderAll()})}
      else{$("pm-opts").innerHTML="";$("pm-fb").innerHTML=fb+"<button class='btn coral' id='pm-next' type='button'>Next step →</button>";$("pm-next").addEventListener("click",function(){pm.idx++;pm.attempts=0;pm.phase="theory";renderAll()})}
@@ -2635,7 +2734,7 @@ function pickOpt(i,btn){
    return;
  }
  /* wrong pick */
- btn.classList.add("picked-bad");btn.disabled=true;
+ btn.classList.add("picked-bad");btn.disabled=true;pm.streak=0;pm.slump++;if(window.FlowLog)FlowLog.record("pm",0,null,null);
  var kind=o.kind||"unsafe";
  var fbHTML="";
  if(pm.sess==="chair"&&o.comfort)pm.comfort=Math.max(0,pm.comfort+o.comfort);
@@ -2664,8 +2763,9 @@ function pickOpt(i,btn){
    coachSay("Stop the line. The flow broke, so the load goes back to receiving — that is not a punishment, it is the system working.");
    return;
  }
- fbHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>"+(fault?("Sequence fault "+pm.faults+" of 3. "):"Not that one. ")+"</b>"+o.why+"</div><p class='small'>Pick again — a correct answer now earns "+(pm.attempts===1?"10":"5")+" of this step's 20 points.</p>";
+ fbHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>"+(fault?("Sequence fault "+pm.faults+" of 3. "):"Not that one. ")+"</b>"+o.why+"</div><p class='small'>Pick again — a correct answer now earns "+(pm.attempts===1?"10":"5")+" of this step's 20 points.</p>"+(pm.slump>=1?"<p class='small'><b>Coach's hint — flow drops back when it should:</b> "+s.theory.split(". ")[0]+".</p><div class='btnrow'><button class='btn small ghost' id='pm-dropback' type='button'>Drop back — practise this step in the sandbox</button></div>":"");
  $("pm-fb").innerHTML=fbHTML;
+ var db=$("pm-dropback");if(db)db.addEventListener("click",function(){var keepIdx=pm.idx;pm.mode="practice";resetRun();pm.idx=keepIdx;pm.phase="theory";renderAll();toast("Sandbox — same step, hints on, nothing scored. Dropping back is the model working.")});
  coachSay(kind==="order"?"Order matters here — that action belongs to a different step. Find the one that belongs to <em>this</em> step.":"Not that one. Read the consequence, breathe, and pick again — the step is still in front of you.");
 }
 function intervene(why){
@@ -2706,8 +2806,9 @@ function renderFinish(){
    return;
  }
  coachSay("Run complete. Debrief honestly: two things done well, two to change — that is where the learning consolidates.");
+ var flowHTML=window.FlowLog?FlowLog.readoutHTML(pm.score/maxScore(),"this graded run"):"";
  var clean=pm.faults===0&&pm.interv===0&&pm.contam===0;
- body.innerHTML="<p style='font-weight:700;font-size:1.05rem;margin:.35rem 0 0'>"+(pm.sess==="chair"?"Chairside assisting":"Sterilisation")+" — graded run complete</p><p style='font-size:.97rem'>Final score <b>"+pm.score+" / "+maxScore()+"</b> · sequence faults "+pm.faults+" · critical errors "+pm.crits+(pm.sess==="chair"?" · comfort interventions "+pm.interv+" · final comfort "+pm.comfort+" / 100":" · contamination events "+pm.contam)+" · timed prompts answered "+pm.answered+", missed "+pm.missed+".</p><div class='pm-badge'><b>Session badge — "+(clean?"Sequence Keeper (clean run)":"Sequence Completed")+".</b> Earned on this page, for this run. It is shown only here, for you and your coach: private, never published, and <b>never a completion record</b>.</div><p class='small'><b>Debrief:</b> two things done well, two to change. "+(pm.faults?"Your faults are listed in the run above — name the step each one belongs to before you rerun.":"A clean sequence — now raise the pressure dial a notch and hold the same standard.")+" A graded score in this demo is practice feedback only — not a credential, and VR practice ≠ clinical hours.</p><div class='btnrow'><button class='btn coral' id='pm-again2' type='button'>Run again — new case</button><button class='btn ghost' id='pm-tosandbox2' type='button'>Back to the sandbox</button></div>";
+ body.innerHTML="<p style='font-weight:700;font-size:1.05rem;margin:.35rem 0 0'>"+(pm.sess==="chair"?"Chairside assisting":"Sterilisation")+" — graded run complete</p><p style='font-size:.97rem'>Final score <b>"+pm.score+" / "+maxScore()+"</b> · sequence faults "+pm.faults+" · critical errors "+pm.crits+(pm.sess==="chair"?" · comfort interventions "+pm.interv+" · final comfort "+pm.comfort+" / 100":" · contamination events "+pm.contam)+" · timed prompts answered "+pm.answered+", missed "+pm.missed+".</p><div class='pm-badge'><b>Session badge — "+(clean?"Sequence Keeper (clean run)":"Sequence Completed")+".</b> Earned on this page, for this run. It is shown only here, for you and your coach: private, never published, and <b>never a completion record</b>.</div><p class='small'><b>Debrief:</b> two things done well, two to change. "+(pm.faults?"Your faults are listed in the run above — name the step each one belongs to before you rerun.":"A clean sequence — now raise the pressure dial a notch and hold the same standard.")+" A graded score in this demo is practice feedback only — not a credential, and VR practice ≠ clinical hours.</p>"+flowHTML+"<div class='btnrow'><button class='btn coral' id='pm-again2' type='button'>Run again — new case</button><button class='btn ghost' id='pm-tosandbox2' type='button'>Back to the sandbox</button></div>";
  $("pm-again2").addEventListener("click",function(){drawNewCase();resetRun()});
  $("pm-tosandbox2").addEventListener("click",function(){pm.mode="practice";resetRun()});
 }
@@ -2726,7 +2827,7 @@ window.__pmSummary=function(){
 /* controls */
 Array.prototype.forEach.call($("pm-mode").children,function(b){b.addEventListener("click",function(){if(pm.mode!==b.getAttribute("data-pm-mode")){pm.mode=b.getAttribute("data-pm-mode");resetRun();toast(pm.mode==="practice"?"Practice sandbox — no stakes, not a credential":"Graded run — order enforced, faults counted")}})});
 Array.prototype.forEach.call($("pm-sess").children,function(b){b.addEventListener("click",function(){if(pm.sess!==b.getAttribute("data-pm-sess")){pm.sess=b.getAttribute("data-pm-sess");drawNewCase();resetRun()}})});
-Array.prototype.forEach.call($("pm-press").children,function(b){b.addEventListener("click",function(){pm.pressure=b.getAttribute("data-pm-press");renderControls();toast("Pressure: "+pm.pressure+(pm.pressure==="low"?" — a missed call costs nothing":""))})});
+Array.prototype.forEach.call($("pm-press").children,function(b){b.addEventListener("click",function(){pm.pressure=b.getAttribute("data-pm-press");if(window.FlowLog)FlowLog.setChallenge(pm.mode==="practice"?15:(pm.pressure==="low"?40:pm.pressure==="medium"?60:85),"Pressure "+pm.pressure);renderControls();toast("Pressure: "+pm.pressure+(pm.pressure==="low"?" — a missed call costs nothing":""))})});
 $("pm-newcase").addEventListener("click",function(){drawNewCase();resetRun();toast(pm.sess==="chair"?"New simulated patient drawn — read the case card first":"New load card drawn")});
 $("pm-restart").addEventListener("click",function(){resetRun();toast("Run restarted — same case")});
 pm.caseIdx=Math.floor(Math.random()*CASES.length);pm.loadIdx=Math.floor(Math.random()*LOADS.length);
@@ -2791,7 +2892,7 @@ function renderFH(){
  var q=FH[fh.i];
  b.innerHTML="<p class='mono small' style='color:var(--coral)'>QUESTION "+(fh.i+1)+" OF "+FH.length+" · SCORE "+fh.score+"</p><p style='font-weight:700;font-size:1.0rem'>"+q.q+"</p><div id='fh-opts'>"+q.o.map(function(o,k){return "<button class='sim-opt' data-fh='"+k+"' type='button'>"+o+"</button>"}).join("")+"</div><div id='fh-fb'></div>";
  Array.prototype.forEach.call(b.querySelectorAll("[data-fh]"),function(btn){btn.addEventListener("click",function(){
-  var k=+btn.getAttribute("data-fh");var good=k===q.a;if(good)fh.score++;
+  var k=+btn.getAttribute("data-fh");var good=k===q.a;if(good)fh.score++;if(window.FlowLog){FlowLog.setChallenge(45,"Transfer drill · question "+(fh.i+1)+" of "+FH.length);FlowLog.record("fh",good?1:0,null,null)}
   Array.prototype.forEach.call(b.querySelectorAll("[data-fh]"),function(x){x.disabled=true;var j=+x.getAttribute("data-fh");if(j===q.a)x.classList.add("picked-good");else if(j===k)x.classList.add("picked-bad")});
   $("fh-fb").innerHTML="<div class='conseq'><b>"+(good?"Correct.":"Not quite — the safe answer is the one outlined.")+"</b> "+q.w+"</div><button class='btn coral small' id='fh-next' type='button'>"+(fh.i===FH.length-1?"Finish the drill":"Next question →")+"</button>";
   $("fh-next").addEventListener("click",function(){fh.i++;if(fh.i>=FH.length)fh.done=true;renderFH()});
@@ -2838,6 +2939,75 @@ Array.prototype.forEach.call(document.querySelectorAll("[data-copycheck]"),funct
  var lines=Array.prototype.map.call(ul.querySelectorAll("li"),function(li,i){return (i+1)+". "+li.textContent.trim()});
  copyText("CHECKLIST — "+btn.getAttribute("data-checkname")+"\nUnspokenSmiles VR Training (demo) — study aid for supervised training, not a clinical protocol.\n\n"+lines.join("\n"),"Checklist copied — paste it anywhere to print");
 })});
+})();
+</script>
+<script>
+(function(){
+"use strict";
+/* ================= FLOW STATE ENGINE — challenge vs. skill, in-visit only =================
+   One shared meter for every session on the page. Engines report each action
+   (fraction scored + response time where a clock exists) and the current
+   challenge setting; the meter reads the last 8 actions. Nothing is stored,
+   nothing leaves the page — same rule as every other engine here.
+   Band rule (Cognition.X Simulation Studio difficulty model): 85% or better
+   moves up, under 50% moves down, otherwise stay — advice, never a gate. */
+var ev=[],challenge=50,challengeLabel="—";
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function recent(){return ev.slice(-8)}
+function stats(){
+  var r=recent();if(!r.length)return null;
+  var acc=r.reduce(function(a,e){return a+e.f},0)/r.length;
+  var timed=r.filter(function(e){return e.ms!=null});
+  var avgMs=timed.length?timed.reduce(function(a,e){return a+e.ms},0)/timed.length:null;
+  var skill=acc*100;
+  if(avgMs!=null){ /* fast and right reads as more skill; fast and wrong does not */
+    if(acc>=0.7&&avgMs<6000)skill=clamp(skill+6,0,100);
+    if(acc>=0.7&&avgMs>20000)skill=clamp(skill-4,0,100);
+  }
+  return {acc:acc,avgMs:avgMs,skill:skill,n:ev.length};
+}
+function bandOf(acc){
+  if(acc==null)return "none";
+  if(acc>=0.85)return "easy";
+  if(acc<0.5)return "hard";
+  return "flow";
+}
+function sayFor(band,st){
+  if(band==="none")return "Start any run and I will read this meter with you. It is driven by your recent accuracy and how fast you answer — when the marker sits in the middle band, the work is matched to you: neither boring nor overwhelming.";
+  if(band==="easy")return "You're clearing these first try — accuracy "+Math.round(st.acc*100)+"%. That's the top of the band talking: the work has gone easy, so the next block should add a complication — a tighter prompt, a higher simulation difficulty, one notch more pressure. Easy is a signal to grow the task, not to stop.";
+  if(band==="hard")return "This stretch is running hard — accuracy "+Math.round(st.acc*100)+"%, below the 50% line where the model says drop back. That's not failure, it's information: take the coach's hint, redo the step together, or drop to the sandbox or a simpler block and rebuild. Smaller and successful beats bigger and stuck.";
+  return "You're in the flow band — accuracy "+Math.round(st.acc*100)+"%, challenge matched to the skill you're actually showing. This is the target state the model is named for: clear goal, feedback at once, work at the edge of what you can almost do. Stay here; when it starts feeling easy, the meter will say so.";
+}
+function render(){
+  var st=stats(),band=bandOf(st?st.acc:null);
+  var pos=50,label="Not started yet";
+  if(st){pos=clamp(50+(challenge-st.skill)*0.55,4,96);label=band==="easy"?"Running easy — add challenge":band==="hard"?"Running hard — drop back / take a hint":"In the flow band"}
+  Array.prototype.forEach.call(document.querySelectorAll(".flowmeter"),function(m){
+    var mk=m.querySelector("[data-fm-marker]");if(mk)mk.style.left=pos+"%";
+    var lb=m.querySelector("[data-fm-label]");if(lb)lb.textContent=st?label+" · "+challengeLabel:"Not started yet";
+    var ac=m.querySelector("[data-fm-acc]");if(ac)ac.textContent=st?Math.round(st.acc*100)+"% (last "+recent().length+")":"—";
+    var sp=m.querySelector("[data-fm-speed]");if(sp)sp.textContent=st?(st.avgMs!=null?("~"+(st.avgMs/1000).toFixed(1)+"s per timed answer"):"untimed actions so far"):"—";
+    var ch=m.querySelector("[data-fm-chal]");if(ch)ch.textContent=challenge+" / 100 · "+challengeLabel;
+    var nn=m.querySelector("[data-fm-n]");if(nn)nn.textContent=st?st.n:0;
+    var sy=m.querySelector("[data-fm-say]");if(sy)sy.textContent=sayFor(band,st);
+  });
+}
+function readoutText(pct){
+  if(pct>=0.85)return "Flow readout: running easy ("+Math.round(pct*100)+"% — at or above the 85% line). The decisions sat below your current skill: move up a difficulty, raise the pressure dial, or take the version with more complications. Practise next: the same material one level harder.";
+  if(pct<0.5)return "Flow readout: running hard ("+Math.round(pct*100)+"% — under the 50% line). The decisions sat above your current skill: drop back a difficulty, work the block in Practice Mode with hints on, and re-read the theory cards. Practise next: the step or decision type that cost the points, in the sandbox first.";
+  return "Flow readout: in the flow band ("+Math.round(pct*100)+"% — between the 50% and 85% lines). Challenge and demonstrated skill were matched: neither boring nor overwhelming. Practise next: stay at this level and run it again with a new case until the band itself starts feeling easy.";
+}
+function readoutHTML(pct,what){
+  return "<div class='flow-narrate' style='margin:12px 0'><b>Flow readout — "+what+":</b> "+readoutText(pct).replace(/^Flow readout: /,"")+" <span class='small'>(Band rule, after the Cognition.X difficulty model: 85% or better moves up · under 50% moves down · otherwise stay — advice, never a gate.)</span></div>";
+}
+window.FlowLog={
+  record:function(source,frac,ms,allotted){ev.push({s:source,f:clamp(+frac||0,0,1),ms:(ms==null?null:+ms),al:(allotted==null?null:+allotted)});if(ev.length>60)ev=ev.slice(-60);render()},
+  setChallenge:function(v,label){challenge=clamp(Math.round(v),0,100);challengeLabel=label||"—";render()},
+  readoutText:readoutText,
+  readoutHTML:readoutHTML,
+  stats:function(){return stats()}
+};
+render();
 })();
 </script>
 </body>
