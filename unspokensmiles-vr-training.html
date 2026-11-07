@@ -167,6 +167,26 @@ footer b{color:#ffd9a8}
   #gl{height:340px}
 }
 @media (max-width:560px){ .grid3,.grid4{grid-template-columns:1fr} section{padding:34px 0 4px} }
+/* interactive lab + hotspots */
+.hotspot-btns{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.hotspot-btns button{background:var(--panel2);border:1.5px solid var(--line);border-radius:999px;padding:6px 11px;font:600 .82rem "Public Sans",sans-serif;color:var(--ink);cursor:pointer}
+.hotspot-btns button.on{background:var(--coral);border-color:var(--coral);color:#fff}
+#hotspot-detail{background:var(--gold-soft);border-radius:var(--r-md);padding:12px 14px;font-size:.93rem;margin-top:12px}
+#hotspot-detail b{color:var(--teal)}
+.tool-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tool-btns button{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;font:600 .88rem "Public Sans",sans-serif;color:var(--ink);cursor:pointer;text-align:left}
+.tool-btns button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.chain-pool{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chain-chip{background:var(--panel);border:1.5px solid var(--teal);border-radius:999px;padding:8px 13px;font:600 .88rem "Public Sans",sans-serif;color:var(--ink);cursor:pointer}
+.chain-chip:hover{background:var(--teal-soft)}
+.chain-chip.used{opacity:.35;pointer-events:none}
+.chain-slots{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0;font-size:.9rem}
+.chain-slot{background:var(--panel2);border:1px dashed var(--line);border-radius:8px;padding:7px 10px;min-width:86px;text-align:center}
+.chain-slot.filled{border-style:solid;border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,var(--panel))}
+.chain-slot.wrong{border-color:var(--coral);background:var(--coral-soft)}
+.spec-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.spec-table td{padding:7px 8px;border-bottom:1px dashed var(--line);vertical-align:top}
+.spec-table td:first-child{font-weight:700;color:var(--teal);width:34%}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .xpfill{transition:none} }
 </style>
 </head>
@@ -193,6 +213,7 @@ footer b{color:#ffd9a8}
       </div>
       <div class="btnrow">
         <a class="btn coral" href="#world">Enter the clinic world</a>
+        <a class="btn ghost" href="#lab">Open the Equipment Lab</a>
         <a class="btn ghost" href="#stations">Explore the 6 stations</a>
         <a class="btn ghost" href="#sim">Run a simulation</a>
         <a class="btn ghost" href="#tools">Compare the tools</a>
@@ -281,6 +302,22 @@ footer b{color:#ffd9a8}
         <div class="coach" id="coach-box">
           <b>Coach Mira (demo guide):</b> <span id="coach-text">Welcome to the Smile Clinic. I'm Mira, your demo guide — I'm not a clinician, and everything here is a screening or teaching example. Start the quest when you're ready, and collect the three checkpoints as you explore.</span>
         </div>
+        <p class="small" style="margin:14px 0 4px;font-weight:700">INTERACTIVE EQUIPMENT — tap a hotspot in the 3D scene, or pick it here</p>
+        <div class="hotspot-btns" id="hotspot-btns">
+          <button type="button" data-hotspot="chair">🪑 Dental chair</button>
+          <button type="button" data-hotspot="delivery">Delivery unit &amp; handpieces</button>
+          <button type="button" data-hotspot="light">Operating light</button>
+          <button type="button" data-hotspot="suction">HVE + saliva ejector</button>
+          <button type="button" data-hotspot="tray">Instrument tray</button>
+          <button type="button" data-hotspot="xray">Intraoral X-ray (simulated)</button>
+          <button type="button" data-hotspot="scaler">Ultrasonic scaler</button>
+          <button type="button" data-hotspot="autoclave">Class B autoclave</button>
+          <button type="button" data-hotspot="ultrasonic">Ultrasonic cleaner</button>
+          <button type="button" data-hotspot="sealer">Pouch sealer &amp; indicators</button>
+          <button type="button" data-hotspot="tooth">Big tooth model</button>
+          <button type="button" data-hotspot="screenkit">School screening kit</button>
+        </div>
+        <div id="hotspot-detail" aria-live="polite"><b>Pick an item of equipment.</b> Each hotspot explains what the real tool does, the spec range used to model it, what your hands do in the IWSDK build (grab · point · hold · place), and the safety line you must not cross. Clicking the matching object in the 3D scene does the same thing.</div>
         <p class="small" style="margin-top:12px">Drag on the scene to look around, or use the Look buttons. On a headset browser, “Enter VR” hands the same scene to WebXR as a pose-only view; everywhere else you are in magic-window mode — drag, tap, and buttons — which is the full experience, not a lesser one.</p>
         <p class="small" id="vr-status" style="font-weight:600"></p>
       </div>
@@ -334,6 +371,48 @@ footer b{color:#ffd9a8}
     <article class="card"><h3>Infection control as a system — CDC nine-area spine</h3><p class="small">Hand hygiene at every transition; gloves are not a substitute for hand hygiene (always wash/rub after removing gloves); barriers vs disinfection; sharps safety (one-handed scoop, point-of-use container); handpieces heat-sterilised between patients. A “contamination view” makes a breach visible — that visible consequence is the functional fidelity for a non-haptic system.</p><p class="small"><b>Sequence spine for the Sterilization session</b> — the nine recommendation areas of the CDC Guidelines for Infection Control in Dental Health-Care Settings, in order: <b>1</b> educating &amp; protecting dental health-care personnel · <b>2</b> preventing transmission of bloodborne pathogens · <b>3</b> hand hygiene · <b>4</b> personal protective equipment (PPE) · <b>5</b> contact dermatitis &amp; latex hypersensitivity · <b>6</b> sterilization &amp; disinfection of patient-care items · <b>7</b> environmental infection control · <b>8</b> dental unit waterlines, biofilm &amp; water quality · <b>9</b> special considerations (including handpieces, radiology, parenteral medications, oral surgery &amp; dental laboratories). The Sterilization session walks that spine in sequence — the order is the safety.</p><p class="src">Content standard: CDC Guidelines for Infection Control in Dental Health-Care Settings — 2003, <i>MMWR</i> 2003;52(RR17);1-61 (Kohn et al.) + Summary (2016) — <a href="https://www.cdc.gov/MMWR/preview/mmwrhtml/rr5217a1.htm" target="_blank" rel="noopener">cdc.gov — MMWR 2003;52(RR17)</a> · <a href="https://www.cdc.gov/dental-infection-control/hcp/summary/sterilization-disinfection.html" target="_blank" rel="noopener">cdc.gov — sterilization &amp; disinfection summary</a>.</p></article>
     <article class="card"><h3>Feedback that teaches</h3><p class="small">Immediate, objective, criterion-based: % target completed, sequence errors, critical errors (wrong instrument, sterile-field breach, missed hand hygiene), and time as a <em>secondary</em> metric — never the pass criterion alone. Show the trajectory across attempts, not just the last score. Feedback alone decays: Wierinck found simulator feedback beat control at 1 day and 3 weeks, but only feedback <em>plus</em> expert instruction held at 4 months.</p></article>
     <article class="card"><h3>Debrief, every run</h3><p class="small">60–90 seconds at the end of every scenario: two things done well, two to change (tied to the scored criteria), a replay of the critical-error moment, and a retry button. Log debrief completion as part of progression, not as an optional extra. Popov et al. 2025 (n=174): multisource feedback <em>alone</em> produced the lowest evaluative behaviours — without facilitation, it does not support reflection.</p><p class="src">Source: <a href="https://par.nsf.gov/servlets/purl/10636742" target="_blank" rel="noopener">Popov et al. 2025</a> (index).</p></article>
+  </div>
+</div></section>
+
+<section id="lab"><div class="wrap">
+  <div class="sec-head">
+    <span class="tag coral">New · deeply interactive</span>
+    <h2>Equipment Lab — touch every tool before you touch a tray</h2>
+    <p>The clinic above is now a working equipment lab, not a diorama. Every major asset is a hotspot with a job: the chair moves through its range, the delivery unit holds four handpieces, suction has two different tools for two different jobs, and the sterilisation chain only works in one order. Use this bench to learn each tool — what it is, its spec range, your hand action, and its safety line — then prove the two sequences in the challenges below.</p>
+    <p class="small">Specs are the generic-unit ranges already in the wiki spec bible (ranges vary by manufacturer; one reference model per asset, reviewed by a practising DA/RDH before any “to spec” claim ships). X-ray is <b>simulated only — nothing emits radiation</b>. Fine haptic drilling is not simulated; resistance, colour and sound are labelled proxies.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <h3 style="margin-bottom:8px">Tool bench — 12 tools, tap to inspect</h3>
+    <div class="tool-btns" id="tool-btns" role="tablist" aria-label="Choose a dental tool"></div>
+    <div id="tool-detail" aria-live="polite"></div>
+  </div>
+
+  <div class="grid2" style="align-items:start">
+    <div class="card">
+      <span class="tag">Challenge 1 · Sterilisation</span>
+      <h3 style="margin-top:8px">The One-Way Chain — put it in order</h3>
+      <p class="small">Eight stages, one safe order. Tap the stages in the order work actually flows through the sterilisation room. A wrong tap is a contamination event — the chain tells you why, and you lose the clean run. Finish all eight in order to complete it.</p>
+      <div class="chain-slots" id="chain-slots" aria-live="polite"></div>
+      <div class="chain-pool" id="chain-pool"></div>
+      <div id="chain-fb" aria-live="polite"></div>
+      <div class="btnrow"><button class="btn small ghost" id="chain-reset" type="button">Shuffle &amp; restart chain</button></div>
+    </div>
+    <div class="card">
+      <span class="tag coral">Challenge 2 · Chairside</span>
+      <h3 style="margin-top:8px">Tray in Working Order — set the exam tray</h3>
+      <p class="small">A tray is laid out in the order the clinician works, left to right — so no one hunts or reaches blind mid-procedure. Tap the six items in working order for a basic examination tray.</p>
+      <div class="chain-slots" id="tray-slots" aria-live="polite"></div>
+      <div class="chain-pool" id="tray-pool"></div>
+      <div id="tray-fb" aria-live="polite"></div>
+      <div class="btnrow"><button class="btn small ghost" id="tray-reset" type="button">Shuffle &amp; restart tray</button></div>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:16px">
+    <article class="card"><h3>🦷 Operatory — the detailed build</h3><p class="small">Chair on a lift column (430–720&nbsp;mm travel) with articulated back and headrest · delivery unit with four holders — high-speed, slow-speed, scaler, air–water syringe — on coiled hoses · HVE and saliva-ejector arms at the assistant's side · cuspidor bowl · operator + assistant stools · articulated operating light · ceiling-mounted monitor showing the chart · supply cabinetry and a wall-mounted X-ray arm. Zones are marked on the floor: operator zone, assistant zone, transfer zone, static zone.</p></article>
+    <article class="card"><h3>🧼 Sterilisation — the detailed build</h3><p class="small">Dirty receiving sink with red sharps container at point of use → ultrasonic tank with a translucent lid and timer → rinse-and-dry bench under a magnifier lamp → heat sealer and pouches with chemical indicators → Class B autoclave with round chamber door and cycle display → pass-through to a sterile store with dated pouches on shelves. Floor arrows run one way only; there is no door back from clean to dirty.</p></article>
+    <article class="card"><h3>🎒 Screening Hall + Imaging Nook — the detailed build</h3><p class="small">Screening hall: privacy screens, portable kit case (mirror, explorer, gauze, gloves, torch), consent folder, referral pad, and the big tooth model on its demo table with an oversized brush. Imaging nook off the operatory: X-ray head on a counterbalanced arm, lead apron + thyroid collar on a stand, sensor holder and a “SIMULATED IMAGE” preview screen — positioning is practised, exposure never happens.</p></article>
   </div>
 </div></section>
 
@@ -1095,6 +1174,53 @@ function buildWorld(){
   for(var i=0;i<6;i++){var a=-0.9+i*0.36;var cx=-4+Math.sin(a)*3.4,cz=4.4+Math.cos(a)*1.4;
     box(0.62,0.5,0.62,i%2?0xf2b544:0xe85d3d,cx,0.25,cz);box(0.62,0.85,0.12,i%2?0xf2b544:0xe85d3d,cx,0.68,cz+(cz>4.4?0.28:-0.28));}
   var lb4=label("School-Screening Hall");lb4.position.set(-4,3.6,6.8);scene.add(lb4);
+  /* ===== DETAILED ASSETS PASS ===== */
+  window.__hotspots=[];
+  function regHot(obj,id){obj.traverse?obj.traverse(function(o){o.userData.hotspotId=id}):0;obj.userData.hotspotId=id;window.__hotspots.push(obj)}
+  function cyl(rt,rb,h,color,x,y,z,seg){var m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||18),new THREE.MeshStandardMaterial({color:color,roughness:.45,metalness:.25}));m.position.set(x,y,z);scene.add(m);return m}
+  function sph(r,color,x,y,z,em){var m=new THREE.Mesh(new THREE.SphereGeometry(r,20,16),new THREE.MeshStandardMaterial({color:color,roughness:.35,emissive:em||0x000000,emissiveIntensity:em?0.8:0}));m.position.set(x,y,z);scene.add(m);return m}
+  /* ceiling light panels */
+  [-10,0,10].forEach(function(x){var p=box(4.6,.12,1.6,0xfff6d8,x,5.35,-4);p.material.emissive=new THREE.Color(0xffeeb0);p.material.emissiveIntensity=.55});
+  /* reception detail: monitor, clock, plant, waiting chairs */
+  var mon=box(.95,.6,.08,0x22332f,-10.5,1.55,-6.6);var scr=box(.85,.5,.02,0x9fd8cb,-10.5,1.55,-6.54);
+  var clock=cyl(.42,.42,.07,0xffffff,-10.5,4.1,-11.3,24);clock.rotation.x=Math.PI/2;
+  for(var wc=0;wc<4;wc++){box(.62,.5,.62,wc%2?0x51756e:0xe85d3d,-15.5+wc*1.05,.25,-8.6);box(.62,.8,.1,wc%2?0x51756e:0xe85d3d,-15.5+wc*1.05,.75,-8.9)}
+  cyl(.28,.34,.5,0xb3541e,-7.2,.25,-8.7,12);sph(.48,0x2e7d5b,-7.2,1.05,-8.7);
+  /* OPERATORY detail: delivery unit, handpieces, suction, stools, cuspidor, monitor, tray instruments */
+  var delivery=new THREE.Group();
+  var dbody=new THREE.Mesh(new THREE.BoxGeometry(1.15,.55,1.5),new THREE.MeshStandardMaterial({color:0xe8efec,roughness:.3,metalness:.25}));dbody.position.y=1.05;delivery.add(dbody);
+  for(var hp=0;hp<4;hp++){var hpc=new THREE.Mesh(new THREE.CylinderGeometry(.055,.07,.42,10),new THREE.MeshStandardMaterial({color:[0xc0c8c5,0x39b5a6,0xf2b544,0x51756e][hp],roughness:.3,metalness:.5}));hpc.position.set(-.38+hp*.26,1.42,.45);hpc.rotation.z=.5;delivery.add(hpc);
+    var hose=new THREE.Mesh(new THREE.TorusGeometry(.32,.028,8,20,Math.PI),new THREE.MeshStandardMaterial({color:0x889691,roughness:.6}));hose.position.set(-.38+hp*.26,.82,.45);delivery.add(hose)}
+  delivery.position.set(1.65,0,-5.9);scene.add(delivery);regHot(delivery,"delivery");
+  var sucArm=box(.12,.12,1.3,0x9fb3b0,-1.55,1.05,-3.4);
+  var hve=cyl(.06,.045,.55,0xdfe7e4,-1.55,1.25,-2.85,10);hve.rotation.x=.7;regHot(hve,"suction");
+  var se=cyl(.035,.025,.5,0xf2b544,-1.3,1.2,-2.85,10);se.rotation.x=.7;regHot(se,"suction");
+  var cusp=sph(.42,0xe8efec,1.5,.95,-3.1);cusp.scale.y=.45;regHot(cusp,"delivery");
+  [[2.3,-3.2],[-1.9,-5.9]].forEach(function(p,i){cyl(.34,.34,.14,i?0xe85d3d:0x51756e,p[0],.78,p[1],18);cyl(.07,.07,.7,0x8fa3a0,p[0],.4,p[1],10);cyl(.3,.36,.08,0x6d7f7c,p[0],.04,p[1],14)});
+  var monArm=box(.1,.1,1.1,0x8fa3a0,2.6,2.9,-6.8);var mon2=box(1.35,.85,.07,0x22332f,2.6,2.55,-6.2);var chartScr=box(1.2,.7,.02,0xcfeee4,2.6,2.55,-6.15);regHot(mon2,"tray");
+  for(var ti=0;ti<5;ti++){var inst=box(.05,.03,.52,[0xd9deed,0xc0c8c5,0xb9c6c3,0xaebbb8,0xdfe7e4][ti]||0xdfe7e4,1.18+ti*.16,1.22,-4.1);inst.rotation.y=.12}
+  box(2.6,1.9,.5,0xd8cfb8,3.6,.95,-8.2);box(2.6,.08,.55,0x8a5a36,3.6,1.95,-8.2);
+  var xrArm=box(1.6,.14,.14,0x9fb3b0,-2.9,3.1,-8.1);var xrHead=box(.55,.5,.7,0xf2e8d5,-3.6,2.85,-7.8);var xrCone=cyl(.13,.2,.5,0xe85d3d,-3.6,2.4,-7.8,14);regHot(xrHead,"xray");regHot(xrCone,"xray");
+  var scalerUnit=box(.7,.45,.6,0x51756e,2.9,1.25,-7.4);var scalerTip=cyl(.03,.02,.4,0xf2b544,2.9,1.6,-7.1,8);scalerTip.rotation.x=.8;regHot(scalerUnit,"scaler");
+  regHot(chair,"chair");regHot(lampHead,"light");regHot(tray,"tray");
+  /* lead apron stand (imaging nook) */
+  cyl(.06,.06,1.7,0x6d7f7c,-4.6,.85,-7.9,10);var apron=box(.75,1.05,.09,0x44546e,-4.6,1.05,-7.85);regHot(apron,"xray");
+  /* STERILISATION detail: sink, sealer, magnifier, sharps, sterile store, pouches */
+  box(1.5,.75,.9,0xb9c6c3,8.2,.38,-7.6);sph(.3,0x9db4ef,8.2,.85,-7.6);
+  var sealer=box(.85,.32,.5,0xf2b544,11.4,1.12,-7.6);regHot(sealer,"sealer");
+  var magArm=box(.08,.08,.9,0x6d7f7c,11.9,2.1,-8);var mag=cyl(.28,.28,.07,0xfff6d8,11.9,1.95,-7.5,20);mag.material.emissive=new THREE.Color(0xffeeb0);mag.material.emissiveIntensity=.5;regHot(mag,"sealer");
+  var sharps=cyl(.22,.19,.55,0xd43a24,7.3,1.25,-7.6,14);regHot(sharps,"ultrasonic");
+  for(var pf=0;pf<6;pf++){var pouch=box(.42,.06,.3,pf%2?0x9fd8cb:0xf2d492,13.55,.65+pf*.32,-4.25);regHot(pouch,"sealer")}
+  var ultraLid=box(1.34,.1,1.0,0x7fc8bc,12.3,2.32,-7.6);regHot(ultraLid,"ultrasonic");regHot(acBody,"autoclave");regHot(acDoor,"autoclave");
+  /* one-way floor arrows sterilisation */
+  for(var ar=0;ar<4;ar++){var cone=new THREE.Mesh(new THREE.ConeGeometry(.22,.5,4),new THREE.MeshStandardMaterial({color:0xe85d3d,roughness:.5}));cone.rotation.x=-Math.PI/2;cone.rotation.z=Math.PI/4;cone.position.set(7.6+ar*1.9,.03,-5.9);scene.add(cone)}
+  /* SCHOOL detail: privacy screens, kit case, backpacks, oversized brush */
+  box(.08,1.5,1.6,0xf2e8d5,-7.6,.75,6.2);box(1.6,1.5,.08,0xf2e8d5,-6.8,.75,5.5);
+  var kit=box(1.15,.42,.65,0xe85d3d,-1.2,.95,7.4);regHot(kit,"screenkit");
+  for(var bp=0;bp<3;bp++){box(.5,.65,.32,[0xf2b544,0x39b5a6,0x9db4ef][bp],-6.6+bp*.75,.33,8.9)}
+  var brush=box(.16,.16,1.5,0xf2b544,-2.7,1.05,7.6);brush.rotation.y=.5;var brushHead=box(.4,.22,.42,0xffffff,-2.15,1.05,7.15);regHot(brush,"tooth");regHot(tooth,"tooth");
+  var lb6=label("Imaging · simulated only","#ffd9a8");lb6.position.set(-3.6,4,-7.8);scene.add(lb6);
+  var lb7=label("Delivery · 4 handpieces");lb7.position.set(1.7,2.35,-5.9);scene.add(lb7);
   /* COACH MIRA — NPC guide */
   coachGrp=new THREE.Group();
   var body=new THREE.Mesh(new THREE.CapsuleGeometry(0.34,0.75,6,14),new THREE.MeshStandardMaterial({color:0xe85d3d,roughness:0.7}));body.position.y=1.0;coachGrp.add(body);
@@ -1115,6 +1241,17 @@ function buildWorld(){
   renderer.domElement.addEventListener("pointerdown",function(e){drag=true;lx=e.clientX;ly=e.clientY});
   window.addEventListener("pointerup",function(){drag=false});
   window.addEventListener("pointermove",function(e){if(!drag)return;azT+=(e.clientX-lx)*0.005;pol=Math.max(0.55,Math.min(1.35,pol+(e.clientY-ly)*0.003));lx=e.clientX;ly=e.clientY});
+  /* raycast hotspots: a tap (not a drag) on equipment inspects it */
+  var downX=0,downY=0;
+  renderer.domElement.addEventListener("pointerdown",function(e){downX=e.clientX;downY=e.clientY});
+  renderer.domElement.addEventListener("pointerup",function(e){
+    if(Math.hypot(e.clientX-downX,e.clientY-downY)>6)return;
+    var r=renderer.domElement.getBoundingClientRect();
+    var mouse=new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+    var rc=new THREE.Raycaster();rc.setFromCamera(mouse,camera);
+    var hits=rc.intersectObjects(window.__hotspots||[],true);
+    if(hits.length){var id=hits[0].object.userData.hotspotId;if(id)showHotspot(id)}
+  });
   animate(0);
 }
 var lastT=0;
@@ -1137,6 +1274,28 @@ function setDistrict(name,silent){
   if(!silent)coachSay("You're in the <b>"+DISTRICTS[name].label+"</b>. "+({reception:"Check in, check the list, check the consent — in that order.",operatory:"Chair, tray, lamp. Everything laid out in the order it will be used.",sterilization:"One-way flow only: receive, clean, pouch, autoclave, store. Never backtrack.",school:"Small chairs, big tooth model, calm voices. Prevention is a teaching job first."}[name]));
 }
 function coachSay(html){$("coach-text").innerHTML=html}
+var HOTSPOTS={
+ chair:{d:"operatory",t:"Dental chair",spec:"Height ~430–720 mm · telescopic headrest ≤120 mm · workspace ≥4000×2600×2000 mm",do:"Position the patient supine, head at the top of the headrest, light centred — before any instrument is picked up.",safe:"Check the chair is clear and the patient is settled before moving it. Never move the chair with instruments over the patient.",iw:"IWSDK: Interactable controls · hold-to-move, with the patient zone as a no-drop area."},
+ delivery:{d:"operatory",t:"Delivery unit & handpieces",spec:"Up to 4 handpieces · air 0.5–0.8 MPa · water 0.2–0.3 MPa",do:"High-speed, slow-speed, scaler and air–water syringe, each in its own holder, hoses untangled. Pick up only the one the clinician calls for.",safe:"Handpieces are heat-sterilised between patients — never surface-disinfected only. Return each bur safely, tip away.",iw:"IWSDK: OneHandGrabbable handpieces · snap-back holders · wrong-holder placement is flagged."},
+ light:{d:"operatory",t:"Operating light",spec:"8,000–30,000 lux (some to 60,000) · 4,000–5,500K · CRI ≥85–90 · spot ~80×160 mm at 700 mm",do:"Handles only, positioned over the oral cavity, angled to avoid the patient's eyes and the clinician's shadow.",safe:"Barrier the handles; reposition by the handles, never by pushing the head over the field.",iw:"IWSDK: Grabbable with rotation constraint · light cone follows the head."},
+ suction:{d:"operatory",t:"HVE + saliva ejector",spec:"HVE ~3.3 SCFM @ −4 inHg · saliva ejector ~1.3 SCFM · oil-free compressor 70–100 psi",do:"HVE does the heavy work — bevel near the working tooth, held by the assistant. The saliva ejector only pools-manages; it never substitutes for the HVE.",safe:"Never rest suction on soft tissue; never use the ejector to retract. Watch the patient's comfort and signal.",iw:"IWSDK: OneHandGrabbable · placement scored by zone and distance to the field (proxy, not haptics)."},
+ tray:{d:"operatory",t:"Instrument tray — in working order",spec:"Laid out left-to-right in the order of use: mirror → explorer → probe → cotton pliers → working instruments → gauze",do:"Set it, check it against the procedure list, and pass handle-first into the transfer zone — never over the patient's face.",safe:"A guessed instrument is a critical error. If you don't recognise the name, say so and let the clinician point.",iw:"IWSDK: Grabbable instruments · sequence validated against the procedure step."},
+ xray:{d:"operatory",t:"Intraoral X-ray — SIMULATED ONLY",spec:"60–70 kV · 2–8 mA · 0.05–0.5 s · focal spot 0.4 mm · ALARA",do:"Position the head, place the sensor holder, fit apron + thyroid collar, step out — then the sim shows a labelled teaching image.",safe:"Nothing here emits radiation, ever. In real practice: justify every exposure, collar every patient, never hold a sensor by hand.",iw:"IWSDK: Interactable positioning · exposure button produces a simulated image only."},
+ scaler:{d:"operatory",t:"Ultrasonic scaler",spec:"28 kHz ±3 · 3–20 W · tip excursion ≤100–200 µm · water coolant always",do:"Light touch, tip moving, water flowing. The coolant is part of the tool — no water, no scaling.",safe:"No dry scaling. Aerosol management applies: HVE alongside, PPE on, barriers placed.",iw:"IWSDK: Hold + move interaction · resistance/sound are labelled proxies, not haptic drilling."},
+ autoclave:{d:"sterilization",t:"Class B autoclave",spec:"EN 13060 pre-vacuum · 132–134 °C · ~27–30 psi · 3–10 min (wrapped 4 min) · drying 15–20 min · never >135 °C for handpieces",do:"Load pouches loosely, indicator side visible, start the wrapped cycle, then check mechanical + chemical indicators before anything is stored.",safe:"An unchanged indicator = unverified: quarantine, log, reprocess. Biological spore test at least weekly and on every implantable load.",iw:"IWSDK: Interactable door + cycle start · real cycle timer with indicator result at the end."},
+ ultrasonic:{d:"sterilization",t:"Ultrasonic cleaner — cleaning, NOT sterilisation",spec:"35–48 kHz · 2–6 L · 5–10 min · solution 40–55 °C",do:"Instruments fully submerged, lid on, timer run — then rinse, dry and inspect. Cleaning always comes before sterilisation.",safe:"Sharps container lives at point of use, one-handed scoop. Never reach into the tank by hand while it runs.",iw:"IWSDK: Place + timed hold · skipping this stage visibly contaminates the chain downstream."},
+ sealer:{d:"sterilization",t:"Pouch sealer, indicators & sterile store",spec:"Pouch with internal + external chemical indicators · sealed, dated, initialled · stored clean, dry, dated-side out",do:"Inspect under the magnifier, pouch, seal, check the indicator after the cycle, then file it in the sterile store by date.",safe:"A torn, wet or dropped pouch is not sterile — reprocess it. First-expired, first-used.",iw:"IWSDK: Grab + place pouches · indicator state is part of the object, not a points popup."},
+ tooth:{d:"school",t:"Big tooth model + oversized brush",spec:"Teaching model for the School-Screening Hall · two minutes · four quadrants · small circles at the gumline",do:"Demonstrate on the model, then hand the giant brush over — children learn this by doing it, start to finish, without the script.",safe:"Teaching only. The model is where questions get answered; anything clinical gets parked for the clinician.",iw:"IWSDK: Two-hand grabbable brush · quadrant sequence tracked."},
+ screenkit:{d:"school",t:"School screening kit",spec:"Portable case: mirror, explorer (blunt), gauze, gloves, torch, consent folder, chart + referral pad",do:"Consent first, good light, clean dry teeth, look–record–flag. Codes: D decay suspected · F filled · M missing · S sealant · PS prescribe sealant · PE partially erupted · N/I not indicated.",safe:"Never seal a cavitated lesion, never diagnose. The flag and the referral are the intervention.",iw:"IWSDK: Kit items Grabbable · chart is a UIKitML slab the learner fills in."}
+};
+function showHotspot(id){
+  var h=HOTSPOTS[id];if(!h)return;
+  if(curDistrict!==h.d)setDistrict(h.d,true);
+  var el=$("hotspot-detail");if(el)el.innerHTML="<b>"+h.t+"</b><br><span class='mono' style='font-size:.8rem'>"+h.spec+"</span><br><b>Your job:</b> "+h.do+"<br><b>Safety line:</b> "+h.safe+"<br><span class='small'>"+h.iw+"</span>";
+  coachSay("<b>"+h.t+".</b> "+h.do);
+  Array.prototype.forEach.call(document.querySelectorAll("#hotspot-btns button"),function(b){b.classList.toggle("on",b.getAttribute("data-hotspot")===id)});
+}
+Array.prototype.forEach.call(document.querySelectorAll("#hotspot-btns button"),function(b){b.addEventListener("click",function(){showHotspot(b.getAttribute("data-hotspot"))})});
 try{
   if(typeof THREE==="undefined")throw new Error("Three.js failed to load");
   buildWorld();
@@ -1313,6 +1472,65 @@ function show(i){
 }
 Array.prototype.forEach.call(btns,function(b){b.addEventListener("click",function(){show(+b.getAttribute("data-station"))})});
 show(0);
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+function toast(m){var t=$("toast");if(t){t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2600)}}
+/* ===== TOOL BENCH ===== */
+var TOOLS=[
+ {n:"Mouth mirror",use:"Indirect vision, retraction and reflecting light into dark areas — the assistant keeps it clean and ready.",spec:"Handle + angled head; sterilisable, heat-processed between patients",act:"Pass handle-first · keep a spare ready when it fogs",safe:"Never use a chipped mirror; fogging is managed, never wiped on gauze over the patient."},
+ {n:"Explorer / probe",use:"Tactile examination aid in clinician hands; the periodontal probe measures pocket depths in mm.",spec:"Explorer: fine pointed tip · Probe: blunt, mm-marked — blunt by design for screening",act:"Lay out in tray order after the mirror · chart the readings called out",safe:"Guides and learners never probe to diagnose — in screening, a blunt explorer and observations only."},
+ {n:"Cotton pliers",use:"Carry cotton, gauze and small items into and out of the field without fingers.",spec:"Locking / non-locking patterns; serrated tips",act:"Pass loaded, tips oriented as the clinician works",safe:"Never hand cotton by fingers into the field."},
+ {n:"High-speed handpiece",use:"Clinician's cutting handpiece — in this sim, a handled prop: picking, holding and returning it safely is the assistant skill.",spec:"Air 0.5–0.8 MPa supply via delivery unit · bur changed with the handpiece stopped",act:"Fit the bur, hand it over stopped, take it back stopped",safe:"Heat-sterilised between patients — never surface-disinfected only. Never hand over a spinning bur."},
+ {n:"Air–water syringe",use:"Rinse and dry the field: water, air, or a mist of both.",spec:"Delivery-unit mounted · removable, sterilisable tips",act:"Short bursts, directed away from soft tissue, paired with suction",safe:"Never aim air into an open surgical site — clinician direction only."},
+ {n:"Ultrasonic scaler",use:"Removes calculus with a vibrating tip and water coolant (hygiene / Station C–D context).",spec:"28 kHz ±3 · 3–20 W · tip excursion ≤100–200 µm · water coolant",act:"Set power + water before the tip touches; keep the HVE alongside",safe:"No dry scaling. Aerosol management: HVE + PPE + barriers."},
+ {n:"HVE suction tip",use:"High-volume evacuation: clears water, spray and debris at the working tooth.",spec:"~3.3 SCFM @ −4 inHg",act:"Hold bevel near the field with your non-dominant hand, anticipate the handpiece",safe:"Never rest on soft tissue; never use it to retract forcefully."},
+ {n:"Curing light",use:"Hardens light-cured composite and sealant material when the clinician calls for it.",spec:"Shielded LED; exposure per material instructions — clinician-directed",act:"Position the tip close over the material, shield up, count the cure time aloud",safe:"Never look directly at the light; the orange shield protects everyone, every time."},
+ {n:"Class B autoclave",use:"Steam sterilisation of wrapped instruments — the highest-value machine in this lab.",spec:"132–134 °C · ~27–30 psi · wrapped 4 min · drying 15–20 min · EN 13060",act:"Load loosely, indicators visible, run, verify, log",safe:"Unchanged indicator = quarantine, log, reprocess. Spore test weekly + implantable loads."},
+ {n:"Ultrasonic cleaner",use:"Loosens and lifts debris before packaging — cleaning, never sterilisation.",spec:"35–48 kHz · 2–6 L · 5–10 min · 40–55 °C",act:"Submerge fully, lid on, time it, rinse, dry, inspect under light",safe:"No hand-reaching into a running tank; sharps handled one at a time."},
+ {n:"Intraoral X-ray unit",use:"Imaging — SIMULATED ONLY in this app. Positioning and protection are practised; no exposure ever occurs.",spec:"60–70 kV · 2–8 mA · ALARA · apron + thyroid collar",act:"Position head + sensor, collar the patient, step behind the barrier, trigger the simulated image",safe:"Justify every real exposure; never hold a sensor for a patient."},
+ {n:"Operating light",use:"Shadow-reduced illumination of the field, moved by its handles only.",spec:"8,000–30,000 lux · 4,000–5,500K · CRI ≥85–90",act:"Reposition by barriered handles, centre on the oral cavity, check the patient's eyes are spared",safe:"Handles get barriers every setup — gloved hands never grab the head."}
+];
+var tb=$("tool-btns"),td=$("tool-detail");
+function showTool(i){
+  var t=TOOLS[i];if(!td)return;
+  td.innerHTML="<div class='grid2' style='align-items:start'><div><h3 style='font-size:1.25rem'>"+t.n+"</h3><p style='font-size:.97rem'>"+t.use+"</p><p class='small'><b>Your hand action:</b> "+t.act+"</p></div><table class='spec-table'><tr><td>Spec / range</td><td>"+t.spec+"</td></tr><tr><td>Safety line</td><td>"+t.safe+"</td></tr><tr><td>In the IWSDK build</td><td>An entity with Grabbable / Interactable components — the same pick-up, pass, place and hold you practise on this bench.</td></tr></table></div>";
+  Array.prototype.forEach.call(tb.children,function(b,j){b.classList.toggle("on",i===j)});
+}
+if(tb){TOOLS.forEach(function(t,i){var b=document.createElement("button");b.type="button";b.textContent=t.n;b.addEventListener("click",function(){showTool(i)});tb.appendChild(b)});showTool(0)}
+/* ===== SEQUENCE CHALLENGE ENGINE ===== */
+function makeChain(cfg){
+  var order=cfg.order.slice(),next=0,errors=0;
+  var slots=$(cfg.slots),pool=$(cfg.pool),fb=$(cfg.fb);
+  function renderSlots(){slots.innerHTML=order.map(function(_,i){return "<span class='chain-slot"+(i<next?" filled":"")+"'>"+(i<next?order[i]:(i+1))+"</span>"+(i<order.length-1?"<span aria-hidden='true'>→</span>":"")}).join("")}
+  function renderPool(){
+    var items=order.slice();
+    for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=items[i];items[i]=items[j];items[j]=tmp}
+    pool.innerHTML="";items.forEach(function(name){var b=document.createElement("button");b.type="button";b.className="chain-chip";b.textContent=name;b.setAttribute("data-name",name);b.addEventListener("click",function(){pick(name,b)});pool.appendChild(b)});
+    renderSlots();fb.innerHTML="<p class='small'>Step "+(next+1)+" of "+order.length+" — tap the next stage.</p>";
+  }
+  function pick(name,btn){
+    if(name===order[next]){next++;btn.classList.add("used");
+      if(next>=order.length){renderSlots();fb.innerHTML="<div class='conseq'><b>Chain complete — clean run"+(errors?" with "+errors+" error"+(errors>1?"s":""):" , zero errors")+".</b> "+cfg.done+"</div>";toast(cfg.toast)}
+      else{renderSlots();fb.innerHTML="<p class='small'><b>Correct.</b> "+cfg.why[name]+"</p>"}
+    }else{errors++;fb.innerHTML="<div class='conseq' style='border-left-color:var(--coral)'><b>Contamination event.</b> "+(cfg.wrong[name]||"That stage cannot happen here — the flow only runs one way.")+" The next correct stage is still waiting.</div>"}
+  }
+  var r=$(cfg.reset);if(r)r.addEventListener("click",function(){next=0;errors=0;renderPool();toast("Challenge shuffled — run it again")});
+  renderPool();
+}
+makeChain({slots:"chain-slots",pool:"chain-pool",fb:"chain-fb",reset:"chain-reset",
+ order:["Receive & sort (dirty)","Ultrasonic clean","Rinse, dry & inspect","Pouch & seal","Autoclave cycle","Cool & check indicators","Log the load","Sterile storage"],
+ why:{"Receive & sort (dirty)":"Dirty work starts at the receiving bench — sharps into the point-of-use container, nothing travels further dirty than it must.","Ultrasonic clean":"Cleaning before sterilisation, always: 35–48 kHz, fully submerged, lid on, timed.","Rinse, dry & inspect":"Under the magnifier: any debris left means back to cleaning — packaging never hides a dirty instrument.","Pouch & seal":"Sealed, dated, initialled, indicator inside and out.","Autoclave cycle":"Class B, 132–134 °C, wrapped cycle — loaded loosely so steam reaches every surface.","Cool & check indicators":"Mechanical + chemical indicators checked before release. Unchanged = unverified.","Log the load":"Cycle, indicators and any failures go in the log — a failed pouch is quarantined and reprocessed, never released. If it isn't recorded, it didn't happen.","Sterile storage":"Clean, dry, dated-side out. First-expired, first-used."},
+ wrong:{"Autoclave cycle":"Sterilising uncleaned or unpouched instruments skips the stages that make the cycle work.","Sterile storage":"Storing before the indicator check puts unverified instruments into circulation.","Pouch & seal":"Pouching a wet or uninspected set seals the problem in."},
+ done:"That is the one-way flow: receive → clean → inspect → pouch → autoclave → verify → store, with failures quarantined and logged. The order is the safety.",toast:"Sterilisation chain complete"});
+makeChain({slots:"tray-slots",pool:"tray-pool",fb:"tray-fb",reset:"tray-reset",
+ order:["Mouth mirror","Explorer","Periodontal probe","Cotton pliers","Suction tip (HVE)","Gauze & cotton rolls"],
+ why:{"Mouth mirror":"First in hand, first on the tray: vision before everything.","Explorer":"Examination order — mirror, then explorer.","Periodontal probe":"Blunt and mm-marked, after the explorer in a basic exam set-up.","Cotton pliers":"Carrying items comes after the examination instruments are laid.","Suction tip (HVE)":"Moisture control is set before the procedure starts, not fetched mid-way.","Gauze & cotton rolls":"Consumables last on the tray, closest to the assistant."},
+ wrong:{"Suction tip (HVE)":"Suction is set in tray order, not first — the examination instruments lead.","Gauze & cotton rolls":"Consumables close the tray; laying them first buries the instruments the clinician reaches for blind."},
+ done:"Tray set in working order: the clinician can reach for the next instrument without looking — which is exactly why layout is a safety feature, not tidiness.",toast:"Tray set in working order"});
 })();
 </script>
 </body>
