@@ -187,6 +187,44 @@ footer b{color:#ffd9a8}
 .spec-table{width:100%;border-collapse:collapse;font-size:.92rem}
 .spec-table td{padding:7px 8px;border-bottom:1px dashed var(--line);vertical-align:top}
 .spec-table td:first-child{font-weight:700;color:var(--teal);width:34%}
+/* teeth & calculus lab */
+.mode-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.mode-tabs button{background:var(--panel);border:1.5px solid var(--line);border-radius:999px;padding:8px 15px;font:600 .9rem "Public Sans",sans-serif;color:var(--ink);cursor:pointer}
+.mode-tabs button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.mode-tabs button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#231a05}
+.tl-stage{position:relative;border:1.5px solid var(--line);border-radius:var(--r-lg);padding:16px;background:var(--panel);overflow:hidden}
+.tl-stage .room-decor{position:absolute;inset:0;opacity:.5;pointer-events:none}
+.tl-stage.passthrough{background:repeating-conic-gradient(var(--panel2) 0% 25%, var(--panel) 0% 50%) 0 0/28px 28px}
+.tl-stage.passthrough .room-decor{display:none}
+.tl-stage .tl-inner{position:relative}
+.arch-label{font:600 .72rem "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:center;margin:10px 0 4px}
+.arch-row{display:flex;gap:3px;justify-content:center}
+.tooth{flex:1 1 0;min-width:0;padding:6px 1px 5px;border:1.5px solid var(--line);background:var(--panel);border-radius:8px 8px 10px 10px;cursor:pointer;font:600 .74rem "IBM Plex Mono",monospace;color:var(--ink);text-align:center;line-height:1.25}
+.tooth small{display:block;font:500 .56rem "Public Sans",sans-serif;color:var(--ink2);white-space:nowrap;overflow:hidden}
+.tooth .inst-code{display:none;font:700 .6rem "IBM Plex Mono",monospace;color:var(--coral)}
+.show-inst .tooth .inst-code{display:block}
+.show-types .tooth.ty-incisor{background:color-mix(in srgb,#7fc8bc 22%,var(--panel))}
+.show-types .tooth.ty-canine{background:color-mix(in srgb,#d99a1f 22%,var(--panel))}
+.show-types .tooth.ty-premolar{background:color-mix(in srgb,#e85d3d 18%,var(--panel))}
+.show-types .tooth.ty-molar{background:color-mix(in srgb,#0e5a50 20%,var(--panel))}
+.hide-num .tooth .tnum{visibility:hidden}
+.tooth.on{border-color:var(--coral);background:var(--coral-soft)}
+.tooth.calc{border-color:var(--gold);box-shadow:inset 0 -7px 0 var(--gold)}
+.tooth.quizpick{border-color:var(--gold);background:var(--gold-soft);box-shadow:0 0 0 3px var(--gold-soft)}
+.inst-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+.inst-card{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r-md);padding:12px;text-align:left;cursor:pointer;color:var(--ink);font:500 .9rem "Public Sans",sans-serif;width:100%}
+.inst-card:hover{border-color:var(--teal)}
+.inst-card svg{width:100%;height:64px;display:block}
+.inst-card b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1rem;margin:6px 0 2px}
+.inst-card.picked-good{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,var(--panel))}
+.inst-card.picked-bad{border-color:var(--coral);background:var(--coral-soft)}
+.clean-stage{width:100%;height:auto;display:block;background:var(--teal-soft);border-radius:var(--r-md);touch-action:none;cursor:crosshair}
+.tl-coach{display:flex;gap:12px;align-items:flex-start;background:var(--gold-soft);border-radius:var(--r-md);padding:12px 14px;font-size:.95rem;margin-top:14px}
+.tl-coach .face{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font:800 1rem "Bricolage Grotesque",sans-serif}
+.tl-coach b{color:var(--teal)}
+.quiz-timer{font:600 1.05rem "IBM Plex Mono",monospace;color:var(--coral)}
+@media (max-width:900px){ .inst-cards{grid-template-columns:1fr 1fr} }
+@media (max-width:560px){ .tooth{font-size:.64rem;padding:5px 0 4px} .tooth small{display:none} .inst-cards{grid-template-columns:1fr} }
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .xpfill{transition:none} }
 </style>
 </head>
@@ -214,6 +252,7 @@ footer b{color:#ffd9a8}
       <div class="btnrow">
         <a class="btn coral" href="#world">Enter the clinic world</a>
         <a class="btn ghost" href="#lab">Open the Equipment Lab</a>
+        <a class="btn ghost" href="#teethlab">Teeth &amp; Calculus Lab</a>
         <a class="btn ghost" href="#stations">Explore the 6 stations</a>
         <a class="btn ghost" href="#sim">Run a simulation</a>
         <a class="btn ghost" href="#tools">Compare the tools</a>
@@ -414,6 +453,112 @@ footer b{color:#ffd9a8}
     <article class="card"><h3>🧼 Sterilisation — the detailed build</h3><p class="small">Dirty receiving sink with red sharps container at point of use → ultrasonic tank with a translucent lid and timer → rinse-and-dry bench under a magnifier lamp → heat sealer and pouches with chemical indicators → Class B autoclave with round chamber door and cycle display → pass-through to a sterile store with dated pouches on shelves. Floor arrows run one way only; there is no door back from clean to dirty.</p></article>
     <article class="card"><h3>🎒 Screening Hall + Imaging Nook — the detailed build</h3><p class="small">Screening hall: privacy screens, portable kit case (mirror, explorer, gauze, gloves, torch), consent folder, referral pad, and the big tooth model on its demo table with an oversized brush. Imaging nook off the operatory: X-ray head on a counterbalanced arm, lead apron + thyroid collar on a stand, sensor holder and a “SIMULATED IMAGE” preview screen — positioning is practised, exposure never happens.</p></article>
   </div>
+</div></section>
+
+<section id="teethlab"><div class="wrap">
+  <div class="sec-head">
+    <span class="tag coral" data-i18n="kicker">New · Study · Quiz · Clean</span>
+    <h2 data-i18n="title">Teeth &amp; Calculus Lab — name it, pick the tip, clean it</h2>
+    <p data-i18n="intro">Three modes adapted from the STAI Health VR project (Helsinki XR Center · Metropolia UAS · HUS · City of Helsinki) — an original implementation for this app: no STAI assets, models or branding are used, and this app is not affiliated with or endorsed by HXRC or STAI. The skill here is recognition — naming teeth and choosing the correct instrument tip for each tooth and surface — not grip or hand movement, which only supervised clinical training can teach. Calculus cleaning is practised on a model only: VR practice ≠ clinical hours, and scaling real patients is licensed clinicians' work.</p>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:flex-start">
+      <div>
+        <p class="small" style="font-weight:700;margin:0" data-i18n="modeLabel">MODE</p>
+        <div class="mode-tabs" id="tl-modes" role="tablist" aria-label="Teeth lab mode">
+          <button type="button" data-mode="study" class="on">Study</button>
+          <button type="button" data-mode="quiz">Quiz</button>
+          <button type="button" data-mode="clean">Clean</button>
+        </div>
+      </div>
+      <div>
+        <p class="small" style="font-weight:700;margin:0" data-i18n="dentLabel">TEETH MODEL</p>
+        <div class="mode-tabs" id="tl-dent">
+          <button type="button" data-dent="perm" class="on" data-i18n="dentPerm">Permanent · 32</button>
+          <button type="button" data-dent="prim" data-i18n="dentPrim">Primary · 20</button>
+        </div>
+      </div>
+      <div>
+        <p class="small" style="font-weight:700;margin:0" data-i18n="roomLabel">ROOM</p>
+        <div class="mode-tabs" id="tl-room-toggle">
+          <button type="button" data-room="room" class="on" data-i18n="roomOn">Clinic room</button>
+          <button type="button" data-room="pass" data-i18n="roomPass">Passthrough — hide room</button>
+        </div>
+      </div>
+      <div>
+        <p class="small" style="font-weight:700;margin:0" data-i18n="langLabel">LANGUAGE · IDIOMA</p>
+        <div class="mode-tabs" id="tl-lang">
+          <button type="button" data-lang="en" class="on">English</button>
+          <button type="button" data-lang="es">Español</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-stage" id="tl-stage">
+      <svg class="room-decor" viewBox="0 0 800 120" preserveAspectRatio="xMidYMin slice" aria-hidden="true" style="width:100%;height:110px">
+        <rect x="18" y="14" width="150" height="86" rx="6" fill="#dcebe4" stroke="#0e5a50" stroke-opacity=".35"/>
+        <line x1="93" y1="14" x2="93" y2="100" stroke="#0e5a50" stroke-opacity=".3"/>
+        <line x1="18" y1="57" x2="168" y2="57" stroke="#0e5a50" stroke-opacity=".3"/>
+        <rect x="330" y="20" width="180" height="52" rx="6" fill="#f1ebdd" stroke="#0e5a50" stroke-opacity=".35"/>
+        <line x1="390" y1="20" x2="390" y2="72" stroke="#0e5a50" stroke-opacity=".3"/><line x1="450" y1="20" x2="450" y2="72" stroke="#0e5a50" stroke-opacity=".3"/>
+        <circle cx="700" cy="48" r="30" fill="none" stroke="#0e5a50" stroke-opacity=".4" stroke-width="3"/>
+        <line x1="700" y1="48" x2="700" y2="30" stroke="#0e5a50" stroke-opacity=".5" stroke-width="3"/><line x1="700" y1="48" x2="714" y2="54" stroke="#0e5a50" stroke-opacity=".5" stroke-width="3"/>
+        <path d="M588 96 q10 -34 34 -30 l26 3 q14 2 12 16 l-2 11 z" fill="#0e5a50" fill-opacity=".18"/>
+      </svg>
+      <div class="tl-inner">
+        <p class="small" id="tl-pass-note" style="display:none;font-weight:600" data-i18n="passNote">Passthrough style: the room is hidden so nothing distracts from the teeth — on a headset this is where your real room would show through.</p>
+        <div id="tl-chart"></div>
+        <div id="tl-layers" style="margin-top:12px">
+          <p class="small" style="font-weight:700;margin:0" data-i18n="layersLabel">STUDY LAYERS — ALL CAN SHOW AT ONCE</p>
+          <div class="mode-tabs" id="tl-layer-btns">
+            <button type="button" data-layer="num" aria-pressed="true" data-i18n="layerNum">Numbers (FDI)</button>
+            <button type="button" data-layer="types" aria-pressed="true" data-i18n="layerTypes">Tooth types</button>
+            <button type="button" data-layer="surf" aria-pressed="true" data-i18n="layerSurf">Surfaces</button>
+            <button type="button" data-layer="inst" aria-pressed="true" data-i18n="layerInst">Instrument areas</button>
+          </div>
+          <p class="small" id="tl-legend"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-coach" aria-live="polite"><div class="face" aria-hidden="true">M</div><div><b>Coach Mira:</b> <span id="tl-coach-text"></span></div></div>
+
+    <div id="tl-study-panel" style="margin-top:16px">
+      <div id="tl-detail" aria-live="polite"></div>
+      <h3 style="margin-top:18px" data-i18n="instTitle">The four calculus instruments — learn the tips</h3>
+      <p class="small" data-i18n="instIntro">Four instruments, four tip shapes. Recognising the tip — and which tooth and surface it belongs on — is the whole skill. Grip and stroke are deliberately not taught here.</p>
+      <div class="inst-cards" id="tl-inst-cards"></div>
+    </div>
+
+    <div id="tl-quiz-panel" style="margin-top:16px;display:none">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+        <p style="margin:0"><span data-i18n="quizScoreLabel">Named correctly</span>: <b id="tl-quiz-score">0</b> · <span data-i18n="quizTimeLabel">Time left</span>: <span class="quiz-timer" id="tl-quiz-time">60</span>s</p>
+        <button class="btn coral small" id="tl-quiz-start" type="button" data-i18n="quizStart">Start the 60-second quiz</button>
+      </div>
+      <div id="tl-quiz-body" aria-live="polite" style="margin-top:10px"></div>
+    </div>
+
+    <div id="tl-clean-panel" style="margin-top:16px;display:none">
+      <div id="tl-clean-body" aria-live="polite"></div>
+      <div id="tl-clean-stage-wrap" style="display:none;margin-top:12px">
+        <svg class="clean-stage" id="tl-clean-svg" viewBox="0 0 640 300" role="img" aria-label="Remote-control cleaning stage">
+          <path d="M270 40 q50 -26 100 0 q34 18 30 62 q-3 30 -10 62 q-6 30 -10 66 q-3 26 -18 26 q-13 0 -16 -22 q-3 -24 -8 -40 q-4 -14 -14 -14 q-10 0 -14 14 q-5 16 -8 40 q-3 22 -16 22 q-15 0 -18 -26 q-4 -36 -10 -66 q-7 -32 -10 -62 q-4 -44 22 -62z" fill="#fffdf8" stroke="#0e5a50" stroke-width="2.5"/>
+          <g id="tl-blobs"></g>
+          <circle id="tl-target" cx="120" cy="80" r="13" fill="none" stroke="#e85d3d" stroke-width="2.5"/>
+          <circle cx="120" cy="80" r="3" fill="#e85d3d" id="tl-target-dot"/>
+          <g id="tl-inst">
+            <line x1="0" y1="0" x2="-104" y2="30" stroke="#47635c" stroke-width="9" stroke-linecap="round"/>
+            <line x1="-14" y1="4" x2="-34" y2="9" stroke="#17332e" stroke-width="5" stroke-linecap="round"/>
+            <path d="M0 0 l-16 3 l3 7 l13 -2z" fill="#d99a1f" stroke="#17332e" stroke-width="1.5"/>
+          </g>
+        </svg>
+        <p class="small" style="margin-top:8px" data-i18n="cleanHow">Remote control, the STAI way: the instrument is not grabbed directly — move your pointer (or finger) and the target ring leads; the instrument follows with a smooth lerp and rotates to face the tooth, so it never clips through. Scrub the gold calculus patches until they are gone.</p>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:6px"><span class="small" style="font-weight:700" data-i18n="cleanProg">Calculus removed</span><div class="xpbar" style="flex:1"><div class="xpfill" id="tl-clean-fill" style="width:0%"></div></div><span class="mono small" id="tl-clean-pct">0%</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px" data-i18n="foot">Numbering shown in FDI (the two-digit system used across Latin America and Europe) with the US Universal number alongside. Surface and instrument-area guidance in this lab is a simplified teaching map for recognition practice — a supervising clinician's judgment always governs real care.</p>
 </div></section>
 
 <section id="packs"><div class="wrap">
@@ -740,6 +885,23 @@ footer b{color:#ffd9a8}
   </details>
 
   <details>
+    <summary>Design inspiration — STAI Health, Helsinki XR Center (added 2026-11-07)</summary>
+    <div class="body">
+      <p>The Teeth &amp; Calculus Lab on this page borrows its <b>ideas</b> from <a href="https://helsinkixrcenter.com/news/hxrc-team-gamifying-dental-calculus-cleaning/" target="_blank" rel="noopener">“Gamifying Dental Calculus Cleaning”</a> — Helsinki XR Center's account of <b>STAI Health</b>, a VR training tool for dental health care students built with Metropolia University of Applied Sciences, HUS and the City of Helsinki (article dated Jun 10, 2025, updated 2025-06-16). The implementation here is original: <b>no STAI assets, teeth models, instrument models, artwork or branding were copied</b>, and this app is <b>not affiliated with or endorsed by</b> HXRC, STAI Health, Metropolia UAS, HUS or the City of Helsinki.</p>
+      <ul>
+        <li><b>Three modes — Study, Quiz, Clean.</b> STAI: Study teaches teeth numbering, types, surfaces and instrument usage areas (all four visual layers displayable at the same time); Quiz asks the learner to name as many teeth as possible before a timer runs out; Clean has a teacher present a tooth, and the learner picks the correct instrument and tip and cleans the calculus from it. All three are reproduced here in that shape.</li>
+        <li><b>Primary + permanent models, switchable.</b> STAI ships both dentitions (their teeth models derive from University of Dundee, School of Dentistry models, retopologised — credited here as their source, not used here); this lab renders both sets as a labelled FDI chart — 32 permanent, 20 primary — with US Universal numbers alongside.</li>
+        <li><b>Four calculus instruments, tip recognition is the point.</b> Micro sickle, mesial curette, distal curette and buccal–lingual curette — STAI's exact four, with STAI's stated aim carried over verbatim in spirit: the goal is <em>not</em> to teach how to hold or move the instrument, but to recognise the correct tip and know which tooth and surface it is for.</li>
+        <li><b>A teacher character.</b> STAI's teacher instructs in Quiz and Clean modes and reacts to right and wrong answers; here that role is taken by this app's existing demo guide, <b>Coach Mira</b>, who sets each Clean tooth, judges instrument picks, and reacts in Quiz and Clean.</li>
+        <li><b>A deliberately quiet room + passthrough.</b> STAI's dentist office is “simple but recognizable… without making it too interesting”, and can be disabled for passthrough; the lab copies that restraint — a light room backdrop with a passthrough-style toggle that hides it.</li>
+        <li><b>Remote-control instrument interaction.</b> STAI rejected direct grab (the instrument clipped through teeth) and settled on a visual target the instrument follows with <b>lerp</b>, continuously rotating to face the selected tooth. The Clean stage here uses the same mechanism: target ring leads, instrument lerps behind it and rotates to face the tooth.</li>
+        <li><b>Localisation pattern, re-pointed.</b> STAI localised Finnish + English (text and teacher audio) for its users; this app serves Costa Rica and the Americas, so the lab is localised <b>English + Spanish</b> (text; no audio is recorded for either language in this demo).</li>
+        <li><b>Framing kept:</b> recognition practice on a model only — no diagnosis, no licensure or certification claim, and VR practice never counts as clinical hours, here or in STAI's framing as a student learning tool.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
     <summary>The dental skill registry (new, SmartCiti.X shape)</summary>
     <div class="body">
       <p>A small <b>new</b> dental registry in the SmartCiti.X shape — 11 strands × 3 tiers (fundamentals / practitioner / lead), sequenced by the same engine pattern: <span class="mono">control/graph.mjs · sequencer.mjs · dial.mjs · gates.mjs · hints.mjs</span>.</p>
@@ -889,6 +1051,7 @@ footer b{color:#ffd9a8}
         <li><span class="mono">AGIFutureFoundation/vr-safety-training</span> — branch <span class="mono">claude/vr-ar-safety-training-wkwmve</span>, commit <span class="mono">9914455</span> (station source; linked, not copied).</li>
         <li>TradePath — <span class="mono">tradepath-training-centre.json</span> (the 3 sessions, zones, XP).</li>
         <li>WorldForge / worlds-3d and Cognition.X (Flow Zone, Simulation Studio, CXXR) — pattern sources, reviewed 2026-11-07.</li>
+        <li><a href="https://helsinkixrcenter.com/news/hxrc-team-gamifying-dental-calculus-cleaning/" target="_blank" rel="noopener">Helsinki XR Center — “Gamifying Dental Calculus Cleaning” (STAI Health)</a>, Jun 10, 2025 (updated 2025-06-16) — design inspiration for the Teeth &amp; Calculus Lab: Study / Quiz / Clean modes, primary + permanent models, the four calculus instruments and tip-recognition aim, the teacher character, the quiet room + passthrough option, remote-control lerp instrument interaction, and the two-language localisation pattern. Ideas only — no assets, models or branding copied; not affiliated or endorsed.</li>
         <li><b>Wiki fact route (Firecrawl, run 2026-11-07):</b> public facts in the wiki's licensure bridge and Unspoken Smiles entry were scraped with Firecrawl from the primary pages listed above (DANB, CDC MMWR, Dental Board of California, unspokensmiles.org) and are cited per fact, with conflicts kept flagged and never merged. Demo-only throughout: not official, not endorsed, not affiliated.</li>
       </ul>
     </div>
@@ -1531,6 +1694,242 @@ makeChain({slots:"tray-slots",pool:"tray-pool",fb:"tray-fb",reset:"tray-reset",
  why:{"Mouth mirror":"First in hand, first on the tray: vision before everything.","Explorer":"Examination order — mirror, then explorer.","Periodontal probe":"Blunt and mm-marked, after the explorer in a basic exam set-up.","Cotton pliers":"Carrying items comes after the examination instruments are laid.","Suction tip (HVE)":"Moisture control is set before the procedure starts, not fetched mid-way.","Gauze & cotton rolls":"Consumables last on the tray, closest to the assistant."},
  wrong:{"Suction tip (HVE)":"Suction is set in tray order, not first — the examination instruments lead.","Gauze & cotton rolls":"Consumables close the tray; laying them first buries the instruments the clinician reaches for blind."},
  done:"Tray set in working order: the clinician can reach for the next instrument without looking — which is exactly why layout is a safety feature, not tidiness.",toast:"Tray set in working order"});
+})();
+</script>
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+if(!$("tl-chart"))return;
+function toast(m){var t=$("toast");if(t){t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2600)}}
+/* ================= i18n — English + Spanish (lab section) ================= */
+var L={
+en:{kicker:"New · Study · Quiz · Clean",title:"Teeth & Calculus Lab — name it, pick the tip, clean it",intro:"Three modes adapted from the STAI Health VR project (Helsinki XR Center · Metropolia UAS · HUS · City of Helsinki) — an original implementation for this app: no STAI assets, models or branding are used, and this app is not affiliated with or endorsed by HXRC or STAI. The skill here is recognition — naming teeth and choosing the correct instrument tip for each tooth and surface — not grip or hand movement, which only supervised clinical training can teach. Calculus cleaning is practised on a model only: VR practice ≠ clinical hours, and scaling real patients is licensed clinicians' work.",modeLabel:"MODE",modeStudy:"Study",modeQuiz:"Quiz",modeClean:"Clean",dentLabel:"TEETH MODEL",dentPerm:"Permanent · 32",dentPrim:"Primary · 20",roomLabel:"ROOM",roomOn:"Clinic room",roomPass:"Passthrough — hide room",langLabel:"LANGUAGE · IDIOMA",passNote:"Passthrough style: the room is hidden so nothing distracts from the teeth — on a headset this is where your real room would show through.",layersLabel:"STUDY LAYERS — ALL CAN SHOW AT ONCE",layerNum:"Numbers (FDI)",layerTypes:"Tooth types",layerSurf:"Surfaces",layerInst:"Instrument areas",instTitle:"The four calculus instruments — learn the tips",instIntro:"Four instruments, four tip shapes. Recognising the tip — and which tooth and surface it belongs on — is the whole skill. Grip and stroke are deliberately not taught here.",quizScoreLabel:"Named correctly",quizTimeLabel:"Time left",quizStart:"Start the 60-second quiz",cleanHow:"Remote control, the STAI way: the instrument is not grabbed directly — move your pointer (or finger) and the target ring leads; the instrument follows with a smooth lerp and rotates to face the tooth, so it never clips through. Scrub the gold calculus patches until they are gone.",cleanProg:"Calculus removed",foot:"Numbering shown in FDI (the two-digit system used across Latin America and Europe) with the US Universal number alongside. Surface and instrument-area guidance in this lab is a simplified teaching map for recognition practice — a supervising clinician's judgment always governs real care.",upper:"Upper arch",lower:"Lower arch",tipSchematic:"Tip close-up (schematic)",useLabel:"Used for",detailPick:"Tap any tooth on the chart to study it — its number, type, surfaces and instrument usage area appear here, all at once.",lblFdi:"FDI number",lblUni:"Universal (US)",lblType:"Type",lblArch:"Arch",lblSurfaces:"Surfaces",lblInst:"Instrument usage area",surfOff:"Surfaces layer is off — turn it on above to list this tooth's surfaces.",instAnt:"Micro sickle — anterior teeth: fine pointed tip for supragingival calculus on labial, lingual and interproximal surfaces.",instPost:"Posterior tooth — the curette family, by surface: mesial surface → mesial curette · distal surface → distal curette · buccal / lingual (palatal) surfaces → buccal–lingual curette. Chewing surface deposits are the clinician's call, escalated, never guessed.",legendTypes:"Type colours: incisor · canine · premolar · molar.",legendInst:"Instrument areas: S = micro sickle (anterior teeth) · C = curette family (posterior teeth — mesial / distal / buccal–lingual by surface).",coachStudy:"Study mode: pick any tooth. Numbers, type, surfaces and instrument areas can all stay on at once — that layered view is the point. Switch between permanent and primary teeth any time.",coachQuizIdle:"Quiz mode: I highlight a tooth, you tap its name. As many as you can in 60 seconds — go!",coachCleanIntro:"Clean mode: I choose the tooth and the surface with calculus. You choose the instrument — look at the tip, not just the name.",quizPrompt:"Which tooth is highlighted?",quizEnd:"Time! You named {n} teeth correctly. Naming teeth fluently is what makes charting and handover safe — run it again and beat it.",quizAgain:"Run the quiz again",quizGood:"Yes — that's the {name}. Next one!",quizBad:"Not quite — that was the {name}. Keep going.",cleanPrompt:"Clean this tooth: <b>{tooth}</b> (FDI {fdi}). The calculus sits on its <b>{surf}</b> surface. Pick the correct instrument and tip.",cleanWrong:"That tip won't serve here — the {inst} belongs on {use}. Look at the tip shape and try another.",cleanRight:"Correct instrument — the {inst}. Now clean: lead with the target ring and let the instrument follow.",cleanDone:"Tooth clean — all calculus removed, {att} instrument pick(s). That was recognition and control practice on a model, never a clinical record.",cleanNext:"Next tooth from Coach Mira",sMesial:"mesial",sDistal:"distal",sBuccal:"buccal",sLingual:"lingual",sSupra:"front (labial), supragingival",attempts:"attempt"},
+es:{kicker:"Nuevo · Estudiar · Cuestionario · Limpiar",title:"Laboratorio de Dientes y Sarro — nómbralo, elige la punta, límpialo",intro:"Tres modos adaptados del proyecto de RV STAI Health (Helsinki XR Center · Metropolia UAS · HUS · Ciudad de Helsinki), con una implementación original para esta aplicación: no se usan recursos, modelos ni marcas de STAI, y esta aplicación no está afiliada ni respaldada por HXRC o STAI. La habilidad aquí es el reconocimiento — nombrar los dientes y elegir la punta de instrumento correcta para cada diente y superficie — no el agarre ni el movimiento de la mano, que solo se aprenden con formación clínica supervisada. La limpieza del sarro se practica solo en un modelo: la práctica en RV ≠ horas clínicas, y el raspado en pacientes reales es trabajo de profesionales con licencia.",modeLabel:"MODO",modeStudy:"Estudiar",modeQuiz:"Cuestionario",modeClean:"Limpiar",dentLabel:"MODELO DE DIENTES",dentPerm:"Permanentes · 32",dentPrim:"Temporales · 20",roomLabel:"SALA",roomOn:"Sala clínica",roomPass:"Passthrough — ocultar sala",langLabel:"LANGUAGE · IDIOMA",passNote:"Estilo passthrough: la sala se oculta para que nada distraiga de los dientes — en un visor, aquí se vería tu sala real.",layersLabel:"CAPAS DE ESTUDIO — TODAS PUEDEN VERSE A LA VEZ",layerNum:"Números (FDI)",layerTypes:"Tipos de diente",layerSurf:"Superficies",layerInst:"Zonas de instrumento",instTitle:"Los cuatro instrumentos para el sarro — aprende las puntas",instIntro:"Cuatro instrumentos, cuatro formas de punta. Reconocer la punta — y saber a qué diente y superficie pertenece — es toda la habilidad. El agarre y el movimiento no se enseñan aquí a propósito.",quizScoreLabel:"Nombrados correctamente",quizTimeLabel:"Tiempo restante",quizStart:"Iniciar el cuestionario de 60 segundos",cleanHow:"Control remoto, al estilo STAI: el instrumento no se agarra directamente — mueve el puntero (o el dedo) y el anillo objetivo guía; el instrumento lo sigue con un lerp suave y gira para mirar al diente, así nunca lo atraviesa. Frota las manchas doradas de sarro hasta que desaparezcan.",cleanProg:"Sarro eliminado",foot:"Numeración en FDI (el sistema de dos dígitos usado en América Latina y Europa) junto al número Universal de EE. UU. La guía de superficies y zonas de instrumento de este laboratorio es un mapa de enseñanza simplificado para practicar el reconocimiento — el criterio de un profesional supervisor siempre manda en la atención real.",upper:"Arcada superior",lower:"Arcada inferior",tipSchematic:"Punta en detalle (esquemático)",useLabel:"Se usa para",detailPick:"Toca cualquier diente del gráfico para estudiarlo — su número, tipo, superficies y zona de instrumento aparecen aquí, todo a la vez.",lblFdi:"Número FDI",lblUni:"Universal (EE. UU.)",lblType:"Tipo",lblArch:"Arcada",lblSurfaces:"Superficies",lblInst:"Zona de instrumento",surfOff:"La capa de superficies está apagada — actívala arriba para ver las superficies de este diente.",instAnt:"Hoz micro — dientes anteriores: punta fina y puntiaguda para el sarro supragingival en superficies labiales, linguales e interproximales.",instPost:"Diente posterior — la familia de curetas, por superficie: superficie mesial → cureta mesial · superficie distal → cureta distal · superficies bucal / lingual (palatina) → cureta bucal-lingual. Los depósitos en la superficie masticatoria los decide el profesional: se escalan, nunca se adivinan.",legendTypes:"Colores por tipo: incisivo · canino · premolar · molar.",legendInst:"Zonas de instrumento: S = hoz micro (dientes anteriores) · C = familia de curetas (dientes posteriores — mesial / distal / bucal-lingual según la superficie).",coachStudy:"Modo Estudiar: elige cualquier diente. Números, tipo, superficies y zonas de instrumento pueden estar activos a la vez — esa vista en capas es el objetivo. Cambia entre dientes permanentes y temporales cuando quieras.",coachQuizIdle:"Modo Cuestionario: yo resalto un diente y tú tocas su nombre. ¡Todos los que puedas en 60 segundos!",coachCleanIntro:"Modo Limpiar: yo elijo el diente y la superficie con sarro. Tú eliges el instrumento — mira la punta, no solo el nombre.",quizPrompt:"¿Qué diente está resaltado?",quizEnd:"¡Tiempo! Nombraste bien {n} dientes. Nombrar los dientes con fluidez hace seguros el registro y la entrega — inténtalo de nuevo y supéralo.",quizAgain:"Repetir el cuestionario",quizGood:"Sí — es el {name}. ¡Siguiente!",quizBad:"Casi — ese era el {name}. Sigue.",cleanPrompt:"Limpia este diente: <b>{tooth}</b> (FDI {fdi}). El sarro está en su superficie <b>{surf}</b>. Elige el instrumento y la punta correctos.",cleanWrong:"Esa punta no sirve aquí — la {inst} pertenece a {use}. Mira la forma de la punta y prueba otra.",cleanRight:"Instrumento correcto — la {inst}. Ahora limpia: guía con el anillo objetivo y deja que el instrumento lo siga.",cleanDone:"Diente limpio — todo el sarro eliminado, {att} elección(es) de instrumento. Esto fue práctica de reconocimiento y control en un modelo, nunca un registro clínico.",cleanNext:"Siguiente diente de la Coach Mira",sMesial:"mesial",sDistal:"distal",sBuccal:"bucal",sLingual:"lingual",sSupra:"frontal (labial), supragingival",attempts:"intento"}};
+var lang="en";
+function t(k){return (L[lang]&&L[lang][k])||L.en[k]||k}
+function fill(s,obj){return s.replace(/\{(\w+)\}/g,function(m,k){return obj[k]!=null?obj[k]:m})}
+/* ================= teeth data ================= */
+var PERM=[["Central incisor","Incisivo central","incisor"],["Lateral incisor","Incisivo lateral","incisor"],["Canine","Canino","canine"],["First premolar","Primer premolar","premolar"],["Second premolar","Segundo premolar","premolar"],["First molar","Primer molar","molar"],["Second molar","Segundo molar","molar"],["Third molar (wisdom)","Tercer molar (muela del juicio)","molar"]];
+var PRIM=[["Central incisor","Incisivo central","incisor"],["Lateral incisor","Incisivo lateral","incisor"],["Canine","Canino","canine"],["First molar","Primer molar","molar"],["Second molar","Segundo molar","molar"]];
+var TYN={incisor:["Incisor","Incisivo"],canine:["Canine","Canino"],premolar:["Premolar","Premolar"],molar:["Molar","Molar"]};
+var QUAD={1:["Upper right","Superior derecho"],2:["Upper left","Superior izquierdo"],3:["Lower left","Inferior izquierdo"],4:["Lower right","Inferior derecho"],5:["Upper right · primary","Superior derecho · temporal"],6:["Upper left · primary","Superior izquierdo · temporal"],7:["Lower left · primary","Inferior izquierdo · temporal"],8:["Lower right · primary","Inferior derecho · temporal"]};
+function makeTeeth(dent){
+  var teeth=[];
+  if(dent==="perm"){for(var q=1;q<=4;q++)for(var p=1;p<=8;p++){var d=PERM[p-1];teeth.push({fdi:""+q+p,uni:"#"+(q===1?9-p:q===2?8+p:q===3?25-p:24+p),pos:p,quad:q,arch:q<=2?"upper":"lower",en:d[0],es:d[1],ty:d[2],anterior:p<=3})}}
+  else{var letters={5:["E","D","C","B","A"],6:["F","G","H","I","J"],7:["O","N","M","L","K"],8:["P","Q","R","S","T"]};for(var q=5;q<=8;q++)for(var p=1;p<=5;p++){var d=PRIM[p-1];teeth.push({fdi:""+q+p,uni:letters[q][p-1],pos:p,quad:q,arch:q<=6?"upper":"lower",en:d[0],es:d[1],ty:d[2],anterior:p<=3})}}
+  return teeth;
+}
+function surfacesOf(tooth){
+  var li=lang==="es"?1:0;
+  var chew=tooth.anterior?["Incisal (biting edge)","Incisal (borde cortante)"]:["Occlusal (chewing)","Oclusal (masticatoria)"];
+  var front=tooth.anterior?["Labial (lip side)","Labial (lado del labio)"]:["Buccal (cheek side)","Bucal (lado de la mejilla)"];
+  var back=tooth.arch==="upper"?["Palatal (roof-of-mouth side)","Palatina"]:["Lingual (tongue side)","Lingual"];
+  return [["Mesial (toward the midline)","Mesial (hacia la línea media)"][li],["Distal (away from the midline)","Distal (lejos de la línea media)"][li],front[li],back[li],chew[li]];
+}
+/* ================= instruments ================= */
+var TIPSVG={
+sickle:'<line x1="8" y1="50" x2="58" y2="50" stroke="#47635c" stroke-width="7" stroke-linecap="round"/><path d="M58 50 L92 24 L86 42 L66 54 Z" fill="#d99a1f" stroke="#17332e" stroke-width="1.5"/>',
+mesial:'<line x1="8" y1="50" x2="52" y2="50" stroke="#47635c" stroke-width="7" stroke-linecap="round"/><path d="M52 50 H66 Q86 50 86 28" fill="none" stroke="#17332e" stroke-width="5" stroke-linecap="round"/><path d="M86 28 l-6 13 h12z" fill="#d99a1f" stroke="#17332e" stroke-width="1.2"/>',
+distal:'<line x1="8" y1="26" x2="52" y2="26" stroke="#47635c" stroke-width="7" stroke-linecap="round"/><path d="M52 26 H66 Q86 26 86 48" fill="none" stroke="#17332e" stroke-width="5" stroke-linecap="round"/><path d="M86 48 l-6 -13 h12z" fill="#d99a1f" stroke="#17332e" stroke-width="1.2"/>',
+buccal:'<line x1="8" y1="50" x2="56" y2="50" stroke="#47635c" stroke-width="7" stroke-linecap="round"/><path d="M56 50 Q78 50 88 38" fill="none" stroke="#17332e" stroke-width="5" stroke-linecap="round"/><ellipse cx="90" cy="34" rx="9" ry="5.5" transform="rotate(-38 90 34)" fill="#d99a1f" stroke="#17332e" stroke-width="1.2"/>'};
+var INSTS=[
+{id:"sickle",en:"Micro sickle",es:"Hoz micro",tip:["Fine pointed tip — triangular in cross-section, two cutting edges meeting at a sharp point.","Punta fina y puntiaguda — triangular, con dos bordes cortantes que se unen en un punto agudo."],use:["anterior teeth — supragingival calculus","los dientes anteriores — sarro supragingival"],useFull:["Anterior teeth (incisors & canines): supragingival calculus on labial, lingual and interproximal surfaces.","Dientes anteriores (incisivos y caninos): sarro supragingival en superficies labiales, linguales e interproximales."]},
+{id:"mesial",en:"Mesial curette",es:"Cureta mesial",tip:["Rounded toe with the blade angled and offset so its cutting edge seats against mesial surfaces.","Punta redondeada con la hoja angulada para apoyarse en las superficies mesiales."],use:["the mesial surfaces of posterior teeth","las superficies mesiales de los dientes posteriores"],useFull:["Mesial surfaces of posterior teeth (premolars & molars) — the offset blade reaches the side facing the midline.","Superficies mesiales de los dientes posteriores (premolares y molares): la hoja angulada alcanza el lado que mira a la línea media."]},
+{id:"distal",en:"Distal curette",es:"Cureta distal",tip:["Rounded toe, blade angled the opposite way to its mesial twin — the mirror image is the tell.","Punta redondeada con la hoja angulada al contrario que su gemela mesial — la imagen en espejo es la pista."],use:["the distal surfaces of posterior teeth","las superficies distales de los dientes posteriores"],useFull:["Distal surfaces of posterior teeth (premolars & molars) — the side facing away from the midline.","Superficies distales de los dientes posteriores (premolares y molares): el lado opuesto a la línea media."]},
+{id:"buccal",en:"Buccal–lingual curette",es:"Cureta bucal-lingual",tip:["Shallow spoon-shaped toe, gently curved — shaped to hug the broad cheek-side and tongue-side walls.","Punta en forma de cuchara poco profunda, suavemente curva, para las paredes bucal y lingual."],use:["the buccal and lingual surfaces of posterior teeth","las superficies bucales y linguales de los dientes posteriores"],useFull:["Buccal and lingual/palatal surfaces of posterior teeth — the broad outer and inner walls.","Superficies bucales y linguales/palatinas de los dientes posteriores: las paredes anchas externa e interna."]}];
+function instById(id){for(var i=0;i<INSTS.length;i++)if(INSTS[i].id===id)return INSTS[i];return INSTS[0]}
+function instName(ins){return lang==="es"?ins.es:ins.en}
+/* ================= state ================= */
+var mode="study",dent="perm",teeth=makeTeeth("perm"),layers={num:true,types:true,surf:true,inst:true},selected=null,quizTarget=null,cleanTarget=null;
+function mira(html){$("tl-coach-text").innerHTML=html}
+function toothName(tooth){return lang==="es"?tooth.es:tooth.en}
+/* ================= chart ================= */
+function archOrder(){
+  if(dent==="perm")return{upper:[[1,"desc"],[2,"asc"]],lower:[[4,"desc"],[3,"asc"]]};
+  return{upper:[[5,"desc"],[6,"asc"]],lower:[[8,"desc"],[7,"asc"]]};
+}
+function getTooth(fdi){for(var i=0;i<teeth.length;i++)if(teeth[i].fdi===fdi)return teeth[i];return null}
+function renderChart(){
+  var ord=archOrder(),html="";
+  ["upper","lower"].forEach(function(arch){
+    html+="<p class='arch-label'>"+t(arch)+"</p><div class='arch-row'>";
+    ord[arch].forEach(function(pair){
+      var list=teeth.filter(function(x){return x.quad===pair[0]});
+      list.sort(function(a,b){return pair[1]==="desc"?b.pos-a.pos:a.pos-b.pos});
+      list.forEach(function(tooth){
+        var cls="tooth ty-"+tooth.ty;
+        if(selected&&selected.fdi===tooth.fdi)cls+=" on";
+        if(quizTarget&&quizTarget.fdi===tooth.fdi)cls+=" quizpick";
+        if(cleanTarget&&cleanTarget.fdi===tooth.fdi)cls+=" calc";
+        html+="<button type='button' class='"+cls+"' data-fdi='"+tooth.fdi+"' aria-label='FDI "+tooth.fdi+" · "+toothName(tooth)+"'><span class='tnum'>"+tooth.fdi+"</span><small>"+toothName(tooth)+"</small><span class='inst-code'>"+(tooth.anterior?"S":"C")+"</span></button>";
+      });
+    });
+    html+="</div>";
+  });
+  var chart=$("tl-chart");chart.innerHTML=html;
+  chart.className=[layers.types?"show-types":"",layers.num?"":"hide-num",layers.inst?"show-inst":""].join(" ");
+  Array.prototype.forEach.call(chart.querySelectorAll(".tooth"),function(b){b.addEventListener("click",function(){onToothTap(b.getAttribute("data-fdi"))})});
+  var lg=[];
+  if(layers.types)lg.push(t("legendTypes"));
+  if(layers.inst)lg.push(t("legendInst"));
+  $("tl-legend").textContent=lg.join(" ");
+}
+function onToothTap(fdi){
+  var tooth=getTooth(fdi);if(!tooth)return;
+  if(mode==="study"){selected=tooth;renderChart();renderDetail(tooth)}
+  else if(mode==="quiz"){toast(lang==="es"?"Toca el nombre correcto abajo":"Tap the tooth's name below")}
+  else{toast(lang==="es"?"La Coach Mira ya eligió este diente — elige el instrumento":"Coach Mira picked this tooth — now pick the instrument")}
+}
+function renderDetail(tooth){
+  var li=lang==="es"?1:0;
+  var surf=layers.surf?"<ul style='margin:.2rem 0;padding-left:1.15rem'>"+surfacesOf(tooth).map(function(s){return "<li>"+s+"</li>"}).join("")+"</ul>":"<p class='small'>"+t("surfOff")+"</p>";
+  $("tl-detail").innerHTML="<div class='card' style='box-shadow:none'><h3 style='font-size:1.3rem'>"+toothName(tooth)+"</h3><table class='spec-table'><tr><td>"+t("lblFdi")+"</td><td class='mono'><b>"+tooth.fdi+"</b></td></tr><tr><td>"+t("lblUni")+"</td><td class='mono'>"+tooth.uni+"</td></tr><tr><td>"+t("lblType")+"</td><td>"+TYN[tooth.ty][li]+"</td></tr><tr><td>"+t("lblArch")+"</td><td>"+QUAD[tooth.quad][li]+" · "+t(tooth.arch)+"</td></tr><tr><td>"+t("lblSurfaces")+"</td><td>"+surf+"</td></tr><tr><td>"+t("lblInst")+"</td><td>"+(tooth.anterior?t("instAnt"):t("instPost"))+"</td></tr></table></div>";
+}
+function renderStudyCards(){
+  var li=lang==="es"?1:0,wrap=$("tl-inst-cards");wrap.innerHTML="";
+  INSTS.forEach(function(ins){
+    var d=document.createElement("div");d.className="inst-card";d.style.cursor="default";
+    d.innerHTML="<svg viewBox='0 0 100 68' aria-hidden='true'>"+TIPSVG[ins.id]+"</svg><b>"+instName(ins)+"</b><span class='small' style='display:block'>"+ins.tip[li]+"</span><span class='small' style='display:block;margin-top:4px'><b>"+t("useLabel")+":</b> "+ins.useFull[li]+"</span><span class='src' style='display:block;margin-top:4px'>"+t("tipSchematic")+"</span>";
+    wrap.appendChild(d);
+  });
+}
+/* ================= quiz ================= */
+var quiz={running:false,score:0,time:60,timer:null};
+function quizStop(){quiz.running=false;if(quiz.timer)clearInterval(quiz.timer);quiz.timer=null;$("tl-quiz-start").disabled=false}
+function quizNext(){
+  var tooth=teeth[Math.floor(Math.random()*teeth.length)];quizTarget=tooth;renderChart();
+  var names=[],seen={};names.push(toothName(tooth));seen[toothName(tooth)]=1;
+  var pool=teeth.slice();var guard=0;
+  while(names.length<4&&guard++<60){var c=pool[Math.floor(Math.random()*pool.length)];var n=toothName(c);if(!seen[n]){seen[n]=1;names.push(n)}}
+  names.sort(function(){return Math.random()-.5});
+  $("tl-quiz-body").innerHTML="<p style='font-weight:700'>"+t("quizPrompt")+" <span class='mono'>FDI "+tooth.fdi+"</span></p><div>"+names.map(function(n){return "<button class='sim-opt' data-qn='"+n.replace(/'/g,"")+"' type='button'>"+n+"</button>"}).join("")+"</div>";
+  Array.prototype.forEach.call($("tl-quiz-body").querySelectorAll("[data-qn]"),function(b){b.addEventListener("click",function(){quizAnswer(b.getAttribute("data-qn"),tooth)})});
+}
+function quizAnswer(name,tooth){
+  if(!quiz.running)return;
+  if(name===toothName(tooth)){quiz.score++;$("tl-quiz-score").textContent=quiz.score;mira(fill(t("quizGood"),{name:toothName(tooth)}))}
+  else{mira(fill(t("quizBad"),{name:toothName(tooth)}))}
+  quizNext();
+}
+function quizStart(){
+  quizStop();quiz.score=0;quiz.time=60;$("tl-quiz-score").textContent="0";$("tl-quiz-time").textContent="60";quiz.running=true;$("tl-quiz-start").disabled=true;
+  mira(t("coachQuizIdle"));quizNext();
+  quiz.timer=setInterval(function(){quiz.time--;$("tl-quiz-time").textContent=quiz.time;if(quiz.time<=0){quizStop();quizTarget=null;renderChart();$("tl-quiz-body").innerHTML="<div class='conseq'><b>"+fill(t("quizEnd"),{n:quiz.score})+"</b></div><button class='btn coral small' id='tl-quiz-again' type='button'>"+t("quizAgain")+"</button>";var ag=$("tl-quiz-again");if(ag)ag.addEventListener("click",quizStart)}},1000);
+}
+/* ================= clean ================= */
+var SCEN=[{surf:"sMesial",inst:"mesial",ant:false},{surf:"sDistal",inst:"distal",ant:false},{surf:"sBuccal",inst:"buccal",ant:false},{surf:"sLingual",inst:"buccal",ant:false},{surf:"sSupra",inst:"sickle",ant:true}];
+var clean={scen:null,attempts:0,picked:false,blobs:[],total:0,raf:null,ix:120,iy:80,tx:120,ty:80,done:false};
+function cleanStopRaf(){if(clean.raf)cancelAnimationFrame(clean.raf);clean.raf=null}
+function newScenario(){
+  cleanStopRaf();clean.attempts=0;clean.picked=false;clean.done=false;clean.blobs=[];
+  var scen=SCEN[Math.floor(Math.random()*SCEN.length)];clean.scen=scen;
+  var pool=teeth.filter(function(x){return scen.ant?x.anterior:!x.anterior});
+  cleanTarget=pool[Math.floor(Math.random()*pool.length)];selected=null;renderChart();
+  $("tl-clean-stage-wrap").style.display="none";
+  mira(t("coachCleanIntro"));
+  var li=lang==="es"?1:0;
+  var body="<p style='font-size:1rem'>"+fill(t("cleanPrompt"),{tooth:toothName(cleanTarget),fdi:cleanTarget.fdi,surf:t(scen.surf)})+"</p><div class='inst-cards'>";
+  INSTS.forEach(function(ins){body+="<button type='button' class='inst-card' data-inst='"+ins.id+"'><svg viewBox='0 0 100 68' aria-hidden='true'>"+TIPSVG[ins.id]+"</svg><b>"+instName(ins)+"</b><span class='src' style='display:block'>"+t("tipSchematic")+"</span></button>"});
+  body+="</div>";
+  $("tl-clean-body").innerHTML=body;
+  Array.prototype.forEach.call($("tl-clean-body").querySelectorAll("[data-inst]"),function(b){b.addEventListener("click",function(){pickInst(b.getAttribute("data-inst"),b)})});
+}
+function pickInst(id,btn){
+  if(clean.picked)return;
+  var ins=instById(id),li=lang==="es"?1:0;
+  if(id!==clean.scen.inst){clean.attempts++;btn.classList.add("picked-bad");btn.disabled=true;mira(fill(t("cleanWrong"),{inst:instName(ins),use:ins.use[li]}));return}
+  btn.classList.add("picked-good");clean.attempts++;clean.picked=true;
+  Array.prototype.forEach.call($("tl-clean-body").querySelectorAll("[data-inst]"),function(b){b.disabled=true});
+  mira(fill(t("cleanRight"),{inst:instName(ins)}));
+  startCleaning();
+}
+function startCleaning(){
+  var wrap=$("tl-clean-stage-wrap");wrap.style.display="block";
+  var spots={sMesial:[252,120],sDistal:[388,120],sBuccal:[320,196],sLingual:[320,66],sSupra:[292,150]};
+  var c=spots[clean.scen.surf]||[320,140];
+  var offs=[[0,0],[-24,14],[22,16],[-4,30]];
+  clean.blobs=offs.map(function(o,i){return{x:c[0]+o[0],y:c[1]+o[1],r:13,max:13}});
+  clean.total=clean.blobs.length*13;clean.done=false;
+  var g=$("tl-blobs");g.innerHTML="";
+  clean.blobs.forEach(function(b){var el=document.createElementNS("http://www.w3.org/2000/svg","circle");el.setAttribute("cx",b.x);el.setAttribute("cy",b.y);el.setAttribute("r",b.r);el.setAttribute("fill","#d99a1f");el.setAttribute("stroke","#8a5f10");el.setAttribute("stroke-width","1.5");g.appendChild(el);b.el=el});
+  updateCleanBar();
+  cleanLoop();
+}
+function updateCleanBar(){
+  var rem=clean.blobs.reduce(function(a,b){return a+Math.max(0,b.r)},0);
+  var pct=clean.total?Math.round(100*(1-rem/clean.total)):100;
+  $("tl-clean-fill").style.width=pct+"%";$("tl-clean-pct").textContent=pct+"%";
+  return pct;
+}
+function cleanLoop(){
+  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lerp=reduced?1:0.14;
+  function frame(){
+    clean.ix+=(clean.tx-clean.ix)*lerp;clean.iy+=(clean.ty-clean.iy)*lerp;
+    var ang=Math.atan2(150-clean.iy,320-clean.ix)*180/Math.PI;
+    var g=$("tl-inst");if(g)g.setAttribute("transform","translate("+clean.ix+" "+clean.iy+") rotate("+ang+")");
+    var tg=$("tl-target"),td=$("tl-target-dot");
+    if(tg){tg.setAttribute("cx",clean.tx);tg.setAttribute("cy",clean.ty)}
+    if(td){td.setAttribute("cx",clean.tx);td.setAttribute("cy",clean.ty)}
+    var changed=false;
+    clean.blobs.forEach(function(b){if(b.r>0){var dx=clean.ix-b.x,dy=clean.iy-b.y;if(Math.sqrt(dx*dx+dy*dy)<30){b.r-=0.85;if(b.r<0)b.r=0;b.el.setAttribute("r",b.r);if(b.r===0)b.el.style.display="none";changed=true}}});
+    if(changed){var pct=updateCleanBar();if(pct>=100&&!clean.done){clean.done=true;cleanStopRaf();mira(fill(t("cleanDone"),{att:clean.attempts}));$("tl-clean-body").innerHTML="<div class='conseq'><b>"+fill(t("cleanDone"),{att:clean.attempts})+"</b></div><button class='btn coral small' id='tl-clean-next' type='button'>"+t("cleanNext")+"</button>";var nb=$("tl-clean-next");if(nb)nb.addEventListener("click",newScenario);return}}
+    clean.raf=requestAnimationFrame(frame);
+  }
+  clean.raf=requestAnimationFrame(frame);
+}
+var svgEl=$("tl-clean-svg");
+function svgPoint(evt){var r=svgEl.getBoundingClientRect();return{x:(evt.clientX-r.left)/r.width*640,y:(evt.clientY-r.top)/r.height*300}}
+if(svgEl){svgEl.addEventListener("pointermove",function(e){var p=svgPoint(e);clean.tx=p.x;clean.ty=p.y});svgEl.addEventListener("pointerdown",function(e){var p=svgPoint(e);clean.tx=p.x;clean.ty=p.y})}
+/* ================= controls ================= */
+function setMode(m){
+  mode=m;
+  Array.prototype.forEach.call($("tl-modes").children,function(b){b.classList.toggle("on",b.getAttribute("data-mode")===m)});
+  $("tl-study-panel").style.display=m==="study"?"block":"none";
+  $("tl-quiz-panel").style.display=m==="quiz"?"block":"none";
+  $("tl-clean-panel").style.display=m==="clean"?"block":"none";
+  $("tl-layers").style.display=m==="study"?"block":"none";
+  selected=null;quizTarget=null;
+  if(m==="study"){cleanTarget=null;renderChart();mira(t("coachStudy"));$("tl-detail").innerHTML="<p class='small'>"+t("detailPick")+"</p>"}
+  if(m==="quiz"){cleanTarget=null;renderChart();mira(t("coachQuizIdle"));if(!quiz.running)$("tl-quiz-body").innerHTML=""}
+  if(m==="clean"){quizStop();newScenario()}
+}
+Array.prototype.forEach.call($("tl-modes").children,function(b){b.addEventListener("click",function(){setMode(b.getAttribute("data-mode"))})});
+Array.prototype.forEach.call($("tl-dent").children,function(b){b.addEventListener("click",function(){
+  dent=b.getAttribute("data-dent");teeth=makeTeeth(dent);selected=null;quizTarget=null;cleanTarget=null;quizStop();
+  Array.prototype.forEach.call($("tl-dent").children,function(x){x.classList.toggle("on",x===b)});
+  if(mode==="clean"){newScenario()}else{renderChart();if(mode==="study")$("tl-detail").innerHTML="<p class='small'>"+t("detailPick")+"</p>"}
+  toast(dent==="perm"?(lang==="es"?"Modelo permanente · 32 dientes":"Permanent model · 32 teeth"):(lang==="es"?"Modelo temporal · 20 dientes":"Primary model · 20 teeth"));
+})});
+Array.prototype.forEach.call($("tl-room-toggle").children,function(b){b.addEventListener("click",function(){
+  var pass=b.getAttribute("data-room")==="pass";
+  Array.prototype.forEach.call($("tl-room-toggle").children,function(x){x.classList.toggle("on",x===b)});
+  $("tl-stage").classList.toggle("passthrough",pass);
+  $("tl-pass-note").style.display=pass?"block":"none";
+})});
+Array.prototype.forEach.call($("tl-layer-btns").children,function(b){b.addEventListener("click",function(){
+  var k=b.getAttribute("data-layer");layers[k]=!layers[k];b.setAttribute("aria-pressed",layers[k]?"true":"false");b.classList.toggle("on",layers[k]);
+  renderChart();if(selected)renderDetail(selected);
+})});
+Array.prototype.forEach.call($("tl-layer-btns").children,function(b){b.classList.add("on")});
+$("tl-quiz-start").addEventListener("click",quizStart);
+/* ================= language ================= */
+function applyLang(){
+  document.documentElement.lang=lang;
+  Array.prototype.forEach.call(document.querySelectorAll("#teethlab [data-i18n]"),function(el){var k=el.getAttribute("data-i18n");if(L.en[k])el.textContent=t(k)});
+  var mb=$("tl-modes").children;mb[0].textContent=t("modeStudy");mb[1].textContent=t("modeQuiz");mb[2].textContent=t("modeClean");
+  Array.prototype.forEach.call($("tl-lang").children,function(x){x.classList.toggle("on",x.getAttribute("data-lang")===lang)});
+  renderStudyCards();renderChart();
+  if(mode==="study"){$("tl-detail").innerHTML="<p class='small'>"+t("detailPick")+"</p>";if(selected)renderDetail(selected);mira(t("coachStudy"))}
+  if(mode==="quiz"){quizStop();quizTarget=null;renderChart();$("tl-quiz-body").innerHTML="";$("tl-quiz-score").textContent="0";mira(t("coachQuizIdle"))}
+  if(mode==="clean"){newScenario()}
+}
+Array.prototype.forEach.call($("tl-lang").children,function(b){b.addEventListener("click",function(){lang=b.getAttribute("data-lang");applyLang();toast(lang==="es"?"Laboratorio en español":"Lab in English")})});
+/* ================= init ================= */
+renderStudyCards();renderChart();
+$("tl-detail").innerHTML="<p class='small'>"+t("detailPick")+"</p>";
+mira(t("coachStudy"));
 })();
 </script>
 </body>
