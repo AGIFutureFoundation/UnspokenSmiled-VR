@@ -16,7 +16,7 @@ A browser-based 3D dental training world (Three.js, IWSDK patterns) built for th
 
 ## Run it
 
-Open `index.html` in a browser (or serve this repo with GitHub Pages). No headset needed — magic-window desktop mode works; a WebXR session is offered on Quest when one is available.
+Open `index.html` in a browser (or serve this repo with GitHub Pages). No headset needed — magic-window desktop mode works. A "Check headset" button reports whether this browser and device support an immersive-vr WebXR session; no WebXR session is started — a real WebXR session is Phase 4 work, not yet built, and no Quest hardware test has happened.
 
 ## Roadmap
 
