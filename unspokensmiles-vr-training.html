@@ -352,7 +352,7 @@ footer b{color:#ffd9a8}
 <section id="world"><div class="wrap">
   <div class="sec-head">
     <h2>The clinic world — one world, four districts</h2>
-    <p>Structured the WorldForge way: one world definition in the worlds-3d schema (districts, an NPC coach, a 5-step quest, collectibles), rendered with the flat-screen third-person Three.js approach. The VR layer follows the Cognition.X CXXR pattern — WebXR as a <em>view</em> over this same simulation, never a second engine — with a magic-window fallback so it fully works with no headset. The worlds-3d engine itself is flat-screen only; this page does not claim otherwise.</p>
+    <p>Structured the WorldForge way: one world definition in the worlds-3d schema (districts, an NPC coach, a 5-step quest, collectibles), rendered with the flat-screen third-person Three.js approach. The planned VR layer follows the Cognition.X CXXR pattern — WebXR as a <em>view</em> over this same simulation, never a second engine — and is Phase 4 work, not yet built; until then the magic-window view is the experience, and it fully works with no headset. The worlds-3d engine itself is flat-screen only; this page does not claim otherwise.</p>
     <p><strong>Stack decision (Mike, 2026-11-07): the VR app is built on Meta's Immersive Web SDK (IWSDK 1.0)</strong> — MIT-licensed, Three.js + high-performance ECS, pre-built grab interactions, locomotion, Havok physics, spatial audio and UIKitML spatial UI. The IWSDK build is to be scaffolded in the repo (<span class="mono">npm create @iwsdk@latest</span>, Node 20.19.0+, VR template) — <span class="tag gold">planned, not yet done</span> — then tested with the IWER emulator on desktop and validated on a Quest headset at the same HTTPS URL (roadmap Phase 4). <strong>This page is the magic-window desktop fallback</strong> — the same simulation, districts and quest in vendored Three.js — so judges without a headset play the identical demo. IWSDK does not run inside this single-file page, and this page doesn't claim it does; full stack notes are in the wiki.</p>
   </div>
 
@@ -366,7 +366,7 @@ footer b{color:#ffd9a8}
         <button class="sbtn" id="btn-zin" type="button">Zoom in</button>
         <button class="sbtn" id="btn-zout" type="button">Zoom out</button>
         <button class="sbtn" id="btn-orbit" type="button">Auto-orbit: off</button>
-        <button class="sbtn" id="btn-vr" type="button">Enter VR (WebXR)</button>
+        <button class="sbtn" id="btn-vr" type="button">Check headset</button>
       </div>
     </div>
     <div id="gl"><div id="glerr" role="alert"></div></div>
@@ -411,7 +411,7 @@ footer b{color:#ffd9a8}
           <button type="button" data-hotspot="screenkit">School screening kit</button>
         </div>
         <div id="hotspot-detail" aria-live="polite"><b>Pick an item of equipment.</b> Each hotspot explains what the real tool does, the spec range used to model it, what your hands do in the IWSDK build (grab · point · hold · place), and the safety line you must not cross. Clicking the matching object in the 3D scene does the same thing.</div>
-        <p class="small" style="margin-top:12px">Drag on the scene to look around, or use the Look buttons. On a headset browser, “Enter VR” hands the same scene to WebXR as a pose-only view; everywhere else you are in magic-window mode — drag, tap, and buttons — which is the full experience, not a lesser one.</p>
+        <p class="small" style="margin-top:12px">Drag on the scene to look around, or use the Look buttons. The training on this page runs in the magic-window view on desktop and mobile — drag, tap, and buttons — which is the full experience, not a lesser one. “Check headset” only checks whether this browser and device support an immersive-vr WebXR session; it does not start one. A real WebXR session is Phase 4 work, not yet built, and no Quest hardware test has happened yet.</p>
         <p class="small" id="vr-status" style="font-weight:600"></p>
       </div>
     </div>
@@ -1322,7 +1322,7 @@ footer b{color:#ffd9a8}
     <div class="body">
       <ul>
         <li><b>Flat screen (full experience):</b> drag to look, Look / Zoom buttons, district buttons to travel, quest + session + sim panels. Walker-style movement and clickable station beacons are the smiles-world template pattern this design follows.</li>
-        <li><b>VR mode (CXXR pattern):</b> WebXR as a view over the same simulation — options as slabs, pose-only. If no headset or no WebXR, the magic-window fallback is the experience, not a demo of it.</li>
+        <li><b>Headset check only — no VR session on this page:</b> the “Check headset” button only asks the browser whether an immersive-vr WebXR session is supported; it never calls <span class="mono">requestSession</span> and never starts a session. The training itself runs in the magic-window view on desktop and mobile. A real WebXR session — the CXXR pattern, WebXR as a pose-only view over the same simulation — is Phase 4 work, not yet built, and no Quest hardware test has happened. If no headset or no WebXR, the magic-window view is the experience, not a demo of it.</li>
         <li><b>Limit:</b> neither the SmartCiti.X VR yard nor the worlds-3d engine has WebXR / headset support — both are flat-screen Three.js (vendored r160, works offline, no CDN). This page does not claim headset support for either.</li>
         <li><b>Limit:</b> no dental GLB models exist. Every 3D object here is a labelled procedural placeholder.</li>
         <li><b>Limit:</b> deep links in the full smiles world use <span class="mono">?hall</span> / <span class="mono">?world</span> parameters; this single-page app uses section anchors instead.</li>
@@ -1844,8 +1844,8 @@ $("btn-zout").addEventListener("click",function(){radT=Math.min(20,radT+2)});
 $("btn-orbit").addEventListener("click",function(){autoOrbit=!autoOrbit;this.textContent="Auto-orbit: "+(autoOrbit?"on":"off");this.classList.toggle("on",autoOrbit)});
 $("btn-vr").addEventListener("click",function(){
   var st=$("vr-status");
-  if(navigator.xr&&navigator.xr.isSessionSupported){navigator.xr.isSessionSupported("immersive-vr").then(function(ok){st.textContent=ok?"WebXR headset detected. In the full CXXR build this button hands the same simulation to the headset as a pose-only view — this page keeps you in the magic window so the demo never breaks mid-run.":"No WebXR headset session available here — you are in magic-window mode, which is the full experience: drag, tap, and buttons drive the same simulation."}).catch(function(){st.textContent="WebXR check failed — magic-window mode is active."})}
-  else{st.textContent="WebXR is not available in this browser — magic-window mode is active. Same simulation, same quest, no headset required."}
+  if(navigator.xr&&navigator.xr.isSessionSupported){navigator.xr.isSessionSupported("immersive-vr").then(function(ok){st.textContent=ok?"Check complete: this browser and device report support for an immersive-vr WebXR session. That is all this button checks — it does not start a session. The training itself runs in the magic-window view on desktop and mobile; a real WebXR session is Phase 4 work, not yet built, and no Quest hardware test has happened yet.":"Check complete: this browser and device do not report support for an immersive-vr WebXR session, and no session was started. The training itself runs in the magic-window view on desktop and mobile, which is the full experience: drag, tap, and buttons drive the same simulation. A real WebXR session is Phase 4 work, not yet built."}).catch(function(){st.textContent="The WebXR support check failed — no session was started. The training itself runs in the magic-window view on desktop and mobile."})}
+  else{st.textContent="WebXR is not available in this browser, so no immersive-vr support check is possible — and no session was started. The training itself runs in the magic-window view on desktop and mobile. Same simulation, same quest, no headset required."}
 });
 Array.prototype.forEach.call(document.querySelectorAll("#district-btns .sbtn"),function(b){b.addEventListener("click",function(){setDistrict(b.getAttribute("data-district"))})});
 
