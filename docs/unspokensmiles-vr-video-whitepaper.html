@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:,">
+<title>UnspokenSmiles VR — Video Whitepaper</title>
+<style>
+:root{
+  --bg:#07272b; --bg2:#0a3238; --panel:#0e3d43; --panel2:#0b3137;
+  --ink:#f2ede3; --muted:#b9cdc9; --amber:#f2a93b; --amber2:#ffd08a;
+  --teal:#39c2b0; --line:rgba(242,237,227,.16); --card:#f7f3ea; --cardink:#12333a;
+  --radius:14px;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#eef4f2; --bg2:#e2eeeb; --panel:#ffffff; --panel2:#f4f8f6; --ink:#12333a; --muted:#4a6360; --line:rgba(18,51,58,.16); --card:#ffffff; --cardink:#12333a; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family: Georgia, 'Times New Roman', serif;line-height:1.55}
+.sans{font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--amber)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 18px 64px}
+header.hero{padding:34px 0 8px}
+.kicker{font-family:system-ui,sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700}
+h1{font-size:2.35rem;line-height:1.08;margin:.35rem 0 .6rem;font-weight:700}
+@media(min-width:700px){h1{font-size:3.1rem}}
+.pitch{font-size:1.22rem;line-height:1.45;max-width:44rem;color:var(--ink)}
+.meta{font-family:system-ui,sans-serif;font-size:.92rem;color:var(--muted)}
+.linkrow{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px;font-family:system-ui,sans-serif}
+.linkrow a{display:inline-block;background:var(--amber);color:#1a2b1e;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:999px;font-size:.95rem}
+.linkrow a.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.notice{border:1.5px solid var(--amber);border-radius:var(--radius);padding:14px 16px;margin:18px 0;font-family:system-ui,sans-serif;font-size:.95rem;background:var(--panel2)}
+.notice strong{color:var(--amber)}
+section{margin:34px 0}
+h2{font-size:1.75rem;line-height:1.2;margin:0 0 .4rem;border-bottom:3px solid var(--amber);padding-bottom:.4rem}
+h3{font-size:1.18rem;margin:1.2rem 0 .35rem}
+.lede{color:var(--muted);max-width:46rem}
+.grid{display:grid;gap:14px}
+@media(min-width:720px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--card);color:var(--cardink);border-radius:var(--radius);padding:16px 18px}
+.card h3{margin-top:0;color:#0b3238}
+.card p{margin:.3rem 0}
+.stat{font-size:2rem;font-weight:700;color:#0e6b62;line-height:1.1}
+.src{font-family:system-ui,sans-serif;font-size:.8rem;color:#5a6f6c}
+table{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:.92rem;background:var(--panel);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--bg2);color:var(--amber)}
+tr:last-child td{border-bottom:none}
+.tablewrap{overflow-x:auto;border-radius:10px}
+@media(max-width:640px){
+  .tablewrap{overflow:visible}
+  table,thead,tbody,tr,th,td{display:block;width:100%}
+  thead{display:none}
+  tr{border-bottom:2px solid var(--amber);padding:6px 0}
+  td{border-bottom:1px solid var(--line)}
+  td::before{content:attr(data-l);display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);font-weight:700}
+}
+ul{padding-left:1.25rem} li{margin:.3rem 0}
+.pill{display:inline-block;font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;background:var(--teal);color:#062a28;border-radius:999px;padding:3px 10px}
+.callout{background:var(--panel);border-radius:var(--radius);padding:18px;border-left:6px solid var(--amber)}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--muted);font-family:system-ui,sans-serif;font-size:.9rem}
+
+/* ---------- Player ---------- */
+.player{background:#051d20;border:1.5px solid var(--line);border-radius:18px;padding:16px;color:#f2ede3}
+@media (prefers-color-scheme: light){.player{background:#0b3238}}
+.player .honest{font-family:system-ui,sans-serif;font-size:.85rem;background:rgba(242,169,59,.16);border:1px solid var(--amber);border-radius:10px;padding:9px 12px;color:#ffd08a}
+.stage{margin-top:14px;background:#0e3d43;border-radius:14px;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 14px;position:relative;overflow:hidden}
+.stage svg{width:min(420px,90%);height:auto}
+.stage .beattitle{font-family:system-ui,sans-serif;font-weight:700;font-size:1.05rem;margin-top:10px;color:#fff}
+.stage .beatvisual{font-family:system-ui,sans-serif;font-size:.85rem;color:#b9cdc9}
+.stage .timebadge{position:absolute;top:10px;right:12px;font-family:ui-monospace,Menlo,monospace;background:rgba(0,0,0,.45);padding:4px 9px;border-radius:999px;font-size:.85rem;color:#ffd08a}
+.caption{margin-top:12px;background:#f7f3ea;color:#12333a;border-radius:12px;padding:14px 16px;font-size:1.12rem;line-height:1.45;min-height:4.2rem}
+.caption .caplabel{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#8a5a00;font-weight:700;display:block;margin-bottom:4px}
+.progresswrap{margin-top:14px}
+.progress{height:12px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden;cursor:pointer}
+.progress > div{height:100%;width:0%;background:var(--amber);transition:width .15s linear}
+.timeread{font-family:ui-monospace,Menlo,monospace;font-size:.9rem;color:#ffd08a;margin-top:6px;display:flex;justify-content:space-between}
+.dots{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.dots button{width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:transparent;color:#f2ede3;font-family:system-ui,sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;padding:0}
+.dots button.active{background:var(--amber);color:#1a2b1e;border-color:var(--amber)}
+.dots button.done{background:rgba(57,194,176,.35)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px;font-family:system-ui,sans-serif}
+.btn{background:var(--amber);color:#1a2b1e;border:none;font-weight:800;padding:12px 22px;border-radius:999px;font-size:1rem;cursor:pointer;font-family:system-ui,sans-serif}
+.btn.secondary{background:transparent;color:#f2ede3;border:1.5px solid rgba(255,255,255,.45)}
+.btn[aria-pressed="true"]{background:var(--teal);color:#062a28}
+.seg{display:inline-flex;border:1.5px solid rgba(255,255,255,.4);border-radius:999px;overflow:hidden}
+.seg button{background:transparent;color:#f2ede3;border:none;padding:9px 14px;font-weight:700;cursor:pointer;font-family:system-ui,sans-serif}
+.seg button[aria-pressed="true"]{background:#f2ede3;color:#12333a}
+.ctl label{font-size:.82rem;color:#b9cdc9;display:block;margin-bottom:3px}
+.ctl select{max-width:210px;padding:8px;border-radius:8px;font-family:system-ui,sans-serif}
+.ctl input[type=range]{width:140px;accent-color:var(--amber)}
+.speech-note{font-family:system-ui,sans-serif;font-size:.85rem;color:#ffd08a;margin-top:10px;min-height:1.2em}
+.beatlist{font-family:system-ui,sans-serif;font-size:.9rem;margin-top:12px}
+.beatlist summary{cursor:pointer;color:var(--amber);font-weight:700}
+.beatlist ol{color:#d8e4e1}
+.beatlist li{cursor:pointer}
+.beatlist li.cur{color:var(--amber2);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">NemulAI × Hack District — “Zero to Demo” · Impact Track</div>
+  <h1>UnspokenSmiles VR — Video Whitepaper</h1>
+  <p class="pitch">A VR training environment that teaches dental assisting, hygiene and school screening before a learner ever touches a patient.</p>
+  <div class="linkrow">
+    <a href="https://agifuturefoundation.github.io/UnspokenSmiled-VR/" target="_blank" rel="noopener">▶ Open the live demo</a>
+    <a class="alt" href="https://github.com/AGIFutureFoundation/UnspokenSmiled-VR" target="_blank" rel="noopener">GitHub repository</a>
+    <a class="alt" href="https://github.com/AGIFutureFoundation/UnspokenSmiled-VR/wiki" target="_blank" rel="noopener">Wiki — help &amp; walkthrough</a>
+  </div>
+  <div class="notice">
+    <strong>Prototype offer — please read first.</strong> This is a hackathon demo prototype only. It is <strong>not official, not endorsed, and not affiliated</strong> with Unspoken Smiles, DANB, the Dental Board of California, or any sponsor named on this page. Nothing here is a credential, a diagnosis tool, or a substitute for supervised clinical training.
+  </div>
+  <div class="notice">
+    <strong>About the “videos” on this page — honestly.</strong> No recorded video file exists yet. The two explainers below are <strong>in-browser storyboard players</strong>: timed beats, on-screen captions, illustrations, and spoken narration from your browser’s speech synthesis. They are <strong>not recorded video</strong>. The CleanShot X screen recording of the live app is <strong>still to be done</strong> — this page is the video deliverable in the meantime, and it is the link offered for the hackathon’s video field.
+  </div>
+</header>
+
+<!-- ============ VIDEO 1 ============ -->
+<section aria-labelledby="v1h">
+  <h2 id="v1h">Explainer Video 1 — “The Pitch”</h2>
+  <p class="lede">Two minutes · 12 beats × 10 seconds. Press Play and the clock, captions, illustrations and (if you unmute) narration run together. Use the numbered dots to jump to any beat. Sound is <strong>muted by default</strong> — tap “Sound: Off” to turn narration on.</p>
+  <div class="player" id="player1"></div>
+</section>
+
+<!-- ============ VIDEO 2 ============ -->
+<section aria-labelledby="v2h">
+  <h2 id="v2h">Explainer Video 2 — “The App Walkthrough”</h2>
+  <p class="lede">Two minutes · 12 beats × 10 seconds · a second, independent player with its own clock and controls. This one walks the app screen by screen, in the order a new Fellow meets it.</p>
+  <div class="player" id="player2"></div>
+</section>
+
+<!-- ============ WHITEPAPER ============ -->
+<section aria-labelledby="probh">
+  <h2 id="probh">The problem</h2>
+  <div class="grid two">
+    <div class="card">
+      <div class="stat">3.58 billion</div>
+      <p>people affected by oral diseases worldwide — the scale figure used across the project.</p>
+      <p class="src">Source as labelled in the project: Unspoken Smiles homepage.</p>
+    </div>
+    <div class="card">
+      <div class="stat">~20% of children</div>
+      <p>have untreated dental decay — the childhood figure behind the school-screening focus.</p>
+      <p class="src">Source as labelled in the project: CDC, via the project’s Zero Cavity page.</p>
+    </div>
+  </div>
+  <p style="margin-top:14px">Dental assisting and hygiene skills are normally learned at the chairside, on real patients, with scarce instructor time. Beginners need a place to make their first hundred mistakes where no patient feels them. That place is what this prototype builds: a full clinic in the browser, with the sequence, the checklist, and the reasoning taught before the first real appointment.</p>
+</section>
+
+<section aria-labelledby="tourh">
+  <h2 id="tourh">Product tour</h2>
+  <div class="grid two">
+    <div class="card"><h3>🦷 The 3D clinic</h3><p>Chair, light, tray and stations in the browser — walk it with mouse or touch. No install, no account, no headset required.</p></div>
+    <div class="card"><h3>✅ The 9-step screening session</h3><p>The flagship prevention and school-screening run: lesson, live checklist beside every run, tasks, and a closing quiz.</p></div>
+    <div class="card"><h3>🎬 Simulation Studio</h3><p>Branching clinical decisions scored 2 / 1 / 0, then debriefed — with a patient comfort meter watching force and angle. Simulation ≠ certification, stated in the brief, the debrief, and the portable run record.</p></div>
+    <div class="card"><h3>🔢 Teeth &amp; Calculus Lab</h3><p>Study, Quiz, Clean. 32 permanent and 20 primary teeth in FDI notation; choose the right tip for tooth and surface — recognition, not haptics.</p></div>
+    <div class="card"><h3>🧰 Equipment Lab</h3><p>12 tools learned by identifying, holding and transferring — plus the 8-stage sterilisation chain in order. Break the order and the load restarts.</p></div>
+    <div class="card"><h3>🎯 Practice vs. graded</h3><p>Practice first in the sandbox, then graded runs where sequence is the score. Struggling learners get a hint and a one-tap drop back to the sandbox for that step.</p></div>
+    <div class="card"><h3>📚 Learning Library</h3><p>The Fellows’ Resource Hub: encyclopedia, methods, learning paths and checklists — including a plain-language Flow State section.</p></div>
+    <div class="card"><h3>🌊 Flow State</h3><p>A visible Flow Meter watches accuracy and pace (Too easy / Flow band / Too hard), adapts difficulty — 85%+ moves up, under 50% moves down, otherwise stay — as advice, never a gate, while Coach Mira narrates.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="stackh">
+  <h2 id="stackh">Stack overview — deep version</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Layer</th><th>What it is</th><th>Honest status</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Layer">Meta IWSDK 1.0 patterns</td><td data-l="What">Interaction and scene patterns from Meta’s Immersive Web SDK, used as design patterns for the training scenes.</td><td data-l="Status">Patterns adopted; not a full SDK runtime dependency claim.</td></tr>
+      <tr><td data-l="Layer">Vendored Three.js</td><td data-l="What">The 3D clinic renders with a vendored (self-hosted) copy of Three.js, so the demo carries no CDN dependency.</td><td data-l="Status">Live in the demo today.</td></tr>
+      <tr><td data-l="Layer">Magic-window view</td><td data-l="What">Today the clinic is a magic-window experience: look and move with mouse or touch on any screen.</td><td data-l="Status">This is what ships today.</td></tr>
+      <tr><td data-l="Layer">“Check headset”</td><td data-l="What">The button reports whether the browser/device reports WebXR support — and starts no session.</td><td data-l="Status">Real immersive WebXR is <strong>Phase 4 — not built</strong>. No Quest test has been run. The button was renamed from “Enter VR” for exactly this reason.</td></tr>
+      <tr><td data-l="Layer">IWER</td><td data-l="What">Immersive Web Emulation Runtime — the emulation route for testing WebXR behaviour without hardware.</td><td data-l="Status">Referenced for the Phase 4 path; not evidence of a headset build.</td></tr>
+      <tr><td data-l="Layer">Cognition.X Simulation Studio model</td><td data-l="What">The decision-simulation and flow model behind Simulation Studio: blocks, transfer checks, 85% / 50% difficulty rule.</td><td data-l="Status">Model credited as inspiration and structure; runs carry <em>transfer.done_here: false</em>.</td></tr>
+      <tr><td data-l="Layer">SmartCiti.X patterns</td><td data-l="What">Skill-graph and staged-learning patterns borrowed as structure.</td><td data-l="Status">Structure only — no assets or tone borrowed.</td></tr>
+      <tr><td data-l="Layer">Firecrawl</td><td data-l="What">Research and source-gathering for specs, licensure facts and references.</td><td data-l="Status">Used at build time.</td></tr>
+      <tr><td data-l="Layer">Lovable</td><td data-l="What">Companion build route used during the hackathon.</td><td data-l="Status">Used at build time.</td></tr>
+      <tr><td data-l="Layer">CleanShot X</td><td data-l="What">Planned tool for the recorded demo video.</td><td data-l="Status"><strong>Recording still to be done</strong> — the storyboard players above stand in for it.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="specsh">
+  <h2 id="specsh">Equipment-to-spec</h2>
+  <p class="lede">Training targets are modelled on real equipment ranges so the numbers a Fellow practises with are the numbers they will meet. Simulation values only — the app operates no real equipment.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Equipment</th><th>Spec used in training</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Equipment">Dental chair</td><td data-l="Spec">430–720 mm height range</td><td data-l="Note">Positioning practice</td></tr>
+      <tr><td data-l="Equipment">Operating light</td><td data-l="Spec">8,000–30,000 lux</td><td data-l="Note">Aiming and intensity</td></tr>
+      <tr><td data-l="Equipment">Autoclave</td><td data-l="Spec">132–134 °C</td><td data-l="Note">Sterilisation chain endpoint</td></tr>
+      <tr><td data-l="Equipment">Ultrasonic cleaner</td><td data-l="Spec">35–48 kHz</td><td data-l="Note">Pre-sterilisation cleaning stage</td></tr>
+      <tr><td data-l="Equipment">Ultrasonic scaler</td><td data-l="Spec">28 kHz</td><td data-l="Note">Tip selection in Quiz / Clean</td></tr>
+      <tr><td data-l="Equipment">X-ray unit</td><td data-l="Spec">60–70 kV</td><td data-l="Note"><strong>Simulated only</strong> — no radiation, no real exposure, ever</td></tr>
+      <tr><td data-l="Equipment">Lab bench</td><td data-l="Spec">TBD</td><td data-l="Note">Spec not yet fixed — listed as TBD rather than invented</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="licenceh">
+  <h2 id="licenceh">Licensure bridge</h2>
+  <p>The app maps its learning paths to real credential routes so Fellows can see where practice sits on the road to qualification — and where it stops.</p>
+  <div class="grid two">
+    <div class="card"><h3>DANB CDA</h3><p><strong>$450</strong> exam fee · <strong>195 minutes</strong> · <strong>245 questions</strong>.</p><p class="src">Figures as published by DANB for the Certified Dental Assistant exam.</p></div>
+    <div class="card"><h3>California RDA</h3><p><strong>800 hours</strong> total = <strong>275 + 260 + 265</strong> across the programme components.</p><p class="src">California Registered Dental Assistant programme structure.</p></div>
+  </div>
+  <div class="callout" style="margin-top:14px">
+    <p style="margin:.2rem 0"><strong>Infection-control reference:</strong> CDC <em>MMWR</em> 2003;52(RR17) — the guidelines the sterilisation chain is taught against.</p>
+    <p style="margin:.4rem 0 0"><span class="pill">VR practice ≠ clinical hours</span> &nbsp;<span class="pill">Simulation ≠ certification</span></p>
+    <p style="margin:.5rem 0 0">Time in this app counts toward neither. It prepares a learner to make better use of the supervised hours that do count.</p>
+  </div>
+</section>
+
+<section aria-labelledby="roadh">
+  <h2 id="roadh">Roadmap — Phases 0–6</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Phase</th><th>What happens</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Phase">0 — Prototype</td><td data-l="What">Browser clinic, screening session, labs, library, this whitepaper.</td><td data-l="Status">Built for this hackathon</td></tr>
+      <tr><td data-l="Phase">1 — Expert review</td><td data-l="What">Dentists, hygienists and instructors review every sequence and spec.</td><td data-l="Status">The pilot ask, below</td></tr>
+      <tr><td data-l="Phase">2 — Small pilot</td><td data-l="What">One small Fellow cohort, written agreement, measured against the checklist.</td><td data-l="Status">Not started</td></tr>
+      <tr><td data-l="Phase">3 — Content depth</td><td data-l="What">More stations, more simulations, Spanish narration throughout the app.</td><td data-l="Status">Planned</td></tr>
+      <tr><td data-l="Phase">4 — Real WebXR</td><td data-l="What">Immersive headset sessions, tested on Quest hardware.</td><td data-l="Status"><strong>Not built — no Quest test yet</strong></td></tr>
+      <tr><td data-l="Phase">5 — Multi-site</td><td data-l="What">Additional schools and screening sites under the same agreements.</td><td data-l="Status">Planned</td></tr>
+      <tr><td data-l="Phase">6 — Sustain</td><td data-l="What">Handover, maintenance, and instructor-led iteration.</td><td data-l="Status">Planned</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="piloth">
+  <h2 id="piloth">The pilot offer</h2>
+  <div class="callout">
+    <p style="margin:.2rem 0"><strong>The ask is deliberately small:</strong></p>
+    <ul style="margin:.3rem 0">
+      <li><strong>Expert review</strong> — a dentist, hygienist or instructor reads the sequences and marks what is wrong.</li>
+      <li><strong>A small pilot cohort</strong> — a handful of Fellows, supervised, with feedback collected.</li>
+      <li><strong>A written agreement before any use</strong> — no classroom or clinic use on a handshake.</li>
+    </ul>
+    <p style="margin:.3rem 0">Demo only until then. Try it: <a href="https://agifuturefoundation.github.io/UnspokenSmiled-VR/" target="_blank" rel="noopener">live demo</a> · <a href="https://github.com/AGIFutureFoundation/UnspokenSmiled-VR" target="_blank" rel="noopener">repo</a> · <a href="https://github.com/AGIFutureFoundation/UnspokenSmiled-VR/wiki" target="_blank" rel="noopener">wiki</a>.</p>
+  </div>
+</section>
+
+<section aria-labelledby="learnedh">
+  <h2 id="learnedh">What we learned / what we’d do differently</h2>
+  <div class="card" style="margin-bottom:14px">
+    <h3>Honesty-first engineering wins</h3>
+    <p>The clearest lesson: our headset button originally said “Enter VR.” It did not enter VR — it reported support. Catching that overclaim and renaming it to <strong>“Check headset”</strong> before submission mattered more than any feature we shipped that day. Every claim on this page went through the same test: can we point at the thing that proves it?</p>
+  </div>
+  <ul>
+    <li><strong>Verify against primary sources.</strong> Exam fees, hours, temperatures and guidelines were checked at the source (DANB, CDC, the Dental Board), not copied from summaries — and where sources disagreed, we flagged it instead of picking the nicer number (see Sources, below).</li>
+    <li><strong>Borrow structure, never assets or tone.</strong> Cognition.X, SmartCiti.X, STAI Health and Dentist Simulator 2 gave us structures and inspiration only. Nothing of theirs ships in this app.</li>
+    <li><strong>Check the form exists first.</strong> Confirm the submission form, its fields and its file limits before the final day — not during it.</li>
+    <li><strong>Video first, not last.</strong> Record the demo video at the start of the build, while everything works, instead of leaving CleanShot X to the end. This whitepaper’s storyboard players exist because we learned that the hard way.</li>
+    <li><strong>Connectors before building.</strong> Set up accounts, tokens and deploy routes before writing features; mid-build setup costs the hours you no longer have.</li>
+    <li><strong>Push route by file size.</strong> Small text changes go by the fast snapshot route; large builds go by upload. Mixing them up wasted a cycle we could not spare.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="thanksh">
+  <h2 id="thanksh">Thanks</h2>
+  <p>Thank you to the sponsors and supporters who made this build possible: <strong>Red Bull, Lovable, East Bay Family Dentistry, Firecrawl, Algoverse, YRI Fellowship, Cleanshot AI, and CodeCrafters</strong> — and to <strong>the judges</strong> for their time, and to <strong>NemulAI × Hack District</strong> for the opportunity to participate in “Zero to Demo.”</p>
+</section>
+
+<section aria-labelledby="sourcesh">
+  <h2 id="sourcesh">Sources &amp; honesty notes</h2>
+  <ul>
+    <li><strong>Problem figures</strong> are source-labelled where they appear: 3.58 billion oral disease (Unspoken Smiles homepage) and ~20% of children with untreated decay (CDC, via the project’s Zero Cavity page).</li>
+    <li><strong>Conflicts flagged, not hidden:</strong> project sources disagree on a founding year (<strong>2014 vs 2011</strong>) and on a people-reached figure (<strong>10,000 vs 9,000+</strong>). Both versions are noted here rather than silently resolved; the primary source should settle each before any public claim is made.</li>
+    <li><strong>Inspiration only:</strong> STAI Health and Dentist Simulator 2 informed structure and ideas. No assets, text, or branding from them are used, and neither endorses this prototype.</li>
+    <li><strong>Licensure figures</strong> (DANB CDA $450 / 195 minutes / 245 questions; California RDA 800 hours = 275 + 260 + 265; CDC MMWR 2003;52(RR17)) are stated as published by those bodies; check the current official pages before relying on them, as fees and rules change.</li>
+    <li><strong>Video status:</strong> both explainers on this page are storyboard players with browser narration, not recordings. The CleanShot X recording is still to be done.</li>
+    <li><strong>Headset status:</strong> “Check headset” reports support and starts no session. Immersive WebXR is Phase 4, not built, with no Quest test performed.</li>
+  </ul>
+</section>
+
+<footer>
+  UnspokenSmiles VR Training — hackathon prototype for NemulAI × Hack District “Zero to Demo,” Impact track. Demo only · not official · not endorsed · not affiliated. VR practice ≠ clinical hours · Simulation ≠ certification.
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var synth = window.speechSynthesis || null;
+
+/* ---------- illustration helper ---------- */
+function ill(kind, label){
+  var inner = "";
+  var common = 'stroke="#ffd08a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+  if(kind==="clinic"){
+    inner = '<rect x="30" y="120" width="360" height="10" fill="#39c2b0" opacity=".5"/><path d="M90 120 L130 70 L230 70 L260 120" '+common+'/><circle cx="300" cy="45" r="18" fill="#f2a93b"/><path d="M300 63 L250 95" '+common+'/><rect x="330" y="80" width="60" height="40" rx="6" '+common+'/><path d="M60 120 v-30 M360 120 v-30" '+common+'/>';
+  } else if(kind==="screening"){
+    inner = '<rect x="70" y="30" width="180" height="130" rx="10" '+common+'/><path d="M95 60 l14 14 l26 -30 M95 95 h90 M95 120 h70" stroke="#39c2b0" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="320" cy="80" r="34" '+common+'/><path d="M305 80 q15 -22 30 0 q-4 26 -15 30 q-11 -4 -15 -30" fill="#f7f3ea"/>';
+  } else if(kind==="teeth"){
+    inner = '<path d="M60 90 q30 -50 60 0 q-6 50 -30 55 q-24 -5 -30 -55" fill="#f7f3ea"/><path d="M170 90 q30 -50 60 0 q-6 50 -30 55 q-24 -5 -30 -55" fill="#f7f3ea"/><path d="M280 90 q30 -50 60 0 q-6 50 -30 55 q-24 -5 -30 -55" fill="#f7f3ea"/><text x="90" y="98" text-anchor="middle" font-family="monospace" font-size="17" fill="#0b3238" font-weight="bold">11</text><text x="200" y="98" text-anchor="middle" font-family="monospace" font-size="17" fill="#0b3238" font-weight="bold">26</text><text x="310" y="98" text-anchor="middle" font-family="monospace" font-size="17" fill="#0b3238" font-weight="bold">48</text>';
+  } else if(kind==="calculus"){
+    inner = '<path d="M140 30 q45 55 30 110 q-4 18 -22 18 q-18 0 -22 -18 q-15 -55 14 -110" fill="#f7f3ea"/><path d="M118 105 q30 14 60 0" stroke="#f2a93b" stroke-width="9" fill="none"/><path d="M300 40 L255 130" '+common+'/><circle cx="308" cy="34" r="9" fill="#39c2b0"/><text x="300" y="168" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffd08a">28 kHz</text>';
+  } else if(kind==="bench"){
+    inner = '<rect x="40" y="115" width="340" height="10" fill="#39c2b0" opacity=".6"/><path d="M80 115 l18 -45 M120 115 l-8 -38 M180 115 l22 -52 M250 115 l-16 -42 M320 115 l10 -34" '+common+'/><circle cx="98" cy="64" r="7" fill="#f2a93b"/><circle cx="202" cy="56" r="7" fill="#f2a93b"/><circle cx="330" cy="74" r="7" fill="#f2a93b"/><text x="210" y="158" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#ffd08a">12 tools</text>';
+  } else if(kind==="chain"){
+    inner = '<g font-family="sans-serif" font-size="12" fill="#0b3238" font-weight="bold" text-anchor="middle">'
+      + [1,2,3,4,5,6,7,8].map(function(n,i){ var x=28+i*46; return '<rect x="'+x+'" y="65" width="38" height="38" rx="9" fill="'+(i===7?"#f2a93b":"#39c2b0")+'"/><text x="'+(x+19)+'" y="89">'+n+'</text>'+(i<7?'<path d="M'+(x+39)+' 84 h6" stroke="#ffd08a" stroke-width="3"/>':''); }).join("")
+      + '</g><text x="210" y="140" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#ffd08a">break the order → the load restarts</text>';
+  } else if(kind==="studio"){
+    inner = '<rect x="55" y="35" width="200" height="105" rx="10" '+common+'/><path d="M75 65 h90 M75 90 h130 M75 115 h60" stroke="#39c2b0" stroke-width="5" stroke-linecap="round"/><path d="M300 140 a55 55 0 1 1 55 -55" '+common+'/><path d="M355 85 l-38 30" stroke="#f2a93b" stroke-width="5" stroke-linecap="round"/><circle cx="355" cy="85" r="6" fill="#f2a93b"/><text x="330" y="168" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ffd08a">comfort meter</text>';
+  } else if(kind==="sandbox"){
+    inner = '<path d="M50 140 h320 M70 140 v-45 l60 -25 l60 25 v45 M230 140 v-45 l60 -25 l60 25 v45" '+common+'/><path d="M290 70 l22 -28 M312 42 l14 8 M312 42 l-4 -16" stroke="#39c2b0" stroke-width="4" stroke-linecap="round"/><text x="130" y="168" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#ffd08a">practice</text><text x="290" y="168" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#f2a93b">graded</text>';
+  } else if(kind==="table"){
+    inner = '<g font-family="monospace" font-size="14" fill="#f7f3ea"><rect x="60" y="35" width="300" height="110" rx="8" stroke="#ffd08a" stroke-width="2" fill="none"/><path d="M60 72 h300 M60 109 h300 M160 35 v110 M260 35 v110" stroke="rgba(255,208,138,.55)" stroke-width="2"/><text x="78" y="60">DANB</text><text x="178" y="60">CDA</text><text x="278" y="60">$450</text><text x="78" y="97">CA RDA</text><text x="178" y="97">800 h</text><text x="278" y="97">275+260</text><text x="78" y="134">CDC</text><text x="178" y="134">MMWR</text><text x="278" y="134">2003</text></g>';
+  } else if(kind==="offer"){
+    inner = '<rect x="85" y="30" width="250" height="125" rx="12" '+common+'/><path d="M115 65 h190 M115 95 h150 M115 125 h175" stroke="#39c2b0" stroke-width="5" stroke-linecap="round"/><circle cx="335" cy="42" r="17" fill="#f2a93b"/><path d="M327 42 l6 6 l11 -12" stroke="#0b3238" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+  } else if(kind==="links"){
+    inner = '<circle cx="130" cy="90" r="30" '+common+'/><circle cx="290" cy="90" r="30" '+common+'/><path d="M160 90 h100" stroke="#39c2b0" stroke-width="5" stroke-dasharray="9 7"/><text x="130" y="150" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#ffd08a">demo</text><text x="290" y="150" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#ffd08a">repo · wiki</text>';
+  } else if(kind==="coach"){
+    inner = '<circle cx="150" cy="70" r="30" '+common+'/><path d="M105 150 q45 -48 90 0" '+common+'/><rect x="235" y="45" width="140" height="80" rx="10" fill="#f7f3ea"/><path d="M255 68 h100 M255 90 h78" stroke="#0b3238" stroke-width="5" stroke-linecap="round"/><path d="M262 125 l-8 18 l26 -14" fill="#f7f3ea"/><text x="210" y="172" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#ffd08a">5 steps · 3 collectibles</text>';
+  } else if(kind==="flow"){
+    inner = '<rect x="50" y="80" width="320" height="20" rx="10" fill="rgba(255,255,255,.15)"/><rect x="50" y="80" width="115" height="20" rx="10" fill="#7a8b89"/><rect x="165" y="80" width="100" height="20" fill="#39c2b0"/><rect x="265" y="80" width="105" height="20" rx="10" fill="#f2a93b"/><path d="M215 62 l10 16 h-20 z" fill="#fff"/><text x="105" y="128" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#b9cdc9">too easy</text><text x="215" y="128" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#39c2b0" font-weight="bold">FLOW BAND</text><text x="318" y="128" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ffd08a">too hard</text>';
+  } else if(kind==="library"){
+    inner = '<path d="M70 45 v105 M105 45 v105 M140 45 v105" stroke="#39c2b0" stroke-width="16"/><path d="M185 150 V52 l28 -9 v107 M235 150 V45 h32 v105 M300 150 l18 -100 l30 6 l-17 99" stroke="#ffd08a" stroke-width="13" fill="none"/><rect x="50" y="152" width="320" height="8" fill="#f2a93b" opacity=".7"/>';
+  } else if(kind==="headset"){
+    inner = '<path d="M110 105 a100 62 0 0 1 200 0" '+common+'/><rect x="88" y="98" width="58" height="48" rx="12" fill="#39c2b0"/><rect x="274" y="98" width="58" height="48" rx="12" fill="#39c2b0"/><path d="M170 60 l28 26 l52 -50" stroke="#f2a93b" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="210" y="172" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#ffd08a">reports support · starts no session</text>';
+  } else { /* open / generic */
+    inner = '<rect x="105" y="35" width="210" height="115" rx="10" '+common+'/><path d="M105 62 h210" stroke="rgba(255,208,138,.6)" stroke-width="2"/><circle cx="122" cy="49" r="4" fill="#f2a93b"/><circle cx="140" cy="49" r="4" fill="#39c2b0"/><path d="M185 82 l52 26 l-52 26 z" fill="#f2a93b"/>';
+  }
+  return '<svg viewBox="0 0 420 185" role="img" aria-label="'+label+' illustration">'+inner+'</svg>';
+}
+
+/* ---------- data ---------- */
+var V1 = [
+ {t:"Intro", v:"clinic", vl:"Clinic illustration", en:"Before a Fellow ever touches a patient, they can learn the clinic here.", es:"Antes de que un Fellow toque a un paciente, puede aprender la clínica aquí."},
+ {t:"Clinic tour", v:"clinic", vl:"Clinic illustration", en:"This is the 3D dental clinic — chair, light, tray, and stations, in the browser.", es:"Esta es la clínica dental en 3D: sillón, lámpara, bandeja y estaciones, en el navegador."},
+ {t:"Screening session", v:"screening", vl:"Screening illustration", en:"The 9-step prevention and school screening session, with a live checklist beside every run.", es:"La sesión de prevención y revisión escolar de 9 pasos, con una lista de verificación en vivo junto a cada práctica."},
+ {t:"Study", v:"teeth", vl:"Teeth chart illustration", en:"Study mode: 32 permanent and 20 primary teeth, charted in FDI notation.", es:"Modo de estudio: 32 dientes permanentes y 20 temporales, registrados en notación FDI."},
+ {t:"Quiz / Clean", v:"calculus", vl:"Calculus illustration", en:"Quiz and Clean: choose the right tip for the tooth and surface — recognition, not haptics.", es:"Quiz y Limpieza: elige la punta correcta para el diente y la superficie — reconocimiento, no háptica."},
+ {t:"Equipment Lab", v:"bench", vl:"Bench illustration", en:"The Equipment Lab: 12 tools, learned by identifying, holding, and transferring.", es:"El Laboratorio de Equipos: 12 herramientas, aprendidas identificando, sosteniendo y transfiriendo."},
+ {t:"Sterilisation chain", v:"chain", vl:"Chain diagram", en:"The 8-stage sterilisation chain, in order — break the order and the load restarts.", es:"La cadena de esterilización de 8 etapas, en orden — rompe el orden y la carga se reinicia."},
+ {t:"Simulation Studio + comfort", v:"studio", vl:"Studio illustration", en:"Simulation Studio decisions, scored and debriefed, with the patient comfort meter watching force and angle.", es:"Decisiones de Simulation Studio, puntuadas y revisadas, con el medidor de comodidad del paciente observando fuerza y ángulo."},
+ {t:"Practice Mode", v:"sandbox", vl:"Sandbox illustration", en:"Practice first, then graded — sandbox to explore, graded runs where sequence is the score.", es:"Practica primero, luego con nota — sandbox para explorar, prácticas calificadas donde la secuencia es la puntuación."},
+ {t:"Licensure bridge", v:"table", vl:"Pathway table", en:"Paths mapped to DANB and California RDA — and VR practice is not clinical hours.", es:"Rutas vinculadas a DANB y al RDA de California — y la práctica en VR no son horas clínicas."},
+ {t:"Pilot offer", v:"offer", vl:"Offer panel", en:"The ask: expert review, a small pilot cohort, and a written agreement before any use.", es:"La petición: revisión experta, una cohorte piloto pequeña y un acuerdo escrito antes de cualquier uso."},
+ {t:"Call to action", v:"links", vl:"Demo link panel", en:"Try the live demo, read the code, and help us train the next Fellows safely.", es:"Prueba la demo en vivo, lee el código y ayúdanos a formar a los próximos Fellows de forma segura."}
+];
+var V2 = [
+ {t:"Open the demo", v:"open", vl:"Browser window", en:"Open the live demo — no install, no account, no headset.", es:"Abre la demo en vivo — sin instalación, sin cuenta, sin casco."},
+ {t:"The 3D clinic", v:"clinic", vl:"Clinic illustration", en:"You start in the 3D clinic. Walk it with mouse or touch.", es:"Empiezas en la clínica 3D. Recórrela con el ratón o con el tacto."},
+ {t:"Coach Mira + the quest", v:"coach", vl:"Coach Mira illustration", en:"Coach Mira gives you the quest: five steps, three collectibles.", es:"La entrenadora Mira te da la misión: cinco pasos, tres coleccionables."},
+ {t:"The 9-step screening session", v:"screening", vl:"Screening illustration", en:"The flagship session: nine steps, lesson, checklist, tasks, quiz.", es:"La sesión estrella: nueve pasos, lección, lista de verificación, tareas, quiz."},
+ {t:"Simulation Studio", v:"studio", vl:"Studio illustration", en:"Five decisions, scored 2, 1, 0 — then a debrief and a portable record.", es:"Cinco decisiones, puntuadas 2, 1, 0 — luego una revisión y un registro portable."},
+ {t:"Teeth & Calculus Lab", v:"teeth", vl:"Teeth chart illustration", en:"Study, Quiz, Clean — 32 permanent plus 20 primary teeth.", es:"Estudio, Quiz, Limpieza — 32 dientes permanentes más 20 temporales."},
+ {t:"Equipment Lab", v:"chain", vl:"Sterilisation chain diagram", en:"Twelve tools, and the eight-stage sterilisation chain in order.", es:"Doce herramientas, y la cadena de esterilización de ocho etapas en orden."},
+ {t:"Practice vs graded", v:"sandbox", vl:"Sandbox illustration", en:"Practice first in the sandbox, then graded runs where sequence is the score.", es:"Practica primero en el sandbox, luego prácticas calificadas donde la secuencia es la puntuación."},
+ {t:"Flow Meter", v:"flow", vl:"Flow Meter illustration", en:"The Flow Meter watches accuracy and pace, and Coach Mira narrates.", es:"El Medidor de Flujo observa precisión y ritmo, y la entrenadora Mira narra."},
+ {t:"Learning Library", v:"library", vl:"Library illustration", en:"The Fellows' Resource Hub: encyclopedia, methods, paths, checklists.", es:"El Centro de Recursos de los Fellows: enciclopedia, métodos, rutas, listas de verificación."},
+ {t:"Check headset + help", v:"headset", vl:"Headset check illustration", en:"Check headset reports support and starts no session. Help and self-fixing live in the wiki.", es:"Comprobar casco informa de la compatibilidad y no inicia ninguna sesión. La ayuda y la autorreparación están en la wiki."},
+ {t:"Where to go next", v:"links", vl:"Links panel", en:"Live demo, repo, wiki, pitch deck — all linked on this page.", es:"Demo en vivo, repositorio, wiki, pitch deck — todo enlazado en esta página."}
+];
+
+function fmt(s){ s=Math.max(0,Math.min(120,Math.floor(s))); return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2); }
+
+function buildPlayer(rootId, beats, title){
+  var root = document.getElementById(rootId);
+  root.innerHTML =
+    '<div class="honest">🎞️ Storyboard player with narration — <strong>not recorded video</strong>. The CleanShot X recording is still to be done.</div>'
+    + '<div class="stage"><span class="timebadge" data-r="badge">0:00</span><div data-r="visual"></div><div class="beattitle" data-r="btitle"></div><div class="beatvisual" data-r="bvisual"></div></div>'
+    + '<div class="caption"><span class="caplabel">Caption · Beat <span data-r="beatnum">1</span> of 12</span><span data-r="caption"></span></div>'
+    + '<div class="progresswrap"><div class="progress" data-r="progress" role="slider" aria-label="Seek" tabindex="0"><div data-r="bar"></div></div>'
+    + '<div class="timeread"><span data-r="clock">0:00</span><span>2:00 total</span></div></div>'
+    + '<div class="dots" data-r="dots" aria-label="Jump to beat"></div>'
+    + '<div class="controls">'
+    +   '<button class="btn" data-r="play" aria-label="Play or pause">▶ Play</button>'
+    +   '<button class="btn secondary" data-r="restart">↺ Restart</button>'
+    +   '<button class="btn secondary" data-r="mute" aria-pressed="false">🔇 Sound: Off</button>'
+    +   '<span class="seg" role="group" aria-label="Language"><button data-r="langen" aria-pressed="true">EN</button><button data-r="langes" aria-pressed="false">ES</button></span>'
+    + '</div>'
+    + '<div class="controls">'
+    +   '<span class="ctl"><label for="'+rootId+'-voice">Narration voice</label><select id="'+rootId+'-voice" data-r="voice"><option value="">Browser default voice</option></select></span>'
+    +   '<span class="ctl"><label for="'+rootId+'-rate">Speed: <span data-r="rateval">1.00×</span></label><input id="'+rootId+'-rate" data-r="rate" type="range" min="0.70" max="1.40" step="0.05" value="1"></span>'
+    + '</div>'
+    + '<div class="speech-note" data-r="note" role="status"></div>'
+    + '<details class="beatlist"><summary>All 12 beats — tap one to jump</summary><ol data-r="list"></ol></details>';
+
+  function q(n){ return root.querySelector('[data-r="'+n+'"]'); }
+  var st = { playing:false, time:0, beat:-1, muted:true, lang:"en", timer:null, lastTs:0 };
+
+  /* dots + list */
+  beats.forEach(function(b,i){
+    var d=document.createElement("button"); d.textContent=(i+1); d.setAttribute("aria-label","Jump to beat "+(i+1)+": "+b.t+" at "+fmt(i*10));
+    d.addEventListener("click",function(){ seek(i*10+0.01); });
+    q("dots").appendChild(d);
+    var li=document.createElement("li"); li.textContent=fmt(i*10)+" — "+b.t;
+    li.addEventListener("click",function(){ seek(i*10+0.01); });
+    q("list").appendChild(li);
+  });
+
+  function cancelSpeech(){ if(synth){ try{ synth.cancel(); }catch(e){} } }
+  function speak(){
+    if(st.muted || !synth) return;
+    cancelSpeech();
+    var text = beats[st.beat][st.lang];
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = st.lang==="es" ? "es-ES" : "en-US";
+    u.rate = parseFloat(q("rate").value)||1;
+    var vi = q("voice").value;
+    if(vi!=="" && synth.getVoices()[+vi]) u.voice = synth.getVoices()[+vi];
+    synth.speak(u);
+  }
+  function render(){
+    var b = Math.min(11, Math.floor(st.time/10));
+    var changed = b!==st.beat;
+    st.beat = b;
+    var beat = beats[b];
+    if(changed){
+      q("visual").innerHTML = ill(beat.v, beat.vl);
+      q("btitle").textContent = beat.t;
+      q("bvisual").textContent = beat.vl;
+      q("beatnum").textContent = b+1;
+      var dots = q("dots").children, items = q("list").children;
+      for(var i=0;i<12;i++){
+        dots[i].className = i===b ? "active" : (i<b ? "done" : "");
+        items[i].className = i===b ? "cur" : "";
+      }
+      if(st.playing) speak();
+    }
+    q("caption").textContent = beat[st.lang];
+    q("clock").textContent = fmt(st.time);
+    q("badge").textContent = fmt(st.time);
+    q("bar").style.width = (st.time/120*100)+"%";
+  }
+  function tick(ts){
+    if(!st.playing) return;
+    var dt = (ts - st.lastTs)/1000; st.lastTs = ts;
+    st.time += dt;
+    if(st.time >= 120){ st.time = 120; render(); stop(true); return; }
+    render();
+    st.timer = requestAnimationFrame(tick);
+  }
+  function play(){
+    if(st.time>=120) st.time = 0;
+    st.playing = true; st.lastTs = performance.now();
+    q("play").textContent = "⏸ Pause";
+    render(); speak();
+    st.timer = requestAnimationFrame(tick);
+  }
+  function stop(ended){
+    st.playing = false;
+    if(st.timer) cancelAnimationFrame(st.timer);
+    cancelSpeech();
+    q("play").textContent = ended ? "↺ Replay" : "▶ Play";
+    if(ended) q("note").textContent = "Finished — 2:00. Press Replay to watch again.";
+  }
+  function seek(t){
+    st.time = Math.max(0, Math.min(119.99, t));
+    cancelSpeech();
+    st.beat = -1;
+    render();
+    if(st.playing){ st.lastTs = performance.now(); speak(); }
+  }
+  q("play").addEventListener("click", function(){ st.playing ? stop(false) : play(); });
+  q("restart").addEventListener("click", function(){ cancelSpeech(); st.time=0; st.beat=-1; if(st.playing){ st.lastTs=performance.now(); } render(); if(st.playing) speak(); else q("note").textContent="Back to 0:00."; });
+  q("mute").addEventListener("click", function(){
+    st.muted = !st.muted;
+    q("mute").textContent = st.muted ? "🔇 Sound: Off" : "🔊 Sound: On";
+    q("mute").setAttribute("aria-pressed", String(!st.muted));
+    if(st.muted){ cancelSpeech(); q("note").textContent = "Narration muted — captions continue."; }
+    else if(!synth){ q("note").textContent = "Speech synthesis is not available in this browser — showing English captions instead."; }
+    else { q("note").textContent = "Narration on."; if(st.playing) speak(); }
+  });
+  function setLang(l){
+    st.lang = l;
+    q("langen").setAttribute("aria-pressed", String(l==="en"));
+    q("langes").setAttribute("aria-pressed", String(l==="es"));
+    cancelSpeech(); render();
+    if(st.playing && !st.muted) speak();
+  }
+  q("langen").addEventListener("click", function(){ setLang("en"); });
+  q("langes").addEventListener("click", function(){ setLang("es"); });
+  q("rate").addEventListener("input", function(){ q("rateval").textContent = parseFloat(q("rate").value).toFixed(2)+"×"; });
+  q("progress").addEventListener("click", function(e){
+    var r = q("progress").getBoundingClientRect();
+    seek(((e.clientX - r.left)/r.width)*120);
+  });
+  /* voices */
+  function loadVoices(){
+    if(!synth) return;
+    var sel = q("voice"), cur = sel.value;
+    var vs = synth.getVoices();
+    sel.innerHTML = '<option value="">Browser default voice</option>';
+    vs.forEach(function(v,i){ var o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; sel.appendChild(o); });
+    sel.value = cur;
+  }
+  if(synth){ loadVoices(); if(synth.onvoiceschanged!==undefined) synth.addEventListener("voiceschanged", loadVoices); }
+  else { q("note").textContent = "Speech synthesis is not available in this browser — captions are shown in English as the fallback."; q("voice").disabled = true; }
+
+  render();
+  return st;
+}
+
+buildPlayer("player1", V1, "The Pitch");
+buildPlayer("player2", V2, "The App Walkthrough");
+})();
+</script>
+</body>
+</html>
